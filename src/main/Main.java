@@ -1,5 +1,6 @@
 package main;
 
+import main.Render.Renderer;
 import main.World.Player;
 import main.World.Wall;
 import main.World.World;
@@ -37,7 +38,7 @@ public class Main extends PApplet {
     }
 
     public void gameRender(){
-        player.renderWorld();
+        Renderer.renderPlayerView(player);
     }
 
     public void renderMap(){
@@ -82,7 +83,7 @@ public class Main extends PApplet {
     }
 
     public static void main(String[] passedArgs) {
-        String[] appletArgs = new String[] {"main"};
+        String[] appletArgs = new String[] {"main.Main"};
         PApplet.main(appletArgs);
     }
 }
