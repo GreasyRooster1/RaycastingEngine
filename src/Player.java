@@ -75,9 +75,18 @@ public class Player {
             ray.y1 = y;
             ray.checkCollision();
 
+            if(ray.mag>=Main.maxViewDistance){
+                continue;
+            }
+
             Main.app.noStroke();
             Main.app.fill((ray.mag/Main.maxViewDistance)*255);
-            float height = ((Main.maxViewDistance-ray.mag)/Main.maxViewDistance)*Main.maxViewDistance;
+            float wallHeight = 50;
+
+            float adjustedLength = (float) (cos(ray.dir-dir)*ray.mag);
+            float vertical_view = (fov/Main.app.width)*Main.app.height;
+            float height = round(min((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height, Main.app.height));
+            height = max(height,0);
             Main.app.rect(widthRayRatio*i,250-height/2,Main.app.width/Main.rayCount,height);
         }
     }
