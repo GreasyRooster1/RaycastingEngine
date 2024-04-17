@@ -5,8 +5,10 @@ import main.Main;
 import main.Texture.Texture;
 import main.Util.Ray;
 import main.World.Player;
+import main.World.Wall;
 
 import static java.lang.Math.*;
+import static processing.core.PApplet.dist;
 
 public class Renderer {
     public static float widthRayRatio = Main.app.width / Main.rayCount;
@@ -20,13 +22,18 @@ public class Renderer {
             }
 
             float lineHeight = calculateLineHeight(ray,p);
-            drawLine(lineHeight,i,ray.collisionWall.texture);
+            drawLine(lineHeight,i,ray);
         }
     }
 
-    public static void drawLine(float height, float x, Texture texture){
+    public static void drawLine(float height, float x, Ray ray){
+
+        Wall wall = ray.collisionWall;
+        float wallLength = dist(wall.x1,wall.y1,wall.x2,wall.y2);
+        float uv_x = dist(wall.x1,wall.y1,ray.collisionX,ray.collisionY)/wallLength;
+        int color = wall.texture.getColor(uv_x,0);
         Main.app.noStroke();
-        Main.app.fill(texture.getColor(0,0));
+        Main.app.fill(color);
         Main.app.rect(widthRayRatio*x,250-height/2, Main.app.width/ Main.rayCount,height);
     }
 

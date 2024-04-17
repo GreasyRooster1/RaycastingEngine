@@ -11,6 +11,7 @@ public class Ray {
     public float x1,y1;
     public float dir,mag;
     public Wall collisionWall;
+    public float collisionX,collisionY;
 
     public Ray(float _x1, float _y1, float _dir, float _mag){
         x1=_x1;
@@ -38,6 +39,8 @@ public class Ray {
                 mag = dist(x1,y1,result.intersectionX,result.intersectionY);
                 closestCollisionDistance=mag;
                 hitWall = wall;
+                collisionX = result.intersectionX;
+                collisionY = result.intersectionY;
             }
         }
         collisionWall= hitWall;
