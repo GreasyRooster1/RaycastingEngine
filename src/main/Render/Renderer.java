@@ -34,7 +34,15 @@ public class Renderer {
         int color = wall.texture.getColor(uv_x,0);
         Main.app.noStroke();
         Main.app.fill(color);
-        Main.app.rect(widthRayRatio*x,250-height/2, Main.app.width/ Main.rayCount,height);
+
+        float segRatio = height/Main.segCount;
+        for(int i=0;i<Main.segCount;i++){
+            Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height);
+        }
+    }
+
+    public static void renderSegment(int x,int y){
+
     }
 
     public static float calculateLineHeight(Ray ray,Player p){

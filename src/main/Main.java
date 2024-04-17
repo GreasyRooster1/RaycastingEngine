@@ -10,6 +10,7 @@ public class Main extends PApplet {
     public static Main app;
     public static float maxViewDistance = 500;
     public static float rayCount = 100;
+    public static float segCount = 100;
     public static boolean mapRender = true;
 
     public Player player;
