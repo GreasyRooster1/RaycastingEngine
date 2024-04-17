@@ -37,7 +37,7 @@ public class Renderer {
 
         float segRatio = height/Main.segCount;
         for(int i=0;i<Main.segCount;i++){
-            Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height);
+            Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height/Main.segCount+1);
         }
     }
 
