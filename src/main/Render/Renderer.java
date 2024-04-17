@@ -31,15 +31,20 @@ public class Renderer {
         Wall wall = ray.collisionWall;
         Main.app.noStroke();
 
+        float visualHeight = min(height,Main.app.height);
         float wallLength = dist(wall.x1,wall.y1,wall.x2,wall.y2);
         float uv_x = dist(wall.x1,wall.y1,ray.collisionX,ray.collisionY)/wallLength;
 
         float segRatio = height/Main.segCount;
         for(int i=0;i<Main.segCount;i++){
+            float y = 250-visualHeight/2 +(segRatio*i);
+            if(y<0||y>Main.app.height){
+                continue;
+            }
             float uv_y = i/Main.segCount;
             int color = wall.texture.getColor(uv_x,uv_y);
             Main.app.fill(color);
-            Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height/Main.segCount+1);
+            Main.app.rect(widthRayRatio*x,250-visualHeight/2 +(segRatio*i), Main.app.width/ Main.rayCount,height/Main.segCount+1);
         }
     }
 
