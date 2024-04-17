@@ -14,7 +14,7 @@ public class Wall {
         y1=_y1;
         x2=_x2;
         y2=_y2;
-        texture = new ColorTexture((int) Main.app.random(0,16777215));
+        texture = new ColorTexture(Main.app.color(Main.app.random(0,255),Main.app.random(0,255),Main.app.random(0,255)));
     }
 
     public void draw(){

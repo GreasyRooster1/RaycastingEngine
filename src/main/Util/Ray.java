@@ -10,6 +10,7 @@ import static processing.core.PApplet.dist;
 public class Ray {
     public float x1,y1;
     public float dir,mag;
+    public Wall collisionWall;
 
     public Ray(float _x1, float _y1, float _dir, float _mag){
         x1=_x1;
@@ -30,13 +31,16 @@ public class Ray {
     }
     public void checkCollision(){
         float closestCollisionDistance=Main.maxViewDistance;
+        Wall hitWall = null;
         for(Wall wall: Main.app.walls) {
             CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * closestCollisionDistance), (float) (y1 + sin(dir) * closestCollisionDistance), wall.x1,wall.y1,wall.x2,wall.y2);
             if(result.collided){
                 mag = dist(x1,y1,result.intersectionX,result.intersectionY);
                 closestCollisionDistance=mag;
+                hitWall = wall;
             }
         }
+        collisionWall= hitWall;
         mag = closestCollisionDistance;
     }
 }

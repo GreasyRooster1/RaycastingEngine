@@ -1,6 +1,8 @@
 package main.Render;
 
+import com.sun.source.doctree.TextTree;
 import main.Main;
+import main.Texture.Texture;
 import main.Util.Ray;
 import main.World.Player;
 
@@ -18,13 +20,13 @@ public class Renderer {
             }
 
             float lineHeight = calculateLineHeight(ray,p);
-            drawLine(lineHeight,i,Main.app.color(255,255,0));
+            drawLine(lineHeight,i,ray.collisionWall.texture);
         }
     }
 
-    public static void drawLine(float height, float x, int color){
+    public static void drawLine(float height, float x, Texture texture){
         Main.app.noStroke();
-        Main.app.fill(color);
+        Main.app.fill(texture.getColor(0,0));
         Main.app.rect(widthRayRatio*x,250-height/2, Main.app.width/ Main.rayCount,height);
     }
 
