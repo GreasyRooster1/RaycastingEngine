@@ -1,3 +1,8 @@
+package main;
+
+import main.World.Player;
+import main.World.Wall;
+import main.World.World;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -77,7 +82,7 @@ public class Main extends PApplet {
     }
 
     public static void main(String[] passedArgs) {
-        String[] appletArgs = new String[] { "Main" };
+        String[] appletArgs = new String[] {"main"};
         PApplet.main(appletArgs);
     }
 }

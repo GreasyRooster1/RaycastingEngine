@@ -1,3 +1,8 @@
+package main.Util;
+
+import main.Main;
+import main.World.Wall;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static processing.core.PApplet.dist;

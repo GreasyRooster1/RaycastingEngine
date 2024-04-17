@@ -1,3 +1,5 @@
+package main.Util;
+
 public class CollisionResult {
     public boolean collided = false;
     public float intersectionX = 0;
