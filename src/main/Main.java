@@ -82,6 +82,10 @@ public class Main extends PApplet {
         }
     }
 
+    public int randomColor(){
+        return Main.app.color(Main.app.random(0,255),Main.app.random(0,255),Main.app.random(0,255));
+    }
+
     public static void main(String[] passedArgs) {
         String[] appletArgs = new String[] {"main.Main"};
         PApplet.main(appletArgs);
