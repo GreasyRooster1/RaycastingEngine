@@ -8,7 +8,7 @@ public class ColorTexture extends Texture {
         color=_color;
     }
     @Override
-    public int getColor(float x, float y) {
+    public int getColor(float uv_x, float uv_y) {
         return color;
     }
 }
