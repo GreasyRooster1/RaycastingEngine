@@ -29,14 +29,16 @@ public class Renderer {
     public static void drawLine(float height, float x, Ray ray){
 
         Wall wall = ray.collisionWall;
+        Main.app.noStroke();
+
         float wallLength = dist(wall.x1,wall.y1,wall.x2,wall.y2);
         float uv_x = dist(wall.x1,wall.y1,ray.collisionX,ray.collisionY)/wallLength;
-        int color = wall.texture.getColor(uv_x,0);
-        Main.app.noStroke();
-        Main.app.fill(color);
 
         float segRatio = height/Main.segCount;
         for(int i=0;i<Main.segCount;i++){
+            float uv_y = i/Main.segCount;
+            int color = wall.texture.getColor(uv_x,uv_y);
+            Main.app.fill(color);
             Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height/Main.segCount+1);
         }
     }
@@ -50,7 +52,7 @@ public class Renderer {
 
         float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag);
         float vertical_view = (p.fov/ Main.app.width)* Main.app.height;
-        float height = Math.round(Math.min((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height, Main.app.height));
+        float height = Math.round((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height);
         return max(height,0);
     }
     public static void updateRayPosition(Ray ray,Player p){
