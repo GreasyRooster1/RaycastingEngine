@@ -23,11 +23,19 @@ public class Main extends PApplet {
 
     public void draw(){
         background(64);
-        player.update();
-        if()
+        player.move();
+        if(mapRender){
+            renderMap();
+        }else{
+            gameRender();
+        }
     }
 
-    public void mapRender(){
+    public void gameRender(){
+        player.renderWorld();
+    }
+
+    public void renderMap(){
         player.draw();
         for(Wall wall:walls){
             wall.draw();
@@ -61,6 +69,10 @@ public class Main extends PApplet {
         }
         if(key=='d'){
             keys[3]=false;
+        }
+
+        if(key==' '){
+            mapRender=!mapRender;
         }
     }
 

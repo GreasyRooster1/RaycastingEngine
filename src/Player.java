@@ -1,5 +1,4 @@
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
+import static java.lang.Math.*;
 import static processing.core.PApplet.append;
 import static processing.core.PApplet.radians;
 
@@ -15,19 +14,14 @@ public class Player {
         y=_y;
         dir= 0;
         speed = 3;
-        turnSpeed=radians(3);
-        fov = radians(90);
+        turnSpeed=radians(1);
+        fov = radians(45);
         setupRays();
     }
     public void setupRays(){
         for (float i = -fov/2; i <fov/2 ; i+=fov/ Main.rayCount) {
             rays = (Ray[])append(rays,new Ray(x,y,i, Main.maxViewDistance));
         }
-    }
-
-    public void update(){
-        vision();
-        draw();
     }
 
     public void draw(){
@@ -38,9 +32,7 @@ public class Player {
         Main.app.noStroke();
         Main.app.ellipse(x,y,20,20);
 
-        for(Ray ray:rays){
-            ray.draw();
-        }
+        drawRays();
     }
 
     public void move(){
@@ -66,11 +58,27 @@ public class Player {
         }
     }
 
-    public void vision(){
+    public void drawRays(){
         for(Ray ray:rays){
             ray.x1 = x;
             ray.y1 = y;
             ray.checkCollision();
+            ray.draw();
+        }
+    }
+
+    public void renderWorld(){
+        float widthRayRatio = Main.app.width / Main.rayCount;
+        for(int i=0;i<Main.rayCount;i+=1){
+            Ray ray = rays[i];
+            ray.x1 = x;
+            ray.y1 = y;
+            ray.checkCollision();
+
+            Main.app.noStroke();
+            Main.app.fill((ray.mag/Main.maxViewDistance)*255);
+            float height = ((Main.maxViewDistance-ray.mag)/Main.maxViewDistance)*Main.maxViewDistance;
+            Main.app.rect(widthRayRatio*i,250-height/2,Main.app.width/Main.rayCount,height);
         }
     }
 }
