@@ -25,11 +25,12 @@ public class Main extends PApplet {
     public void setup(){
         app = this;
         player = new Player(250,250);
+        colorMode(RGB,1);
         World.createWorld();
     }
 
     public void draw(){
-        background(64);
+        background(0.25f);
         player.move();
         if(mapRender){
             renderMap();
@@ -84,7 +85,7 @@ public class Main extends PApplet {
     }
 
     public int randomColor(){
-        return Main.app.color(Main.app.random(0,255),Main.app.random(0,255),Main.app.random(0,255));
+        return Main.app.color(Main.app.random(0,1),Main.app.random(0,1),Main.app.random(0,1));
     }
 
     public static void main(String[] passedArgs) {
