@@ -1,5 +1,6 @@
 package main;
 
+import main.Render.HUDRender;
 import main.Render.Renderer;
 import main.World.Player;
 import main.World.Wall;
@@ -11,8 +12,8 @@ import static main.AssetLoader.AssetLoader.registerImages;
 public class Main extends PApplet {
     public static Main app;
     public static float maxViewDistance = 500;
-    public static float rayCount = 100;
-    public static float segCount = 100;
+    public static float rayCount = 500;
+    public static float segCount = 250;
     public static boolean mapRender = true;
 
     public Player player;
@@ -42,6 +43,7 @@ public class Main extends PApplet {
         }else{
             gameRender();
         }
+        HUDRender.render();
     }
 
     public void gameRender(){
