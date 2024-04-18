@@ -6,6 +6,8 @@ import main.World.Wall;
 import main.World.World;
 import processing.core.PApplet;
 
+import static main.AssetLoader.AssetLoader.registerImages;
+
 public class Main extends PApplet {
     public static Main app;
     public static float maxViewDistance = 500;
@@ -24,8 +26,11 @@ public class Main extends PApplet {
 
     public void setup(){
         app = this;
-        player = new Player(250,250);
         colorMode(RGB,1);
+
+        registerImages();
+        player = new Player(250,250);
+
         World.createWorld();
     }
 
