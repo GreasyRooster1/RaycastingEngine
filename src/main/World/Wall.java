@@ -2,10 +2,7 @@ package main.World;
 
 import main.Main;
 import main.Texture.Texture;
-import main.Texture.TextureTypes.ColorTexture;
-import main.Texture.TextureTypes.GradientTexture;
-import main.Texture.TextureTypes.UVTestTexture;
-import main.Texture.TextureTypes.VerticalGradientTexture;
+import main.Texture.TextureTypes.*;
 
 public class Wall {
     public float x1,y1;
@@ -17,7 +14,7 @@ public class Wall {
         y1=_y1;
         x2=_x2;
         y2=_y2;
-        texture = new UVTestTexture();
+        texture = new ImageTexture("walls.brick");
     }
 
     public void draw(){
