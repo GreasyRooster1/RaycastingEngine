@@ -1,6 +1,7 @@
 package main.World.Editor;
 
 import main.Main;
+import main.Texture.TextureRegistry;
 import main.World.Editor.Buttons.TextureButton;
 import main.World.Editor.Buttons.WallButton;
 import main.World.Wall;
@@ -15,12 +16,14 @@ public class MapEditor {
     public static UIComponent[] uiComponents={};
     public static boolean placingWall = false;
     public static Wall editingWall;
+    public static TextureButton textureButton;
 
     public static void setup(){
         app = Main.app;
         uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new TextureButton(90,410,80,80));
 
+        textureButton = (TextureButton) uiComponents[1];
     }
 
     public static void update(){
@@ -61,10 +64,12 @@ public class MapEditor {
                         editingWall.deselect();
                     }
                     editingWall = wall;
+                    textureButton.textureId = wall.texture.id;
                 }
             }
         }
         if(editingWall!=null){
+            editingWall.texture = TextureRegistry.get(textureButton.textureId);
             editingWall.edit();
         }
     }
