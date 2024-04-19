@@ -20,7 +20,7 @@ public class Util {
         }
         return result;
     }
-    boolean rectRect(float r1x, float r1y, float r1w, float r1h, float r2x, float r2y, float r2w, float r2h) {
+    public static boolean rectRect(float r1x, float r1y, float r1w, float r1h, float r2x, float r2y, float r2w, float r2h) {
 
         // are the sides of one rectangle touching the other?
 
