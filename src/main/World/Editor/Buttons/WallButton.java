@@ -1,6 +1,7 @@
 package main.World.Editor.Buttons;
 
 import main.Main;
+import main.World.Editor.MapEditor;
 import main.World.Editor.UIComponent;
 import processing.core.PConstants;
 
@@ -17,5 +18,10 @@ public class WallButton extends UIComponent {
         Main.app.textSize(20);
         Main.app.textAlign(PConstants.CENTER);
         Main.app.text("Add Wall",x+w/2,y+h/2);
+    }
+
+    @Override
+    public void onPress() {
+        MapEditor.placingWall = true;
     }
 }
