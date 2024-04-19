@@ -62,4 +62,8 @@ public class Wall {
         Main.app.ellipse(x1,y1,10,10);
         Main.app.ellipse(x2,y2,10,10);
     }
+
+    public void changeTexture(int id){
+        texture=TextureRegistry.get(id);
+    }
 }

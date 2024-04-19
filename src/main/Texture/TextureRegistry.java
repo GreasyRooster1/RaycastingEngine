@@ -13,6 +13,7 @@ public class TextureRegistry {
         register(new UVTestTexture());
     }
     public static void register(Texture texture){
+        texture.id = textures.length;
         textures = (Texture[]) append(textures,texture);
     }
 

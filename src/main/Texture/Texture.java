@@ -3,6 +3,7 @@ package main.Texture;
 import main.Main;
 
 public abstract class Texture {
+    public int id;
     public int getColor(float uv_x,float uv_y){
         return 0;
     }
