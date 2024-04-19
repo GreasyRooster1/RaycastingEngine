@@ -11,7 +11,10 @@ import processing.core.PApplet;
 
 import main.AssetLoader.AssetLoader;
 
+import java.awt.*;
+
 import static main.AssetLoader.AssetLoader.registerImages;
+import static main.Util.Util.moveCursor;
 
 public class Main extends PApplet {
     public static Main app;
@@ -45,6 +48,7 @@ public class Main extends PApplet {
     public void draw(){
         background(0.25f);
         player.move();
+        handleCursor();
         if(editRender){
             renderEditMode();
         }else{
@@ -59,11 +63,22 @@ public class Main extends PApplet {
 
     public void renderEditMode(){
         player.draw();
+
         for(Wall wall:walls){
             wall.draw();
         }
         MapEditor.update();
     }
+
+    public void handleCursor(){
+        if(editRender){
+            cursor();
+        }else{
+            noCursor();
+            moveCursor(Main.app.width/2,Main.app.height/2);
+        }
+    }
+
 
     public void keyPressed(){
         if(key=='w'){

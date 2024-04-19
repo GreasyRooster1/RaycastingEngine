@@ -5,8 +5,8 @@ import main.Util.Ray;
 import processing.core.PApplet;
 
 import static java.lang.Math.*;
-import static processing.core.PApplet.append;
-import static processing.core.PApplet.radians;
+import static processing.core.PApplet.*;
+import static processing.core.PConstants.PI;
 
 public class Player {
     public float x,y;
@@ -43,24 +43,40 @@ public class Player {
 
     public void move(){
         if(Main.app.keys[0]) {
-            x+= (float) (cos(dir)*speed);
-            y+= (float) (sin(dir)*speed);
+            x+= cos(dir)*speed;
+            y+= sin(dir)*speed;
         }
         if(Main.app.keys[1]) {
-            x-= (float) (cos(dir)*speed);
-            y-= (float) (sin(dir)*speed);
+            x-= cos(dir)*speed;
+            y-= sin(dir)*speed;
         }
-        if(Main.app.keys[2]){
-            dir-=turnSpeed;
-            for(Ray ray:rays){
-                ray.dir-=turnSpeed;
+
+        if(!Main.editRender){
+            float delta = Main.app.mouseX- (float)(Main.app.width /2) +8;
+            turn(delta/100);
+            if(Main.app.keys[2]){
+                x+= cos(dir-PI/2)*speed;
+                y+= sin(dir-PI/2)*speed;
+            }
+            if(Main.app.keys[3]){
+                x+= cos(dir+PI/2)*speed;
+                y+= sin(dir+
+                        PI/2)*speed;
+            }
+        }else{
+            if(Main.app.keys[2]){
+                turn(-turnSpeed);
+            }
+            if(Main.app.keys[3]){
+                turn(turnSpeed);
             }
         }
-        if(Main.app.keys[3]){
-            dir+=turnSpeed;
-            for(Ray ray:rays){
-                ray.dir+=turnSpeed;
-            }
+    }
+
+    public void turn(float deg){
+        dir+=deg;
+        for(Ray ray:rays){
+            ray.dir+=deg;
         }
     }
 

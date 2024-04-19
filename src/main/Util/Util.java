@@ -1,5 +1,9 @@
 package main.Util;
 
+import main.Main;
+
+import java.awt.*;
+
 public class Util {
     public static CollisionResult lineLine(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
         CollisionResult result = new CollisionResult();
@@ -44,5 +48,14 @@ public class Util {
         // if ANY of the above are true, the line
         // has hit the rectangle
         return left || right || top || bottom;
+    }
+
+    public static void moveCursor(int x,int y){
+        try {
+            Robot robot = new Robot();
+            robot.mouseMove(Main.app.windowX+x,Main.app.windowY+y);
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
