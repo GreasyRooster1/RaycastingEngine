@@ -32,7 +32,7 @@ public class Main extends PApplet {
 
         registerImages();
         player = new Player(250,250);
-        MapEditor.open();
+        MapEditor.setup();
 
         World.createWorld();
     }
@@ -90,9 +90,6 @@ public class Main extends PApplet {
         }
 
         if(key==' '){
-            if(!editRender){
-                MapEditor.open();
-            }
             editRender =!editRender;
         }
     }

@@ -1,9 +1,9 @@
 package main.World.Editor.Buttons;
 
 import main.Main;
-import main.World.Editor.Button;
+import main.World.Editor.UIComponent;
 
-public class WallButton extends Button {
+public class WallButton extends UIComponent {
     public WallButton(float _x, float _y, float _w, float _h) {
         super(_x, _y, _w, _h);
     }
