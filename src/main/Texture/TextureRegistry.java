@@ -16,6 +16,12 @@ public class TextureRegistry {
         register(new UVTestTexture());
         register(new ImageTexture("walls.brick"));
         register(new ImageTexture("walls.cobble"));
+        register(new ImageTexture("walls.doom.plate"));
+        register(new ImageTexture("walls.doom.rock"));
+        register(new ImageTexture("walls.doom.satan"));
+        register(new ImageTexture("walls.doom.skull"));
+        register(new ImageTexture("walls.doom.tech_door"));
+        register(new ImageTexture("walls.doom.vault_door"));
         register(new GradientTexture(Main.app.color(1, 0.6f, 0.9f),Main.app.color(0.6f, 0.9f, 1)));
     }
     public static void register(Texture texture){

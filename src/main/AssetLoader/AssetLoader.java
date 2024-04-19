@@ -16,6 +16,12 @@ public class AssetLoader {
     public static void registerImages(){
         register("assets\\Walls\\brick.jpg","walls.brick");
         register("assets\\Walls\\cobble.png","walls.cobble");
+        register("assets\\Walls\\doom\\plate.png","walls.doom.plate");
+        register("assets\\Walls\\doom\\rock.png","walls.doom.rock");
+        register("assets\\Walls\\doom\\satan.png","walls.doom.satan");
+        register("assets\\Walls\\doom\\skull.png","walls.doom.skull");
+        register("assets\\Walls\\doom\\tech_door.png","walls.doom.techDoor");
+        register("assets\\Walls\\doom\\vault_door.png","walls.doom.vaultDoor");
     }
 
     public static void register(String path,String name){
