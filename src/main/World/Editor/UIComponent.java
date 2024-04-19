@@ -14,6 +14,7 @@ public class UIComponent {
     }
     public void update(){
         render();
+        checkEvents();
     }
     public void checkEvents(){
         if(rectRect(x,y,w,h,Main.app.mouseX,Main.app.mouseY,1,1)){

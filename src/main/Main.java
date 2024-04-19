@@ -8,13 +8,15 @@ import main.World.Wall;
 import main.World.World;
 import processing.core.PApplet;
 
+import main.AssetLoader.AssetLoader;
+
 import static main.AssetLoader.AssetLoader.registerImages;
 
 public class Main extends PApplet {
     public static Main app;
     public static float maxViewDistance = 500;
-    public static float rayCount = 500;
-    public static float segCount = 200;
+    public static float rayCount = 250;
+    public static float segCount = 100;
     public static boolean editRender = true;
 
     public Player player;
