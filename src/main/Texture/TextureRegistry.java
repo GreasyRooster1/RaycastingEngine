@@ -9,8 +9,8 @@ import static processing.core.PApplet.append;
 public class TextureRegistry {
     public static Texture[] textures = {};
     public static void registerTextures(){
-        register(new ImageTexture("walls.brick"));
         register(new UVTestTexture());
+        register(new ImageTexture("walls.brick"));
     }
     public static void register(Texture texture){
         texture.id = textures.length;
