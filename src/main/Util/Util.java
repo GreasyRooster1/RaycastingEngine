@@ -32,4 +32,17 @@ public class Util {
         }
         return false;
     }
+    public static boolean lineRect(float x1, float y1, float x2, float y2, float rx, float ry, float rw, float rh) {
+
+        // check if the line has hit any of the rectangle's sides
+        // uses the Line/Line function below
+        boolean left =   lineLine(x1,y1,x2,y2, rx,ry,rx, ry+rh).collided;
+        boolean right =  lineLine(x1,y1,x2,y2, rx+rw,ry, rx+rw,ry+rh).collided;
+        boolean top =    lineLine(x1,y1,x2,y2, rx,ry, rx+rw,ry).collided;
+        boolean bottom = lineLine(x1,y1,x2,y2, rx,ry+rh, rx+rw,ry+rh).collided;
+
+        // if ANY of the above are true, the line
+        // has hit the rectangle
+        return left || right || top || bottom;
+    }
 }
