@@ -15,6 +15,7 @@ public class TextureRegistry {
         register(new ErrorTexture());
         register(new UVTestTexture());
         register(new ImageTexture("walls.brick"));
+        register(new ImageTexture("walls.cobble"));
         register(new GradientTexture(Main.app.color(1, 0.6f, 0.9f),Main.app.color(0.6f, 0.9f, 1)));
     }
     public static void register(Texture texture){
