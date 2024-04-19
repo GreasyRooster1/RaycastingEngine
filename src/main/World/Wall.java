@@ -2,6 +2,7 @@ package main.World;
 
 import main.Main;
 import main.Texture.Texture;
+import main.Texture.TextureRegistry;
 import main.Texture.TextureTypes.*;
 
 import static main.Util.Util.rectRect;
@@ -17,7 +18,7 @@ public class Wall {
         y1=_y1;
         x2=_x2;
         y2=_y2;
-        texture = new ImageTexture("walls.brick");
+        texture = TextureRegistry.get(1);
     }
 
     public void draw(){

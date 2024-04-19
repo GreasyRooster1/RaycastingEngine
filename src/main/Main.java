@@ -2,6 +2,7 @@ package main;
 
 import main.Render.HUDRender;
 import main.Render.Renderer;
+import main.Texture.TextureRegistry;
 import main.World.Editor.MapEditor;
 import main.World.Player;
 import main.World.Wall;
@@ -33,6 +34,8 @@ public class Main extends PApplet {
         colorMode(RGB,1);
 
         registerImages();
+        TextureRegistry.registerTextures();
+
         player = new Player(250,250);
         MapEditor.setup();
 
