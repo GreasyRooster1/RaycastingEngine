@@ -15,7 +15,7 @@ public class AssetLoader {
 
     public static void registerImages(){
         register("assets\\Walls\\brick.jpg","walls.brick");
-        register("assets\\Walls\\cobble.jpg","walls.cobble");
+        register("assets\\Walls\\cobble.png","walls.cobble");
     }
 
     public static void register(String path,String name){
