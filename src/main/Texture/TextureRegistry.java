@@ -1,5 +1,6 @@
 package main.Texture;
 
+import main.Texture.TextureTypes.ErrorTexture;
 import main.Texture.TextureTypes.ImageTexture;
 import main.Texture.TextureTypes.UVTestTexture;
 
@@ -9,6 +10,7 @@ import static processing.core.PApplet.append;
 public class TextureRegistry {
     public static Texture[] textures = {};
     public static void registerTextures(){
+        register(new ErrorTexture());
         register(new UVTestTexture());
         register(new ImageTexture("walls.brick"));
     }
