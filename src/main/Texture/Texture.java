@@ -10,7 +10,7 @@ public abstract class Texture {
         for (int i = 0; i < w; i+=res) {
             for (int j = 0; j < h; j+=res) {
                 Main.app.fill(getColor(i/w,j/h));
-                Main.app.rect(x,y,res,res);
+                Main.app.rect(x+i,y+j,res,res);
             }
         }
     }
