@@ -2,15 +2,18 @@ package main.World.Editor;
 
 import main.Main;
 import main.World.Editor.Buttons.WallButton;
+import main.World.Wall;
 import main.World.World;
 import processing.core.PApplet;
 
+import static main.Util.Util.lineRect;
 import static processing.core.PApplet.append;
 
 public class MapEditor {
     private static PApplet app;
     public static UIComponent[] uiComponents={};
     public static boolean placingWall = false;
+    public static Wall editingWall;
 
     public static void setup(){
         app = Main.app;
@@ -21,6 +24,7 @@ public class MapEditor {
         drawBar();
         renderUIComponents();
         checkWallPlace();
+        checkWallEdit();
     }
     public static void renderUIComponents(){
         for(UIComponent uiComponent : uiComponents){
@@ -42,7 +46,23 @@ public class MapEditor {
 
         if(Main.app.mousePressed){
             World.newWall(Main.app.mouseX,Main.app.mouseY,Main.app.mouseX,Main.app.mouseY+100);
-            //placingWall=false;
+            placingWall=false;
+        }
+    }
+
+    public static void checkWallEdit(){
+        for(Wall wall:Main.app.walls){
+            if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,Main.app.mouseX,Main.app.mouseY,4,4)){
+                if(Main.app.mousePressed) {
+                    if(editingWall!=null) {
+                        editingWall.deselect();
+                    }
+                    editingWall = wall;
+                }
+            }
+        }
+        if(editingWall!=null){
+            editingWall.edit();
         }
     }
 }
