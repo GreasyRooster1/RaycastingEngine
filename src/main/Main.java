@@ -2,6 +2,7 @@ package main;
 
 import main.Render.HUDRender;
 import main.Render.Renderer;
+import main.World.Editor.MapEditor;
 import main.World.Player;
 import main.World.Wall;
 import main.World.World;
@@ -14,7 +15,7 @@ public class Main extends PApplet {
     public static float maxViewDistance = 500;
     public static float rayCount = 500;
     public static float segCount = 200;
-    public static boolean mapRender = true;
+    public static boolean editRender = true;
 
     public Player player;
     public Wall[] walls = {};
@@ -31,6 +32,7 @@ public class Main extends PApplet {
 
         registerImages();
         player = new Player(250,250);
+        MapEditor.open();
 
         World.createWorld();
     }
@@ -38,8 +40,8 @@ public class Main extends PApplet {
     public void draw(){
         background(0.25f);
         player.move();
-        if(mapRender){
-            renderMap();
+        if(editRender){
+            renderEditMode();
         }else{
             gameRender();
         }
@@ -50,11 +52,12 @@ public class Main extends PApplet {
         Renderer.renderPlayerView(player);
     }
 
-    public void renderMap(){
+    public void renderEditMode(){
         player.draw();
         for(Wall wall:walls){
             wall.draw();
         }
+        MapEditor.update();
     }
 
     public void keyPressed(){
@@ -87,7 +90,10 @@ public class Main extends PApplet {
         }
 
         if(key==' '){
-            mapRender=!mapRender;
+            if(!editRender){
+                MapEditor.open();
+            }
+            editRender =!editRender;
         }
     }
 
