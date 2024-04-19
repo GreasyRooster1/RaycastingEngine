@@ -4,9 +4,9 @@ import main.Main;
 
 import static main.Util.Util.rectRect;
 
-public class Button {
+public class UIComponent {
     public float x,y,w,h;
-    public Button(float _x,float _y,float _w,float _h){
+    public UIComponent(float _x, float _y, float _w, float _h){
         x=_x;
         y=_y;
         w=_w;
