@@ -1,6 +1,8 @@
 package main.World;
 
 import main.Main;
+import main.Texture.TextureRegistry;
+import main.Texture.TextureTypes.PortalTexture;
 import processing.core.PApplet;
 
 import static processing.core.PApplet.append;
@@ -20,8 +22,9 @@ public class World {
 
         //portal wall
         Wall portal = newWall(170,100,130,100);
-        portal.bottomHeight=20;
-        portal.topHeight=20;
+        portal.bottomHeight=15;
+        portal.topHeight=5;
+        portal.texture = new PortalTexture();
     }
 
     public static Wall newWall(float x1, float y1, float x2, float y2){
