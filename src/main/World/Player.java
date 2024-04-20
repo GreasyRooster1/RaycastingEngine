@@ -14,6 +14,7 @@ public class Player {
     public float speed,turnSpeed;
     public Ray[] rays={};
     public float fov;
+    public boolean useMouse = false;
 
     public Player(float _x, float _y){
         x=_x;
@@ -51,7 +52,7 @@ public class Player {
             y-= sin(dir)*speed;
         }
 
-        if(!Main.editRender){
+        if(!Main.editRender&&useMouse){
             float delta = Main.app.mouseX- (float)(Main.app.width /2) +8;
             turn(delta/100);
             if(Main.app.keys[2]){
