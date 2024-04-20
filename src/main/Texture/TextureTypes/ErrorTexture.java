@@ -10,7 +10,7 @@ public class ErrorTexture extends Texture {
 
     }
     @Override
-    public int getColor(float uv_x, float uv_y) {
+    public int getColorFromUV(float uv_x, float uv_y) {
         if(uv_x>0.5&&uv_y<=0.5){
             return Main.app.color(255,0,255);
         }

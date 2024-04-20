@@ -13,7 +13,7 @@ public class ImageTexture extends Texture {
     }
 
     @Override
-    public int getColor(float uv_x, float uv_y) {
+    public int getColorFromUV(float uv_x, float uv_y) {
         return image.get((int) (uv_x*image.width), (int) (uv_y*image.height));
     }
 }

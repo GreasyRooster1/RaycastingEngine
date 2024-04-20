@@ -1,8 +1,6 @@
 package main.Render;
 
-import com.sun.source.doctree.TextTree;
 import main.Main;
-import main.Texture.Texture;
 import main.Util.Ray;
 import main.World.Player;
 import main.World.Wall;
@@ -27,14 +25,13 @@ public class Renderer {
     }
 
     public static void drawLine(float height, float x, Ray ray){
-
         Wall wall = ray.collisionWall;
-        Main.app.noStroke();
 
         float wallLength = dist(wall.x1,wall.y1,wall.x2,wall.y2);
         float uv_x = dist(wall.x1,wall.y1,ray.collisionX,ray.collisionY)/wallLength;
-
         float segRatio = height/Main.segCount;
+
+        Main.app.noStroke();
         for(int i=0;i<Main.segCount;i++){
             float y = 250-height/2 +(segRatio*i);
             if(y<=-segRatio||y>=Main.app.height){
@@ -43,7 +40,7 @@ public class Renderer {
 
             float uv_y = i/Main.segCount;
 
-            int color = wall.texture.getColor(uv_x,uv_y);
+            int color = wall.texture.getColor(wall,uv_x,uv_y);
 
             Main.app.fill(color);
             Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height/Main.segCount+1);

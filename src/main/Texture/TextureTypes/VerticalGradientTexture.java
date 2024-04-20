@@ -11,7 +11,7 @@ public class VerticalGradientTexture extends Texture {
         col2 = _col2;
     }
     @Override
-    public int getColor(float uv_x, float uv_y) {
+    public int getColorFromUV(float uv_x, float uv_y) {
         return Main.app.lerpColor(col1,col2, uv_y);
     }
 }
