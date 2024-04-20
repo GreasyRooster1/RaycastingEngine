@@ -52,7 +52,7 @@ public class Renderer {
     }
 
     public static float calculateLineHeight(Ray ray,Player p){
-        float wallHeight = 50;
+        float wallHeight = ray.collisionWall.height;
 
         float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag);
         float vertical_view = (p.fov/ Main.app.width)* Main.app.height;
