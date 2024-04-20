@@ -42,13 +42,13 @@ public class Renderer {
 
             int color = wall.texture.getColor(wall,uv_x,uv_y);
 
-            Main.app.fill(color);
-            Main.app.rect(widthRayRatio*x,250-height/2 +(segRatio*i), Main.app.width/ Main.rayCount,height/Main.segCount+1);
+            renderSegment(color,x,i,height,segRatio);
         }
     }
 
-    public static void renderSegment(int x,int y){
-
+    public static void renderSegment(int color, float line_x,float line_y,float height,float segRatio){
+        Main.app.fill(color);
+        Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ Main.rayCount,height/Main.segCount+1);
     }
 
     public static float calculateLineHeight(Ray ray,Player p){
