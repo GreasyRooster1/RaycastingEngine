@@ -1,7 +1,6 @@
 package main.World;
 
 import main.Main;
-import main.World.Wall;
 import processing.core.PApplet;
 
 import static processing.core.PApplet.append;
@@ -11,10 +10,23 @@ public class World {
         newWall(100,100,100,200);
         newWall(100,200,200,200);
         newWall(200,200,200,100);
-        newWall(200,100,100,100);
+
+        newWall(100,100,130,100);
+        newWall(200,100,170,100);
+
+        newWall(130,100,130,50);
+        newWall(170,100,170,50);
+        newWall(170,50,130,50);
+
+        //portal wall
+        Wall portal = newWall(170,100,130,100);
+        portal.bottomHeight=20;
+        portal.topHeight=20;
     }
 
-    public static void newWall(float x1,float y1,float x2,float y2){
-        Main.app.walls = (Wall[]) PApplet.append(Main.app.walls,new Wall(x1,y1,x2,y2));
+    public static Wall newWall(float x1, float y1, float x2, float y2){
+        Wall wall = new Wall(x1,y1,x2,y2);
+        Main.app.walls = (Wall[]) PApplet.append(Main.app.walls,wall);
+        return wall;
     }
 }
