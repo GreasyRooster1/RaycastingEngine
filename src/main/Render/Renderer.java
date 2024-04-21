@@ -28,8 +28,8 @@ public class Renderer {
         if(ray.collisionWall.texture.isTransparent){
             float startX = (float) (ray.collisionX);
             float startY = (float) (ray.collisionY);
-            float endX = (float)(p.x+cos(p.dir)* Main.maxViewDistance);
-            float endY = (float)(p.y+sin(p.dir)* Main.maxViewDistance);
+            float endX = (float)(p.x+cos(ray.dir)* Main.maxViewDistance);
+            float endY = (float)(p.y+sin(ray.dir)* Main.maxViewDistance);
             Ray rayThroughWall = new Ray(startX,startY,endX,endY);
             rayThroughWall.checkCollision();
             renderSingleRay(rayThroughWall,p,x,dist(p.x,p.y,ray.collisionX,ray.collisionY));
@@ -56,7 +56,9 @@ public class Renderer {
             float uv_y = i/Main.segCount;
 
             int color = wall.texture.getColor(wall,uv_x,uv_y);
-
+            if(wall.texture.isTransparent&&color==0){
+                continue;
+            }
             renderSegment(color,x,i,height,segRatio);
         }
     }
