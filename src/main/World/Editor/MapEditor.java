@@ -71,6 +71,7 @@ public class MapEditor {
                     wall.changeTexture(textureButton.textureId);
                 }
                 placingPath = false;
+                pathPoints = new Point[0];
             }
         }
 
@@ -107,7 +108,7 @@ public class MapEditor {
     }
 
     public static void checkWallEdit(){
-        if(placingWall||placingPath){ return; }
+        if(placingWall||placingPath){ editingWall=null;return; }
         for(Wall wall:Main.app.walls){
             if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,Main.app.mouseX,Main.app.mouseY,4,4)){
                 if(Main.app.mousePressed) {
