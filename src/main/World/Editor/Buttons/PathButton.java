@@ -25,6 +25,7 @@ public class PathButton extends UIComponent {
 
     @Override
     public void onPress() {
-        MapEditor.placingWall = true;
+        MapEditor.placingPath = true;
+        MapEditor.placingWall = false;
     }
 }
