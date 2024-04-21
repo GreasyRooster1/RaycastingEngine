@@ -3,15 +3,13 @@ package main.World.Editor;
 import main.Main;
 import main.Texture.TextureRegistry;
 import main.Util.Point;
-import main.World.Editor.Buttons.PathButton;
-import main.World.Editor.Buttons.SaveButton;
-import main.World.Editor.Buttons.TextureButton;
-import main.World.Editor.Buttons.WallButton;
+import main.World.Editor.Buttons.*;
 import main.World.Wall;
 import main.World.World;
 import processing.core.PApplet;
 
 import static main.Util.Util.lineRect;
+import static main.World.World.spawnPoint;
 import static main.World.World.walls;
 import static processing.core.PApplet.append;
 import static processing.core.PConstants.LEFT;
@@ -35,6 +33,8 @@ public class MapEditor {
         uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new TextureButton(190,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
+
         uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
         textureButton = (TextureButton) uiComponents[2];
@@ -46,6 +46,7 @@ public class MapEditor {
         checkWallPlace();
         checkWallEdit();
         checkPathPlace();
+        checkSpawnMove();
     }
     public static void renderUIComponents(){
         for(UIComponent uiComponent : uiComponents){
@@ -56,6 +57,16 @@ public class MapEditor {
         app.noStroke();
         app.fill(.5f,.5f);
         app.rect(0,400,500,100);
+    }
+
+    public static void checkSpawnMove(){
+        if(!moveSpawnpoint){return;}
+        if(Main.app.mouseY>400){ return; }
+        spawnPoint.position.x=Main.app.mouseX;
+        spawnPoint.position.y=Main.app.mouseY;
+        if(Main.app.mousePressed){
+            moveSpawnpoint = false;
+        }
     }
 
     public static void checkPathPlace(){
@@ -129,6 +140,7 @@ public class MapEditor {
             editingWall.edit();
         }
     }
+
     public static void resetAction(){
         moveSpawnpoint = false;
         editingWall = null;
