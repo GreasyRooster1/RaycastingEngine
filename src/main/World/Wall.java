@@ -4,6 +4,7 @@ import main.Main;
 import main.Texture.Texture;
 import main.Texture.TextureRegistry;
 import main.Texture.TextureTypes.*;
+import processing.core.PConstants;
 
 import static main.Util.Util.rectRect;
 
@@ -14,6 +15,7 @@ public class Wall {
     public int selectedHandle = 0;
     public float bottomHeight,topHeight;
     public float height;
+    public float UUID;
 
     public Wall(float _x1,float _y1,float _x2,float _y2){
         x1=_x1;
@@ -21,6 +23,7 @@ public class Wall {
         x2=_x2;
         y2=_y2;
         height = 50;
+        UUID=Main.app.random(PConstants.MIN_FLOAT,PConstants.MAX_FLOAT)+System.currentTimeMillis() / 1000f;
         texture = TextureRegistry.get(1);
     }
 
