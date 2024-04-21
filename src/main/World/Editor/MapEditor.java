@@ -12,6 +12,7 @@ import main.World.World;
 import processing.core.PApplet;
 
 import static main.Util.Util.lineRect;
+import static main.World.World.walls;
 import static processing.core.PApplet.append;
 import static processing.core.PConstants.LEFT;
 import static processing.core.PConstants.RIGHT;
@@ -109,7 +110,7 @@ public class MapEditor {
 
     public static void checkWallEdit(){
         if(placingWall||placingPath){ editingWall=null;return; }
-        for(Wall wall:Main.app.walls){
+        for(Wall wall:walls){
             if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,Main.app.mouseX,Main.app.mouseY,4,4)){
                 if(Main.app.mousePressed) {
                     if(editingWall!=null) {

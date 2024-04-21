@@ -7,6 +7,7 @@ import processing.core.PApplet;
 import static java.lang.Math.*;
 import static main.Util.Util.lineLine;
 import static main.Util.Util.lineRect;
+import static main.World.World.walls;
 import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
 
@@ -111,7 +112,7 @@ public class Player {
     public void attemptMove(float dx, float dy) {
         boolean hitX = false;
         boolean hitY = false;
-        for (Wall wall : Main.app.walls) {
+        for (Wall wall : walls) {
             if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, x-w/2 +dx*2, y-h/2,w,h)) {
                 hitX = true;
             }

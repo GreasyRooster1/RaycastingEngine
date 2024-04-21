@@ -5,6 +5,7 @@ import main.World.Wall;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import static main.World.World.walls;
 import static processing.core.PApplet.dist;
 import static processing.core.PApplet.println;
 
@@ -34,7 +35,7 @@ public class Ray {
     public void checkCollisionIgnoringWall(int id) {
         float closestCollisionDistance=Main.maxViewDistance;
         Wall hitWall = null;
-        for(Wall wall: Main.app.walls) {
+        for(Wall wall: walls) {
             if(wall.id==id){
                 continue;
             }
@@ -53,7 +54,7 @@ public class Ray {
     public void checkCollision(){
         float closestCollisionDistance=Main.maxViewDistance;
         Wall hitWall = null;
-        for(Wall wall: Main.app.walls) {
+        for(Wall wall: walls) {
             CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * closestCollisionDistance), (float) (y1 + sin(dir) * closestCollisionDistance), wall.x1,wall.y1,wall.x2,wall.y2);
             if(result.collided){
                 mag = dist(x1,y1,result.intersectionX,result.intersectionY);

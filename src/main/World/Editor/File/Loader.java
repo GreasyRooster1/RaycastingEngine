@@ -10,6 +10,7 @@ import processing.data.JSONObject;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+import static main.World.World.walls;
 import static processing.core.PApplet.*;
 
 public class Loader {
@@ -21,13 +22,13 @@ public class Loader {
             Wall wall = new Wall(jsonWall.getFloat("x1"),jsonWall.getFloat("y1"),jsonWall.getFloat("x2"),jsonWall.getFloat("y2"));
             wall.texture = TextureRegistry.get(jsonWall.getInt("textureId"));
             wall.height = jsonWall.getFloat("height");
-            Main.app.walls = (Wall[]) append(Main.app.walls,wall);
+            walls = (Wall[]) append(walls,wall);
         }
     }
     public static void save(String filename){
         JSONObject json = new JSONObject();
         JSONArray jsonWalls = new JSONArray();
-        for(Wall wall: Main.app.walls){
+        for(Wall wall: walls){
             JSONObject jsonWall = new JSONObject();
             jsonWall.put("x1",wall.x1);
             jsonWall.put("y1",wall.y1);

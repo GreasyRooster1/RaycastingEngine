@@ -16,6 +16,7 @@ import java.awt.*;
 
 import static main.AssetLoader.AssetLoader.registerImages;
 import static main.Util.Util.moveCursor;
+import static main.World.World.walls;
 
 public class Main extends PApplet {
     public static Main app;
@@ -27,7 +28,7 @@ public class Main extends PApplet {
     public static boolean mouseClicked = false;
 
     public Player player;
-    public Wall[] walls = {};
+
     public boolean[] keys = {false,false,false,false};
 
 
