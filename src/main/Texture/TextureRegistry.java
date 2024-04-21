@@ -1,10 +1,7 @@
 package main.Texture;
 
 import main.Main;
-import main.Texture.TextureTypes.ErrorTexture;
-import main.Texture.TextureTypes.GradientTexture;
-import main.Texture.TextureTypes.ImageTexture;
-import main.Texture.TextureTypes.UVTestTexture;
+import main.Texture.TextureTypes.*;
 
 import static processing.core.PApplet.append;
 
@@ -22,7 +19,7 @@ public class TextureRegistry {
         register(new ImageTexture("walls.doom.skull"));
         register(new ImageTexture("walls.doom.techDoor"));
         register(new ImageTexture("walls.doom.vaultDoor"));
-        register(new ImageTexture("walls.bars"));
+        register(new TransparentImageTexture("walls.bars"));
     }
     public static void register(Texture texture){
         texture.id = textures.length;
