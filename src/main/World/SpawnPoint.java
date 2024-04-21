@@ -5,6 +5,9 @@ import main.Util.Point;
 
 public class SpawnPoint {
     public Point position;
+    SpawnPoint(float x, float y){
+        position = new Point(x, y);
+    }
     public void render(){
         Main.app.fill(1,0,1);
         Main.app.noStroke();

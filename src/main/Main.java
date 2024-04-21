@@ -16,6 +16,7 @@ import java.awt.*;
 
 import static main.AssetLoader.AssetLoader.registerImages;
 import static main.Util.Util.moveCursor;
+import static main.World.World.spawnPoint;
 import static main.World.World.walls;
 
 public class Main extends PApplet {
@@ -74,6 +75,7 @@ public class Main extends PApplet {
         for(Wall wall:walls){
             wall.draw();
         }
+        spawnPoint.render();
         MapEditor.update();
     }
 

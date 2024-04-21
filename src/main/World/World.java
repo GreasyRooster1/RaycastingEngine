@@ -9,7 +9,7 @@ import static processing.core.PApplet.append;
 
 public class World {
     public static Wall[] walls = {};
-    public static SpawnPoint spawnPoint;
+    public static SpawnPoint spawnPoint = new SpawnPoint(250,250);
 
     public static void createWorld(){
         newWall(100,100,100,200);
