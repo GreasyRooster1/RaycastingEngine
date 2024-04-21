@@ -5,6 +5,7 @@ import main.World.Wall;
 
 public abstract class Texture {
     public int id;
+    public boolean isTransparent = false;
 
     public int getColor(Wall wall, float uv_x, float uv_y){
         //just uses whatever one the texture defines,
