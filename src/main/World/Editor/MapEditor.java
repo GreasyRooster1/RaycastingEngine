@@ -2,6 +2,7 @@ package main.World.Editor;
 
 import main.Main;
 import main.Texture.TextureRegistry;
+import main.World.Editor.Buttons.PathButton;
 import main.World.Editor.Buttons.SaveButton;
 import main.World.Editor.Buttons.TextureButton;
 import main.World.Editor.Buttons.WallButton;
@@ -22,7 +23,7 @@ public class MapEditor {
     public static void setup(){
         app = Main.app;
         uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new WallButton(100,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new TextureButton(190,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
