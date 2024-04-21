@@ -14,24 +14,28 @@ public class Renderer {
         for(int i = 0; i< Main.rayCount; i+=1){
             Ray ray = p.rays[i];
             updateRayPosition(ray,p);
-            if(ray.mag>= Main.maxViewDistance){
-                continue;
-            }
 
-            renderSingleRay(ray,p,i);
+
+            renderSingleRay(ray,p,i,0);
         }
     }
 
-    public static void renderSingleRay(Ray ray,Player p,int x){
-        if(ray.collisionWall.texture.isTransparent){
-            float endX = (float)(p.x+cos(p.dir)* Main.maxViewDistance);
-            float endY = (float)(p.y+sin(p.dir)* Main.maxViewDistance);
-            Ray rayThroughWall = new Ray(ray.collisionX,ray.collisionY,endX,endY);
-            rayThroughWall.checkCollision();
-            renderSingleRay(rayThroughWall,p,x);
+    public static void renderSingleRay(Ray ray,Player p,int x,float additionalHeight){
+        if(ray.mag>= Main.maxViewDistance){
+            return;
         }
 
-        float lineHeight = calculateLineHeight(ray,p);
+        if(ray.collisionWall.texture.isTransparent){
+            float startX = (float) (ray.collisionX);
+            float startY = (float) (ray.collisionY);
+            float endX = (float)(p.x+cos(p.dir)* Main.maxViewDistance);
+            float endY = (float)(p.y+sin(p.dir)* Main.maxViewDistance);
+            Ray rayThroughWall = new Ray(startX,startY,endX,endY);
+            rayThroughWall.checkCollision();
+            renderSingleRay(rayThroughWall,p,x,dist(p.x,p.y,ray.collisionX,ray.collisionY));
+        }
+
+        float lineHeight = calculateLineHeight(ray,p,additionalHeight);
         drawLine(lineHeight,x,ray);
     }
 
@@ -62,10 +66,10 @@ public class Renderer {
         Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ Main.rayCount,height/Main.segCount+1);
     }
 
-    public static float calculateLineHeight(Ray ray,Player p){
+    public static float calculateLineHeight(Ray ray,Player p,float additionalLength){
         float wallHeight = ray.collisionWall.height;
 
-        float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag);
+        float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag) +additionalLength;
         float vertical_view = (p.fov/ Main.app.width)* Main.app.height;
         float height = Math.round((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height);
         return max(height,0);
