@@ -16,6 +16,11 @@ import static processing.core.PApplet.*;
 public class Loader {
     public static void load(String filename){
         JSONObject json = loadJSONObject(new File(filename));
+
+        JSONObject spawnPoint = json.getJSONObject("spawnPoint");
+        World.spawnPoint.position.x = spawnPoint.getFloat("x");
+        World.spawnPoint.position.y = spawnPoint.getFloat("y");
+
         JSONArray world = json.getJSONArray("world");
         for (int i=0;i<world.size();i++){
             JSONObject jsonWall =  world.getJSONObject(i);
@@ -39,6 +44,10 @@ public class Loader {
             jsonWalls.append(jsonWall);
         }
         json.put("world",jsonWalls);
+
+        JSONObject spawnPoint = new JSONObject();
+        spawnPoint.put("x",World.spawnPoint.position.x);
+        spawnPoint.put("y",World.spawnPoint.position.y);
 
         writeFile(filename,json.toString());
     }
