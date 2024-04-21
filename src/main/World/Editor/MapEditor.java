@@ -70,6 +70,7 @@ public class MapEditor {
                     Wall wall = World.newWall(p1.x,p1.y,p2.x,p2.y);
                     wall.changeTexture(textureButton.textureId);
                 }
+                placingPath = false;
             }
         }
 
