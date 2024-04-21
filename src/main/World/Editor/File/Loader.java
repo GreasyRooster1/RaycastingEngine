@@ -48,6 +48,7 @@ public class Loader {
         JSONObject spawnPoint = new JSONObject();
         spawnPoint.put("x",World.spawnPoint.position.x);
         spawnPoint.put("y",World.spawnPoint.position.y);
+        json.put("spawnPoint",spawnPoint);
 
         writeFile(filename,json.toString());
     }
