@@ -20,11 +20,14 @@ import static processing.core.PConstants.RIGHT;
 public class MapEditor {
     private static PApplet app;
     public static UIComponent[] uiComponents={};
-    public static boolean placingWall = false;
-    public static Wall editingWall;
+
     public static TextureButton textureButton;
 
+    public static boolean placingWall = false;
     public static boolean placingPath = false;
+    public static boolean moveSpawnpoint = false;
+
+    public static Wall editingWall;
     public static Point[] pathPoints = {};
 
     public static void setup(){
@@ -125,5 +128,11 @@ public class MapEditor {
             editingWall.texture = TextureRegistry.get(textureButton.textureId);
             editingWall.edit();
         }
+    }
+    public static void resetAction(){
+        moveSpawnpoint = false;
+        editingWall = null;
+        placingWall = false;
+        placingPath = false;
     }
 }

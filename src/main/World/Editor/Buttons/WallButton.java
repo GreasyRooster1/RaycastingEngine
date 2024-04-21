@@ -22,7 +22,7 @@ public class WallButton extends UIComponent {
 
     @Override
     public void onPress() {
+        MapEditor.resetAction();
         MapEditor.placingWall = true;
-        MapEditor.placingPath = false;
     }
 }

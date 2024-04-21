@@ -1,14 +1,13 @@
 package main.World.Editor.Buttons;
 
 import main.Main;
+import main.World.Editor.File.Loader;
 import main.World.Editor.MapEditor;
 import main.World.Editor.UIComponent;
 import processing.core.PConstants;
 
-import java.awt.*;
-
-public class PathButton extends UIComponent {
-    public PathButton(float _x, float _y, float _w, float _h) {
+public class SpawnPointButton extends UIComponent {
+    public SpawnPointButton(float _x, float _y, float _w, float _h) {
         super(_x, _y, _w, _h);
     }
 
@@ -19,13 +18,13 @@ public class PathButton extends UIComponent {
         Main.app.fill(0f);
         Main.app.textSize(20);
         Main.app.textAlign(PConstants.CENTER);
-        Main.app.text("Create",x+w/2,y+h/3);
-        Main.app.text("Path",x+w/2,y+(h/3)*2);
+        Main.app.text("Move",x+w/2,y+h/3);
+        Main.app.text("Spawn",x+w/2,y+(h/3)*2);
     }
 
     @Override
     public void onPress() {
         MapEditor.resetAction();
-        MapEditor.placingPath = true;
+        MapEditor.moveSpawnpoint = true;
     }
 }
