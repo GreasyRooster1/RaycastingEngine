@@ -26,10 +26,8 @@ public class Renderer {
         }
 
         if(ray.collisionWall.texture.isTransparent){
-            float endX = (float)(p.x+cos(ray.dir)* Main.maxViewDistance);
-            float endY = (float)(p.y+sin(ray.dir)* Main.maxViewDistance);
-            Ray rayThroughWall = new Ray(p.x,p.y,endX,endY);
-            rayThroughWall.checkCollisionIgnoringWall(ray.collisionWall.UUID);
+            Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,Main.maxViewDistance);
+            rayThroughWall.checkCollisionIgnoringWall(ray.collisionWall.id);
             renderSingleRay(rayThroughWall,p,x);
         }
 
