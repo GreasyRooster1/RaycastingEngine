@@ -23,8 +23,8 @@ public class Player {
         y=_y;
         dir= 0;
         speed = 3;
-        w=20;
-        h=20;
+        w=10;
+        h=10;
         turnSpeed=radians(1);
         fov = radians(45);
         setupRays();
