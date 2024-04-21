@@ -14,14 +14,25 @@ public class Renderer {
         for(int i = 0; i< Main.rayCount; i+=1){
             Ray ray = p.rays[i];
             updateRayPosition(ray,p);
-
             if(ray.mag>= Main.maxViewDistance){
                 continue;
             }
 
-            float lineHeight = calculateLineHeight(ray,p);
-            drawLine(lineHeight,i,ray);
+            renderSingleRay(ray,p,i);
         }
+    }
+
+    public static void renderSingleRay(Ray ray,Player p,int x){
+        if(ray.collisionWall.texture.isTransparent){
+            float endX = (float)(p.x+cos(p.dir)* Main.maxViewDistance);
+            float endY = (float)(p.y+sin(p.dir)* Main.maxViewDistance);
+            Ray rayThroughWall = new Ray(ray.collisionX,ray.collisionY,endX,endY);
+            rayThroughWall.checkCollision();
+            renderSingleRay(rayThroughWall,p,x);
+        }
+
+        float lineHeight = calculateLineHeight(ray,p);
+        drawLine(lineHeight,x,ray);
     }
 
     public static void drawLine(float height, float x, Ray ray){
@@ -59,6 +70,7 @@ public class Renderer {
         float height = Math.round((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height);
         return max(height,0);
     }
+
     public static void updateRayPosition(Ray ray,Player p){
         ray.x1 = p.x;
         ray.y1 = p.y;
