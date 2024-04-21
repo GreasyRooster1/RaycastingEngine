@@ -30,6 +30,23 @@ public class Ray {
         Main.app.strokeWeight(1);
         Main.app.line(x1,y1, (float) (x1+cos(dir)*mag), (float) (y1+sin(dir)*mag));
     }
+    public void checkCollisionIgnoringWall(float UUID) {
+        float closestCollisionDistance=Main.maxViewDistance;
+        Wall hitWall = null;
+        for(Wall wall: Main.app.walls) {
+            if(wall.UUID==UUID){continue;}
+            CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * closestCollisionDistance), (float) (y1 + sin(dir) * closestCollisionDistance), wall.x1,wall.y1,wall.x2,wall.y2);
+            if(result.collided){
+                mag = dist(x1,y1,result.intersectionX,result.intersectionY);
+                closestCollisionDistance=mag;
+                hitWall = wall;
+                collisionX = result.intersectionX;
+                collisionY = result.intersectionY;
+            }
+        }
+        collisionWall= hitWall;
+        mag = closestCollisionDistance;
+    }
     public void checkCollision(){
         float closestCollisionDistance=Main.maxViewDistance;
         Wall hitWall = null;
