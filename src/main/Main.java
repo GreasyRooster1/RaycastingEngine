@@ -44,11 +44,12 @@ public class Main extends PApplet {
         registerImages();
         TextureRegistry.registerTextures();
 
-        player = new Player(250,250);
         MapEditor.setup();
 
         //World.createWorld();
         Loader.load("world.json");
+
+        player = new Player(spawnPoint.position.x, spawnPoint.position.y);
     }
 
     public void draw(){

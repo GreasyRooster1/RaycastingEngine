@@ -27,7 +27,7 @@ public class Player {
         w=10;
         h=10;
         turnSpeed=radians(1);
-        fov = radians(45);
+        fov = radians(90);
         setupRays();
     }
     public void setupRays(){
