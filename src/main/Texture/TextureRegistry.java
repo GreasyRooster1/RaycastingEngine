@@ -22,7 +22,7 @@ public class TextureRegistry {
         register(new ImageTexture("walls.doom.skull"));
         register(new ImageTexture("walls.doom.techDoor"));
         register(new ImageTexture("walls.doom.vaultDoor"));
-        register(new GradientTexture(Main.app.color(1, 0.6f, 0.9f),Main.app.color(0.6f, 0.9f, 1)));
+        register(new ImageTexture("walls.bars"));
     }
     public static void register(Texture texture){
         texture.id = textures.length;
