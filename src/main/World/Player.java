@@ -6,23 +6,25 @@ import processing.core.PApplet;
 
 import static java.lang.Math.*;
 import static main.Util.Util.lineLine;
+import static main.Util.Util.lineRect;
 import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
 
 public class Player {
-    public float x,y;
+    public float x,y,w,h;
     public float dir;
     public float speed,turnSpeed;
     public Ray[] rays={};
     public float fov;
     public boolean useMouse = false;
-    public float collisionDistance = 10;
 
     public Player(float _x, float _y){
         x=_x;
         y=_y;
         dir= 0;
         speed = 3;
+        w=20;
+        h=20;
         turnSpeed=radians(1);
         fov = radians(45);
         setupRays();
@@ -103,10 +105,10 @@ public class Player {
         boolean hitX = false;
         boolean hitY = false;
         for (Wall wall : Main.app.walls) {
-            if (lineLine(wall.x1, wall.y1, wall.x2, wall.y2, x, y, x + dx*collisionDistance, y).collided) {
+            if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, x-w/2 +dx*2, y-w/2,w,h)) {
                 hitX = true;
             }
-            if (lineLine(wall.x1, wall.y1, wall.x2, wall.y2, x, y, x, y + dy*collisionDistance).collided) {
+            if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, x-w/2 , y-w/2 +dy*2,w,h)) {
                 hitY = true;
             }
             if (hitX && hitY) {
