@@ -5,6 +5,7 @@ import main.Util.Ray;
 import processing.core.PApplet;
 
 import static java.lang.Math.*;
+import static main.Util.Util.lineLine;
 import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
 
@@ -15,6 +16,7 @@ public class Player {
     public Ray[] rays={};
     public float fov;
     public boolean useMouse = false;
+    public float collisionDistance = 10;
 
     public Player(float _x, float _y){
         x=_x;
@@ -44,25 +46,32 @@ public class Player {
 
     public void move(){
         if(Main.app.keys[0]) {
-            x+= cos(dir)*speed;
-            y+= sin(dir)*speed;
+            attemptMove(
+                    cos(dir)*speed,
+                    sin(dir)*speed
+            );
         }
         if(Main.app.keys[1]) {
-            x-= cos(dir)*speed;
-            y-= sin(dir)*speed;
+            attemptMove(
+                    -cos(dir)*speed,
+                    -sin(dir)*speed
+            );
         }
 
         if(!Main.editRender&&useMouse){
             float delta = Main.app.mouseX- (float)(Main.app.width /2) +8;
             turn(delta/100);
             if(Main.app.keys[2]){
-                x+= cos(dir-PI/2)*speed;
-                y+= sin(dir-PI/2)*speed;
+                attemptMove(
+                        -cos(dir-PI/2)*speed,
+                        -sin(dir-PI/2)*speed
+                );
             }
             if(Main.app.keys[3]){
-                x+= cos(dir+PI/2)*speed;
-                y+= sin(dir+
-                        PI/2)*speed;
+                attemptMove(
+                        cos(dir-PI/2)*speed,
+                        sin(dir-PI/2)*speed
+                );
             }
         }else{
             if(Main.app.keys[2]){
@@ -90,7 +99,25 @@ public class Player {
         }
     }
 
-    public void renderWorld(){
-
+    public void attemptMove(float dx, float dy) {
+        boolean hitX = false;
+        boolean hitY = false;
+        for (Wall wall : Main.app.walls) {
+            if (lineLine(wall.x1, wall.y1, wall.x2, wall.y2, x, y, x + dx*collisionDistance, y).collided) {
+                hitX = true;
+            }
+            if (lineLine(wall.x1, wall.y1, wall.x2, wall.y2, x, y, x, y + dy*collisionDistance).collided) {
+                hitY = true;
+            }
+            if (hitX && hitY) {
+                break;
+            }
+        }
+        if (!hitX) {
+            x += dx;
+        }
+        if (!hitY) {
+            y += dy;
+        }
     }
 }
