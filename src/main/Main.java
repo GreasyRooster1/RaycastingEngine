@@ -43,8 +43,8 @@ public class Main extends PApplet {
         player = new Player(250,250);
         MapEditor.setup();
 
-        World.createWorld();
-        //Loader.load("world.json");
+        //World.createWorld();
+        Loader.load("world.json");
     }
 
     public void draw(){
