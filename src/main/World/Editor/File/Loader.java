@@ -1,20 +1,30 @@
 package main.World.Editor.File;
 
 import main.Main;
+import main.Texture.TextureRegistry;
 import main.World.Wall;
 import main.World.World;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
-import static processing.core.PApplet.println;
+import static processing.core.PApplet.*;
 
 public class Loader {
-    public static void load(){
-
+    public static void load(String filename){
+        JSONObject json = loadJSONObject(new File(filename));
+        JSONArray world = json.getJSONArray("world");
+        for (int i=0;i<world.size();i++){
+            JSONObject jsonWall =  world.getJSONObject(i);
+            Wall wall = new Wall(jsonWall.getFloat("x1"),jsonWall.getFloat("y1"),jsonWall.getFloat("x2"),jsonWall.getFloat("y2"));
+            wall.texture = TextureRegistry.get(jsonWall.getInt("textureId"));
+            wall.height = jsonWall.getFloat("height");
+            Main.app.walls = (Wall[]) append(Main.app.walls,wall);
+        }
     }
-    public static void save(){
+    public static void save(String filename){
         JSONObject json = new JSONObject();
         JSONArray jsonWalls = new JSONArray();
         for(Wall wall: Main.app.walls){
@@ -29,16 +39,40 @@ public class Loader {
         }
         json.put("world",jsonWalls);
 
-        writeFile("world.json",json.toString());
+        writeFile(filename,json.toString());
     }
 
     public static void writeFile(String filename,String text){
         try {
-            PrintWriter writer = new PrintWriter(filename, "UTF-8");
+            PrintWriter writer = new PrintWriter(filename, StandardCharsets.UTF_8);
             writer.println(text);
             writer.close();
         }catch(Exception e){
             println("could not write to the file");
+        }
+    }
+
+    public static String readFile(String filename){
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(filename));
+        }catch (Exception e){
+            println("could not read from the file");
+            return "";
+        }
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            return sb.toString();
+        } catch (IOException e) {
+            println("could not read from the file");
+            return "";
         }
     }
 }

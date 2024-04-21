@@ -3,6 +3,7 @@ package main;
 import main.Render.HUDRender;
 import main.Render.Renderer;
 import main.Texture.TextureRegistry;
+import main.World.Editor.File.Loader;
 import main.World.Editor.MapEditor;
 import main.World.Player;
 import main.World.Wall;
@@ -43,6 +44,7 @@ public class Main extends PApplet {
         MapEditor.setup();
 
         World.createWorld();
+        //Loader.load("world.json");
     }
 
     public void draw(){
