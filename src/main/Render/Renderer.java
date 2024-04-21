@@ -16,26 +16,24 @@ public class Renderer {
             updateRayPosition(ray,p);
 
 
-            renderSingleRay(ray,p,i,0);
+            renderSingleRay(ray,p,i);
         }
     }
 
-    public static void renderSingleRay(Ray ray,Player p,int x,float additionalHeight){
+    public static void renderSingleRay(Ray ray,Player p,int x){
         if(ray.mag>= Main.maxViewDistance){
             return;
         }
 
         if(ray.collisionWall.texture.isTransparent){
-            float startX = (float) (ray.collisionX);
-            float startY = (float) (ray.collisionY);
             float endX = (float)(p.x+cos(ray.dir)* Main.maxViewDistance);
             float endY = (float)(p.y+sin(ray.dir)* Main.maxViewDistance);
-            Ray rayThroughWall = new Ray(startX,startY,endX,endY);
-            rayThroughWall.checkCollision();
-            renderSingleRay(rayThroughWall,p,x,dist(p.x,p.y,ray.collisionX,ray.collisionY));
+            Ray rayThroughWall = new Ray(p.x,p.y,endX,endY);
+            rayThroughWall.checkCollisionIgnoringWall(ray.collisionWall.UUID);
+            renderSingleRay(rayThroughWall,p,x);
         }
 
-        float lineHeight = calculateLineHeight(ray,p,additionalHeight);
+        float lineHeight = calculateLineHeight(ray,p);
         drawLine(lineHeight,x,ray);
     }
 
@@ -68,10 +66,10 @@ public class Renderer {
         Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ Main.rayCount,height/Main.segCount+1);
     }
 
-    public static float calculateLineHeight(Ray ray,Player p,float additionalLength){
+    public static float calculateLineHeight(Ray ray,Player p){
         float wallHeight = ray.collisionWall.height;
 
-        float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag) +additionalLength;
+        float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag);
         float vertical_view = (p.fov/ Main.app.width)* Main.app.height;
         float height = Math.round((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height);
         return max(height,0);
