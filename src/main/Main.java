@@ -23,6 +23,8 @@ public class Main extends PApplet {
     public static float rayCount = 250;
     public static float segCount = 100;
     public static boolean editRender = true;
+    public static boolean previousMouseDown = false;
+    public static boolean mouseClicked = false;
 
     public Player player;
     public Wall[] walls = {};
@@ -49,6 +51,7 @@ public class Main extends PApplet {
 
     public void draw(){
         background(0.25f);
+        updateMouseClick();
         player.move();
         handleCursor();
         if(editRender){
@@ -57,6 +60,7 @@ public class Main extends PApplet {
             gameRender();
         }
         HUDRender.render();
+        previousMouseDown = mousePressed;
     }
 
     public void gameRender(){
@@ -81,6 +85,9 @@ public class Main extends PApplet {
         }
     }
 
+    public void updateMouseClick(){
+        mouseClicked = !previousMouseDown && mousePressed;
+    }
 
     public void keyPressed(){
         if(key=='w'){
