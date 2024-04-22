@@ -33,6 +33,7 @@ public class MapEditor {
     public static float blockSize = 25;
 
     public static void setup(){
+        //todo add pages
         app = Main.app;
         uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
