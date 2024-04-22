@@ -11,6 +11,7 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.pow;
 import static main.Util.Util.lineRect;
 import static main.World.World.*;
 import static processing.core.PApplet.append;
@@ -23,7 +24,7 @@ public class MapEditor {
 
     public static TextureButton textureButton;
 
-    public static float zoom = 2;
+    public static float zoom = 1;
 
     public static boolean placingWall = false;
     public static boolean placingPath = false;
@@ -107,7 +108,7 @@ public class MapEditor {
         Main.app.stroke(1,0,0,.5f);
         Main.app.rect(Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2,blockSize,blockSize);
 
-        blockSize+=Main.mouseScroll;
+        blockSize-=Main.mouseScroll*2;
 
         if(Main.app.mousePressed){
             ArrayList<Wall> blockWalls = new ArrayList<>();
