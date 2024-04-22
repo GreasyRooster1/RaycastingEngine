@@ -68,12 +68,16 @@ public class Main extends PApplet {
     }
 
     public void renderEditMode(){
+        pushMatrix();
+        scale(MapEditor.zoom);
         player.draw();
 
         for(Wall wall:walls){
             wall.draw();
         }
         spawnPoint.render();
+        popMatrix();
+
         MapEditor.update();
     }
 

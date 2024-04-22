@@ -23,6 +23,8 @@ public class MapEditor {
 
     public static TextureButton textureButton;
 
+    public static float zoom = 2;
+
     public static boolean placingWall = false;
     public static boolean placingPath = false;
     public static boolean moveSpawnpoint = false;
@@ -48,6 +50,7 @@ public class MapEditor {
 
     public static void update(){
         drawBar();
+        doZoom();
         renderUIComponents();
         checkWallPlace();
         checkWallEdit();
@@ -64,6 +67,25 @@ public class MapEditor {
         app.noStroke();
         app.fill(.5f,.5f);
         app.rect(0,400,500,100);
+    }
+
+    public static void resetAction(){
+        moveSpawnpoint = false;
+        editingWall = null;
+        placingWall = false;
+        placingPath = false;
+        placingBlock = false;
+    }
+
+    public static void doZoom(){
+        if(Main.app.keyPressed){
+            if(Main.app.key=='='){
+                zoom+=0.01f;
+            }
+            if(Main.app.key=='-'){
+                zoom-=0.01f;
+            }
+        }
     }
 
     public static void checkBlockPlace(){
@@ -170,11 +192,5 @@ public class MapEditor {
         }
     }
 
-    public static void resetAction(){
-        moveSpawnpoint = false;
-        editingWall = null;
-        placingWall = false;
-        placingPath = false;
-        placingBlock = false;
-    }
+
 }
