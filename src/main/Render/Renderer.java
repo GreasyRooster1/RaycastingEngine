@@ -6,6 +6,7 @@ import main.World.Player;
 import main.World.Wall;
 
 import static java.lang.Math.*;
+import static processing.core.PApplet.append;
 import static processing.core.PApplet.dist;
 
 public class Renderer {
@@ -14,23 +15,22 @@ public class Renderer {
         for(int i = 0; i< Main.rayCount; i+=1){
             Ray ray = p.rays[i];
             updateRayPosition(ray,p);
-
-
-            renderSingleRay(ray,p,i,10);
+            
+            renderSingleRay(ray,p,i,new int[0],3);
         }
     }
 
-    public static void renderSingleRay(Ray ray,Player p,int x,int depth){
+    public static void renderSingleRay(Ray ray,Player p,int x,int[] ignoredIds,int depth){
         if(ray.mag>= Main.maxViewDistance||depth<=0){
             return;
         }
 
         if(ray.collisionWall.texture.isTransparent){
-//            float dir = (float) atan2(ray.collisionY-ray.y1,ray.collisionX-ray.x1);
-//            Ray rayThroughWall = new Ray(ray.collisionX,ray.collisionY,dir,Main.maxViewDistance);
             Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,Main.maxViewDistance);
-            rayThroughWall.checkCollisionIgnoringWall(ray.collisionWall.id);
-            renderSingleRay(rayThroughWall,p,x,depth-1);
+
+            ignoredIds = append(ignoredIds,ray.collisionWall.id);
+            rayThroughWall.checkCollisionIgnoringWalls(ignoredIds);
+            renderSingleRay(rayThroughWall,p,x,ignoredIds,depth-1);
         }
 
         float lineHeight = calculateLineHeight(ray,p);
