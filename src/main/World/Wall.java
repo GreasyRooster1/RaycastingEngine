@@ -42,22 +42,22 @@ public class Wall {
     }
 
     public void checkHandleMove(){
-        if(Main.app.mousePressed&&rectRect(Main.app.mouseX,Main.app.mouseY,1,1,x1-5,y1-5,10,10)){
+        if(Main.app.mousePressed&&rectRect(Main.mouseXScaled,Main.mouseYScaled,1,1,x1-5,y1-5,10,10)){
             selectedHandle = 1;
         }
-        if(Main.app.mousePressed&&rectRect(Main.app.mouseX,Main.app.mouseY,1,1,x2-5,y2-5,10,10)){
+        if(Main.app.mousePressed&&rectRect(Main.mouseXScaled,Main.mouseYScaled,1,1,x2-5,y2-5,10,10)){
             selectedHandle = 2;
         }
         if(!Main.app.mousePressed){
             selectedHandle=0;
         }
         if(selectedHandle==1){
-            x1=Main.app.mouseX;
-            y1=Main.app.mouseY;
+            x1=Main.mouseXScaled;
+            y1=Main.mouseYScaled;
         }
         if(selectedHandle==2){
-            x2=Main.app.mouseX;
-            y2=Main.app.mouseY;
+            x2=Main.mouseXScaled;
+            y2=Main.mouseYScaled;
         }
     }
 

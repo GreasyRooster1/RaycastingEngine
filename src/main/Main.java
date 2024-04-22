@@ -86,8 +86,8 @@ public class Main extends PApplet {
 
     public void updateMouseEvents(){
         mouseClicked = !previousMouseDown && mousePressed;
-        mouseXScaled = mouseX*MapEditor.zoom;
-        mouseYScaled = mouseY*MapEditor.zoom;
+        mouseXScaled = mouseX/MapEditor.zoom;
+        mouseYScaled = mouseY/MapEditor.zoom;
     }
 
     public void resetMouseEvents() {
