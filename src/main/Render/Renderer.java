@@ -26,8 +26,9 @@ public class Renderer {
         }
 
         if(ray.collisionWall.texture.isTransparent){
-            float dir = (float) atan2(ray.collisionY-ray.y1,ray.collisionX-ray.x1);
-            Ray rayThroughWall = new Ray(ray.collisionX,ray.collisionY,dir,Main.maxViewDistance);
+//            float dir = (float) atan2(ray.collisionY-ray.y1,ray.collisionX-ray.x1);
+//            Ray rayThroughWall = new Ray(ray.collisionX,ray.collisionY,dir,Main.maxViewDistance);
+            Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,Main.maxViewDistance);
             rayThroughWall.checkCollisionIgnoringWall(ray.collisionWall.id);
             renderSingleRay(rayThroughWall,p,x,depth-1);
         }
