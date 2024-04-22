@@ -23,8 +23,11 @@ public class Main extends PApplet {
     public static float segCount = 100;
     public static boolean editRender = true;
     public static boolean previousMouseDown = false;
+
     public static boolean mouseClicked = false;
     public static float mouseScroll = 0;
+    public static float mouseXScaled = 1;
+    public static float mouseYScaled = 1;
 
     public Player player;
 
@@ -83,6 +86,8 @@ public class Main extends PApplet {
 
     public void updateMouseEvents(){
         mouseClicked = !previousMouseDown && mousePressed;
+        mouseXScaled = mouseX*MapEditor.zoom;
+        mouseYScaled = mouseY*MapEditor.zoom;
     }
 
     public void resetMouseEvents() {

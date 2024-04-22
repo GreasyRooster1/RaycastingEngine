@@ -105,16 +105,16 @@ public class MapEditor {
         if(Main.app.mouseY>400){ return; }
 
         Main.app.stroke(1,0,0,.5f);
-        Main.app.rect(Main.app.mouseX-blockSize/2,Main.app.mouseY-blockSize/2,blockSize,blockSize);
+        Main.app.rect(Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2,blockSize,blockSize);
 
         blockSize+=Main.mouseScroll;
 
         if(Main.app.mousePressed){
             ArrayList<Wall> blockWalls = new ArrayList<>();
-            blockWalls.add(newWall(Main.app.mouseX-blockSize/2,Main.app.mouseY-blockSize/2,Main.app.mouseX+blockSize/2,Main.app.mouseY-blockSize/2));
-            blockWalls.add(newWall(Main.app.mouseX+blockSize/2,Main.app.mouseY-blockSize/2,Main.app.mouseX+blockSize/2,Main.app.mouseY+blockSize/2));
-            blockWalls.add(newWall(Main.app.mouseX+blockSize/2,Main.app.mouseY+blockSize/2,Main.app.mouseX-blockSize/2,Main.app.mouseY+blockSize/2));
-            blockWalls.add(newWall(Main.app.mouseX-blockSize/2,Main.app.mouseY+blockSize/2,Main.app.mouseX-blockSize/2,Main.app.mouseY-blockSize/2));
+            blockWalls.add(newWall(Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2,Main.mouseXScaled+blockSize/2,Main.mouseYScaled-blockSize/2));
+            blockWalls.add(newWall(Main.mouseXScaled+blockSize/2,Main.mouseYScaled-blockSize/2,Main.mouseXScaled+blockSize/2,Main.mouseYScaled+blockSize/2));
+            blockWalls.add(newWall(Main.mouseXScaled+blockSize/2,Main.mouseYScaled+blockSize/2,Main.mouseXScaled-blockSize/2,Main.mouseYScaled+blockSize/2));
+            blockWalls.add(newWall(Main.mouseXScaled-blockSize/2,Main.mouseYScaled+blockSize/2,Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2));
             for(Wall wall : blockWalls){
                 wall.changeTexture(textureButton.textureId);
             }
@@ -125,8 +125,8 @@ public class MapEditor {
     public static void checkSpawnMove(){
         if(!moveSpawnpoint){return;}
         if(Main.app.mouseY>400){ return; }
-        spawnPoint.position.x=Main.app.mouseX;
-        spawnPoint.position.y=Main.app.mouseY;
+        spawnPoint.position.x=Main.mouseXScaled;
+        spawnPoint.position.y=Main.mouseYScaled;
         if(Main.app.mousePressed){
             moveSpawnpoint = false;
         }
@@ -139,7 +139,7 @@ public class MapEditor {
 
         if(Main.mouseClicked){
             if(Main.app.mouseButton==LEFT) {
-                pathPoints = (Point[]) append(pathPoints, new Point(Main.app.mouseX, Main.app.mouseY));
+                pathPoints = (Point[]) append(pathPoints, new Point(Main.mouseXScaled, Main.mouseYScaled));
             }else if(Main.app.mouseButton==RIGHT){
                 //sterilize points
                 for(int i=1;i<pathPoints.length;i++) {
@@ -177,10 +177,10 @@ public class MapEditor {
         if(Main.app.mouseY>400){ return; }
 
         Main.app.stroke(1,0,0,.5f);
-        Main.app.line(Main.app.mouseX,Main.app.mouseY,Main.app.mouseX,Main.app.mouseY+100);
+        Main.app.line(Main.mouseXScaled,Main.mouseYScaled,Main.mouseXScaled,Main.mouseYScaled+100);
 
         if(Main.app.mousePressed){
-            newWall(Main.app.mouseX,Main.app.mouseY,Main.app.mouseX,Main.app.mouseY+100);
+            newWall(Main.mouseXScaled,Main.mouseYScaled,Main.mouseXScaled,Main.mouseYScaled+100);
             placingWall=false;
         }
     }
@@ -188,7 +188,7 @@ public class MapEditor {
     public static void checkWallEdit(){
         if(placingWall||placingPath){ editingWall=null;return; }
         for(Wall wall:walls){
-            if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,Main.app.mouseX,Main.app.mouseY,4,4)){
+            if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,Main.mouseXScaled,Main.mouseYScaled,4,4)){
                 if(Main.app.mousePressed) {
                     if(editingWall!=null) {
                         editingWall.deselect();
