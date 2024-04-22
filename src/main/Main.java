@@ -7,12 +7,9 @@ import main.World.Editor.File.Loader;
 import main.World.Editor.MapEditor;
 import main.World.Player;
 import main.World.Wall;
-import main.World.World;
 import processing.core.PApplet;
 
-import main.AssetLoader.AssetLoader;
-
-import java.awt.*;
+import processing.event.MouseEvent;
 
 import static main.AssetLoader.AssetLoader.registerImages;
 import static main.Util.Util.moveCursor;
@@ -27,6 +24,7 @@ public class Main extends PApplet {
     public static boolean editRender = true;
     public static boolean previousMouseDown = false;
     public static boolean mouseClicked = false;
+    public static float mouseScroll = 0;
 
     public Player player;
 
@@ -54,16 +52,15 @@ public class Main extends PApplet {
 
     public void draw(){
         background(0.25f);
-        updateMouseClick();
+        updateMouseEvents();
         player.move();
-        handleCursor();
         if(editRender){
             renderEditMode();
         }else{
             gameRender();
         }
         HUDRender.render();
-        previousMouseDown = mousePressed;
+        resetMouseEvents();
     }
 
     public void gameRender(){
@@ -80,17 +77,13 @@ public class Main extends PApplet {
         MapEditor.update();
     }
 
-    public void handleCursor(){
-        if(editRender){
-            cursor();
-        }else{
-            noCursor();
-            moveCursor(Main.app.width/2,Main.app.height/2);
-        }
+    public void updateMouseEvents(){
+        mouseClicked = !previousMouseDown && mousePressed;
     }
 
-    public void updateMouseClick(){
-        mouseClicked = !previousMouseDown && mousePressed;
+    public void resetMouseEvents() {
+        mouseScroll = 0;
+        previousMouseDown = mousePressed;
     }
 
     public void keyPressed(){
@@ -125,6 +118,10 @@ public class Main extends PApplet {
         if(key==' '){
             editRender =!editRender;
         }
+    }
+
+    public void mouseWheel(MouseEvent event) {
+        mouseScroll= event.getCount();
     }
 
     public int randomColor(){

@@ -8,9 +8,11 @@ import main.World.Wall;
 import main.World.World;
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static main.Util.Util.lineRect;
-import static main.World.World.spawnPoint;
-import static main.World.World.walls;
+import static main.World.World.*;
 import static processing.core.PApplet.append;
 import static processing.core.PConstants.LEFT;
 import static processing.core.PConstants.RIGHT;
@@ -24,9 +26,11 @@ public class MapEditor {
     public static boolean placingWall = false;
     public static boolean placingPath = false;
     public static boolean moveSpawnpoint = false;
+    public static boolean placingBlock = false;
 
     public static Wall editingWall;
     public static Point[] pathPoints = {};
+    public static float blockSize = 25;
 
     public static void setup(){
         app = Main.app;
@@ -34,6 +38,7 @@ public class MapEditor {
         uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new TextureButton(190,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(370,410,80,80));
 
         uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
@@ -47,6 +52,7 @@ public class MapEditor {
         checkWallEdit();
         checkPathPlace();
         checkSpawnMove();
+        checkBlockPlace();
     }
     public static void renderUIComponents(){
         for(UIComponent uiComponent : uiComponents){
@@ -57,6 +63,28 @@ public class MapEditor {
         app.noStroke();
         app.fill(.5f,.5f);
         app.rect(0,400,500,100);
+    }
+
+    public static void checkBlockPlace(){
+        if(!placingBlock){ return; }
+        if(Main.app.mouseY>400){ return; }
+
+        Main.app.stroke(1,0,0,.5f);
+        Main.app.rect(Main.app.mouseX-blockSize/2,Main.app.mouseY-blockSize/2,blockSize,blockSize);
+
+        blockSize+=Main.mouseScroll;
+
+        if(Main.app.mousePressed){
+            ArrayList<Wall> blockWalls = new ArrayList<>();
+            blockWalls.add(newWall(Main.app.mouseX-blockSize/2,Main.app.mouseY-blockSize/2,Main.app.mouseX+blockSize/2,Main.app.mouseY-blockSize/2));
+            blockWalls.add(newWall(Main.app.mouseX+blockSize/2,Main.app.mouseY-blockSize/2,Main.app.mouseX+blockSize/2,Main.app.mouseY+blockSize/2));
+            blockWalls.add(newWall(Main.app.mouseX+blockSize/2,Main.app.mouseY+blockSize/2,Main.app.mouseX-blockSize/2,Main.app.mouseY+blockSize/2));
+            blockWalls.add(newWall(Main.app.mouseX-blockSize/2,Main.app.mouseY+blockSize/2,Main.app.mouseX-blockSize/2,Main.app.mouseY-blockSize/2));
+            for(Wall wall : blockWalls){
+                wall.changeTexture(textureButton.textureId);
+            }
+            placingBlock=false;
+        }
     }
 
     public static void checkSpawnMove(){
@@ -82,7 +110,7 @@ public class MapEditor {
                 for(int i=1;i<pathPoints.length;i++) {
                     Point p1 = pathPoints[i - 1];
                     Point p2 = pathPoints[i];
-                    Wall wall = World.newWall(p1.x,p1.y,p2.x,p2.y);
+                    Wall wall = newWall(p1.x,p1.y,p2.x,p2.y);
                     wall.changeTexture(textureButton.textureId);
                 }
                 placingPath = false;
@@ -117,7 +145,7 @@ public class MapEditor {
         Main.app.line(Main.app.mouseX,Main.app.mouseY,Main.app.mouseX,Main.app.mouseY+100);
 
         if(Main.app.mousePressed){
-            World.newWall(Main.app.mouseX,Main.app.mouseY,Main.app.mouseX,Main.app.mouseY+100);
+            newWall(Main.app.mouseX,Main.app.mouseY,Main.app.mouseX,Main.app.mouseY+100);
             placingWall=false;
         }
     }
@@ -146,5 +174,6 @@ public class MapEditor {
         editingWall = null;
         placingWall = false;
         placingPath = false;
+        placingBlock = false;
     }
 }

@@ -3,6 +3,7 @@ package main.World;
 import main.Main;
 import main.Util.Ray;
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 import static java.lang.Math.*;
 import static main.Util.Util.lineLine;
@@ -27,7 +28,7 @@ public class Player {
         w=10;
         h=10;
         turnSpeed=radians(1);
-        fov = radians(90);
+        fov = radians(45);
         setupRays();
     }
     public void setupRays(){
@@ -108,6 +109,8 @@ public class Player {
             ray.dir+=deg;
         }
     }
+
+
 
     public void attemptMove(float dx, float dy) {
         boolean hitX = false;
