@@ -49,14 +49,13 @@ public class MapEditor {
     }
 
     public static void update(){
+        //scale sensitive
         drawBar();
-        doZoom();
         renderUIComponents();
-        checkWallPlace();
-        checkWallEdit();
-        checkPathPlace();
-        checkSpawnMove();
-        checkBlockPlace();
+
+        doZoom();
+
+        preformChecksAndRenders();
     }
     public static void renderUIComponents(){
         for(UIComponent uiComponent : uiComponents){
@@ -67,6 +66,19 @@ public class MapEditor {
         app.noStroke();
         app.fill(.5f,.5f);
         app.rect(0,400,500,100);
+    }
+
+    public static void preformChecksAndRenders(){
+        Main.app.pushMatrix();
+        Main.app.scale(zoom);
+
+        checkWallPlace();
+        checkWallEdit();
+        checkPathPlace();
+        checkSpawnMove();
+        checkBlockPlace();
+
+        Main.app.popMatrix();
     }
 
     public static void resetAction(){
