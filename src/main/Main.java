@@ -1,6 +1,7 @@
 package main;
 
 import main.Render.HUDRender;
+import main.Render.RenderOptions;
 import main.Render.Renderer;
 import main.Texture.TextureRegistry;
 import main.World.Editor.File.Loader;
@@ -37,6 +38,7 @@ public class Main extends PApplet {
 
     public void setup(){
         app = this;
+        RenderOptions.setup();
         colorMode(RGB,1);
 
         registerImages();
