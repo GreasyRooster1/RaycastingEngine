@@ -19,6 +19,7 @@ public class TextureRegistry {
         register(new ImageTexture("walls.doom.skull"));
         register(new ImageTexture("walls.doom.techDoor"));
         register(new ImageTexture("walls.doom.vaultDoor"));
+        register(new TransparentImageTexture("walls.doom.bars"));
         register(new TransparentImageTexture("walls.bars"));
     }
     public static void register(Texture texture){

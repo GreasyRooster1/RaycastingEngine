@@ -22,6 +22,7 @@ public class AssetLoader {
         register("assets\\Walls\\doom\\skull.png","walls.doom.skull");
         register("assets\\Walls\\doom\\tech_door.png","walls.doom.techDoor");
         register("assets\\Walls\\doom\\vault_door.png","walls.doom.vaultDoor");
+        register("assets\\Walls\\doom\\bars.png","walls.doom.bars");
         register("assets\\Walls\\bars.png","walls.bars");
     }
 
