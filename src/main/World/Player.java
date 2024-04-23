@@ -6,6 +6,8 @@ import processing.core.PApplet;
 import processing.event.MouseEvent;
 
 import static java.lang.Math.*;
+import static main.Render.RenderOptions.maxViewDistance;
+import static main.Render.RenderOptions.rayCount;
 import static main.Util.Util.lineLine;
 import static main.Util.Util.lineRect;
 import static main.World.World.walls;
@@ -32,8 +34,8 @@ public class Player {
         setupRays();
     }
     public void setupRays(){
-        for (float i = -fov/2; i <fov/2 ; i+=fov/ Main.rayCount) {
-            rays = (Ray[]) PApplet.append(rays,new Ray(x,y,i, Main.maxViewDistance));
+        for (float i = -fov/2; i <fov/2 ; i+=fov/ rayCount) {
+            rays = (Ray[]) PApplet.append(rays,new Ray(x,y,i, maxViewDistance));
         }
     }
 

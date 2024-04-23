@@ -18,9 +18,6 @@ import static main.World.World.walls;
 
 public class Main extends PApplet {
     public static Main app;
-    public static float maxViewDistance = 5000;
-    public static float rayCount = 250;
-    public static float segCount = 100;
     public static boolean editRender = true;
     public static boolean previousMouseDown = false;
 
