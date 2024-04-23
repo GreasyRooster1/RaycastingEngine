@@ -7,6 +7,7 @@ import main.Texture.TextureTypes.*;
 import processing.core.PConstants;
 
 import static main.Util.Util.rectRect;
+import static main.Util.WallColorHelper.getWallColor;
 
 public class Wall {
     public float x1,y1;
@@ -28,7 +29,7 @@ public class Wall {
     }
 
     public void draw(){
-        Main.app.stroke(255,0,0);
+        Main.app.stroke(getWallColor(texture.id));
         Main.app.strokeWeight(2);
         Main.app.line(x1,y1,x2,y2);
     }
@@ -63,8 +64,8 @@ public class Wall {
 
     public void drawEditMode(){
         Main.app.noStroke();
+        Main.app.fill(1,1,0);
         Main.app.strokeWeight(2);
-        Main.app.fill(255,255,0);
         Main.app.ellipse(x1,y1,10,10);
         Main.app.ellipse(x2,y2,10,10);
     }
