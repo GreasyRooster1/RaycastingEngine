@@ -78,6 +78,7 @@ public class MapEditor {
     }
 
     public static void preformChecksAndRenders(){
+        if(checkForOpenPanel()) return;
         Main.app.pushMatrix();
         Main.app.scale(zoom);
         Main.app.translate(-camX, -camY);
@@ -89,6 +90,15 @@ public class MapEditor {
         checkBlockPlace();
 
         Main.app.popMatrix();
+    }
+
+    private static boolean checkForOpenPanel() {
+        for(UIPanel panel:uiPanels){
+            if(panel.active){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void resetAction(){
