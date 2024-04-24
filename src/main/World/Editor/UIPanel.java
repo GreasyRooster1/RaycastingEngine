@@ -2,8 +2,6 @@ package main.World.Editor;
 
 import main.Main;
 
-import javax.swing.*;
-
 import static processing.core.PApplet.append;
 
 public class UIPanel extends UIComponent {
@@ -46,6 +44,9 @@ public class UIPanel extends UIComponent {
         components = (UIComponent[]) append(component,components);
     }
 
+    public UIComponent createAccessorButton(){
+        return null;
+    }
     public void createComponents(){
 
     }
