@@ -45,10 +45,8 @@ public class MapEditor {
         app = Main.app;
         uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel().sterilize());
 
-        uiComponents = (UIComponent[])append(uiComponents,new WallButton(100,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new PathButton(190,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(370,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(190,410,80,80));
 
         uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
