@@ -1,10 +1,8 @@
-package main.World.Editor.Buttons;
+package main.World.Editor.Components.Buttons;
 
 import main.Main;
 import main.Texture.TextureRegistry;
-import main.World.Editor.MapEditor;
 import main.World.Editor.UIComponent;
-import processing.core.PConstants;
 
 public class TextureButton extends UIComponent {
     public int textureId = 0;

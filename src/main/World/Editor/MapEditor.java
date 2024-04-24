@@ -3,10 +3,14 @@ package main.World.Editor;
 import main.Main;
 import main.Texture.TextureRegistry;
 import main.Util.Point;
-import main.World.Editor.Buttons.*;
+import main.World.Editor.Components.Buttons.BlockButton;
+import main.World.Editor.Components.Buttons.PathButton;
+import main.World.Editor.Components.Buttons.SaveButton;
+import main.World.Editor.Components.Buttons.SpawnPointButton;
+import main.World.Editor.Components.Buttons.TextureButton;
+import main.World.Editor.Components.Buttons.WallButton;
 import main.World.Wall;
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 import java.util.ArrayList;
 

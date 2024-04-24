@@ -1,13 +1,13 @@
-package main.World.Editor.Buttons;
+package main.World.Editor.Components;
 
 import main.Main;
-import main.World.Editor.File.Loader;
-import main.World.Editor.MapEditor;
 import main.World.Editor.UIComponent;
 import processing.core.PConstants;
 
-public class SaveButton extends UIComponent {
-    public SaveButton(float _x, float _y, float _w, float _h) {
+public class TextButton extends UIComponent {
+    public String text = "";
+
+    public TextButton(float _x, float _y, float _w, float _h) {
         super(_x, _y, _w, _h);
     }
 
@@ -18,11 +18,6 @@ public class SaveButton extends UIComponent {
         Main.app.fill(0f);
         Main.app.textSize(20);
         Main.app.textAlign(PConstants.CENTER);
-        Main.app.text("Save",x+w/2,y+h/2);
-    }
-
-    @Override
-    public void onPress() {
-        Loader.save("world.json");
+        Main.app.text(text,x,y,w,h);
     }
 }
