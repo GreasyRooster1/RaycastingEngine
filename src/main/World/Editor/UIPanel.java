@@ -7,7 +7,7 @@ import static processing.core.PApplet.append;
 
 public class UIPanel extends UIComponent {
     public boolean active = false;
-    public UIComponent[] components;
+    public UIComponent[] components = {};
 
     public UIPanel() {
         super(0,0, Main.app.width, Main.app.height);
@@ -42,12 +42,12 @@ public class UIPanel extends UIComponent {
     }
 
     public void addComponent(UIComponent component){
-        components = (UIComponent[]) append(component,components);
+        components = (UIComponent[]) append(components,component);
     }
 
     public void registerAccessorButton(){
         PanelAccessButton accessButton = new PanelAccessButton(0,0,0,0);
-        accessButton.syncWithTemplate();
+        accessButton.syncWithPanel(this);
         MapEditor.uiComponents = (UIComponent[]) append(MapEditor.uiComponents,accessButton);
     }
 

@@ -11,7 +11,8 @@ public class PanelAccessButton extends TextButton {
         super(_x, _y, _w, _h);
     }
 
-    public void syncWithTemplate(){
+    public void syncWithPanel(UIPanel p){
+        panel = p;
         button = panel.createAccessorButton();
         text = button.text;
         x = button.x;
