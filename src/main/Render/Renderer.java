@@ -30,6 +30,17 @@ public class Renderer {
             return;
         }
 
+        float height = renderWall(ray,p,x,ignoredIds,depth);
+        renderFloor(ray,p,x,height);
+    }
+
+    public static void renderFloor(Ray ray,Player p,int x,float height){
+        for (int i = 0; i < (Main.app.height-height)/2; i++) {
+
+        }
+    }
+
+    public static float renderWall(Ray ray, Player p, int x, int[] ignoredIds, int depth){
         if(ray.collisionWall.texture.isTransparent){
             Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,maxViewDistance);
 
@@ -40,6 +51,7 @@ public class Renderer {
 
         float lineHeight = calculateLineHeight(ray,p);
         drawLine(lineHeight,x,ray);
+        return lineHeight;
     }
 
     public static void drawLine(float height, float x, Ray ray){
