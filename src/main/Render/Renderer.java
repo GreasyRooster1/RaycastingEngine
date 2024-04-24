@@ -1,6 +1,7 @@
 package main.Render;
 
 import main.Main;
+import main.Util.Point;
 import main.Util.Ray;
 import main.World.Player;
 import main.World.Wall;
@@ -12,6 +13,8 @@ import static processing.core.PApplet.dist;
 
 public class Renderer {
     public static float widthRayRatio = Main.app.width / rayCount;
+    public static float projectionPlaneDistance = 20;
+    public static float projectionPlaneWidth = calculateProjectionWidth();
 
     public static void renderPlayerView(Player p){
         for(int i = 0; i< rayCount; i+=1){
@@ -75,7 +78,7 @@ public class Renderer {
         float wallHeight = ray.collisionWall.height;
 
         float adjustedLength = (float) (cos(ray.dir-p.dir)*ray.mag);
-        float vertical_view = (p.fov/ Main.app.width)* Main.app.height;
+        float vertical_view = (fov/ Main.app.width)* Main.app.height;
         float height = Math.round((wallHeight / (2 * tan(0.5f * vertical_view) * adjustedLength)) * Main.app.height);
         return max(height,0);
     }
@@ -84,5 +87,11 @@ public class Renderer {
         ray.x1 = p.x;
         ray.y1 = p.y;
         ray.checkCollision();
+    }
+
+    public static float calculateProjectionWidth(){
+        Point leftmost = new Point((float) (cos(-fov/2)*projectionPlaneDistance), (float) (sin(-fov/2)*projectionPlaneDistance));
+        Point rightmost = new Point((float) (cos(fov/2)*projectionPlaneDistance), (float) (sin(fov/2)*projectionPlaneDistance));
+        return dist(leftmost.x,leftmost.y,rightmost.x, rightmost.y);
     }
 }

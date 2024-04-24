@@ -6,8 +6,7 @@ import processing.core.PApplet;
 import processing.event.MouseEvent;
 
 import static java.lang.Math.*;
-import static main.Render.RenderOptions.maxViewDistance;
-import static main.Render.RenderOptions.rayCount;
+import static main.Render.RenderOptions.*;
 import static main.Util.Util.lineLine;
 import static main.Util.Util.lineRect;
 import static main.World.World.walls;
@@ -19,7 +18,7 @@ public class Player {
     public float dir;
     public float speed,turnSpeed;
     public Ray[] rays={};
-    public float fov;
+
     public boolean useMouse = false;
 
     public Player(float _x, float _y){
@@ -30,7 +29,6 @@ public class Player {
         w=10;
         h=10;
         turnSpeed=radians(1);
-        fov = radians(45);
         setupRays();
     }
     public void setupRays(){
