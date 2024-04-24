@@ -1,4 +1,4 @@
-package main.Editor.Components.Buttons;
+package main.Editor.Components.Buttons.TextureButtons;
 
 import main.Main;
 import main.Texture.TextureRegistry;

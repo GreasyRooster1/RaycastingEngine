@@ -1,6 +1,6 @@
 package main.Editor.Components.Panels;
 
-import main.Editor.Components.Buttons.TextureButton;
+import main.Editor.Components.Buttons.TextureButtons.TextureButton;
 import main.Editor.Components.TextButton;
 import main.Editor.UIPanel;
 
