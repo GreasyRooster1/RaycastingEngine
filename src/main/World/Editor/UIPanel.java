@@ -45,6 +45,18 @@ public class UIPanel extends UIComponent {
         components = (UIComponent[]) append(component,components);
     }
 
+    public void registerAccessorButton(){
+        PanelAccessButton accessButton = new PanelAccessButton(0,0,0,0);
+        accessButton.syncWithTemplate();
+        MapEditor.uiComponents = (UIComponent[]) append(MapEditor.uiComponents,accessButton);
+    }
+
+    public UIPanel sterilize() {
+        registerAccessorButton();
+        createComponents();
+        return this;
+    }
+
     public TextButton createAccessorButton(){
         return null;
     }
@@ -57,4 +69,6 @@ public class UIPanel extends UIComponent {
     public void onClose(){
 
     }
+
+
 }

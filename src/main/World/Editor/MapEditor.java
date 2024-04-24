@@ -44,14 +44,7 @@ public class MapEditor {
     public static void setup(){
         //todo add pages
         app = Main.app;
-        uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel());
-//        uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
-//        uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
-//        uiComponents = (UIComponent[])append(uiComponents,new TextureButton(190,410,80,80));
-//        uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
-//        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(370,410,80,80));
-//
-//        uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
+        uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel().sterilize());
 
     }
 
