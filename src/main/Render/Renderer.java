@@ -38,11 +38,11 @@ public class Renderer {
     }
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
-        for (int i = 0; i < (Main.app.height-height)/2; i++) {
-            Point3 origin = new Point3(p.x,p.y,0);
-            //Vec3 dir = new Vec3(p.x-);
-            //Ray3 floorRay = new Ray3(origin,dir);
-        }
+//        for (int i = (int) (height/2); i < (Main.app.height-height)/2; i++) {
+//            Point3 origin = new Point3(p.x,p.y,0);
+//            Vec3 dir = new Vec3(p.x-);
+//            Ray3 floorRay = new Ray3(origin,dir);
+//        }
     }
 
     public static float renderWall(Ray ray, Player p, int x, int[] ignoredIds, int depth){
