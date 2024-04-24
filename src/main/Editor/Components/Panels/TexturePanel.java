@@ -9,7 +9,7 @@ import main.Texture.TextureRegistry;
 import static processing.core.PApplet.floor;
 
 public class TexturePanel extends UIPanel {
-    public float buttonSize = 50;
+    public float buttonSize = 60;
     public float buttonMargin = 10;
     public TexturePanel() {
     }
@@ -27,8 +27,9 @@ public class TexturePanel extends UIPanel {
 
         //create all the generated ones
         for(int i=0;i<TextureRegistry.textures.length;i++) {
-            float x = buttonMargin+((i%5)*(buttonSize+buttonMargin));
-            float y = floor(i/5f)*(buttonSize+buttonMargin);
+            float buttonsPerRow = floor(500/(buttonSize+buttonMargin));
+            float x = buttonMargin+((i%buttonsPerRow)*(buttonSize+buttonMargin));
+            float y = floor(i/buttonsPerRow)*(buttonSize+buttonMargin);
             addComponent(new SingleTextureButton(x, y, buttonSize, buttonSize, i));
         }
     }

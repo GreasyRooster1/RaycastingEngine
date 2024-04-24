@@ -19,8 +19,9 @@ public class SingleTextureButton extends UIComponent {
         }else {
             Main.app.fill(0.75f);
         }
-        Main.app.rect(x,y,w,h,15);
-        TextureRegistry.get(textureId).renderTexture(x+15,y+15,w-30,h-30,1);
+        float scaleMargin = (w/90)*15;
+        Main.app.rect(x,y,w,h,scaleMargin);
+        TextureRegistry.get(textureId).renderTexture(x+scaleMargin,y+scaleMargin,w-scaleMargin*2,h-scaleMargin*2,1);
     }
 
     @Override
