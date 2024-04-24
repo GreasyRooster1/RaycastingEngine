@@ -4,8 +4,8 @@ import main.Render.HUDRender;
 import main.Render.RenderOptions;
 import main.Render.Renderer;
 import main.Texture.TextureRegistry;
-import main.World.Editor.File.Loader;
-import main.World.Editor.MapEditor;
+import main.Editor.File.Loader;
+import main.Editor.MapEditor;
 import main.World.Player;
 import main.World.Wall;
 import processing.core.PApplet;
@@ -13,8 +13,7 @@ import processing.core.PApplet;
 import processing.event.MouseEvent;
 
 import static main.AssetLoader.AssetLoader.registerImages;
-import static main.Util.Util.moveCursor;
-import static main.World.Editor.MapEditor.*;
+import static main.Editor.MapEditor.*;
 import static main.World.World.spawnPoint;
 import static main.World.World.walls;
 

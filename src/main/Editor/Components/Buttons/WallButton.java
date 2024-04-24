@@ -1,10 +1,7 @@
-package main.World.Editor.Components.Buttons;
+package main.Editor.Components.Buttons;
 
-import main.Main;
-import main.World.Editor.Components.TextButton;
-import main.World.Editor.MapEditor;
-import main.World.Editor.UIComponent;
-import processing.core.PConstants;
+import main.Editor.Components.TextButton;
+import main.Editor.MapEditor;
 
 public class WallButton extends TextButton {
 

@@ -1,4 +1,4 @@
-package main.World.Editor;
+package main.Editor;
 
 import main.Main;
 

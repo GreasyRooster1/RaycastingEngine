@@ -1,8 +1,6 @@
-package main.World.Editor;
+package main.Editor;
 
-import main.World.Editor.Components.TextButton;
-
-import java.awt.*;
+import main.Editor.Components.TextButton;
 
 public class PanelAccessButton extends TextButton {
     public UIPanel panel=null;

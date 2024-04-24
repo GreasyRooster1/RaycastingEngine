@@ -1,7 +1,7 @@
-package main.World.Editor;
+package main.Editor;
 
 import main.Main;
-import main.World.Editor.Components.TextButton;
+import main.Editor.Components.TextButton;
 
 import static processing.core.PApplet.append;
 

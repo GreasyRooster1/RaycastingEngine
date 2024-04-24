@@ -1,7 +1,7 @@
-package main.World.Editor.Components;
+package main.Editor.Components;
 
 import main.Main;
-import main.World.Editor.UIComponent;
+import main.Editor.UIComponent;
 import processing.core.PConstants;
 
 public class TextButton extends UIComponent {

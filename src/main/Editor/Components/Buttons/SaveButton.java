@@ -1,10 +1,7 @@
-package main.World.Editor.Components.Buttons;
+package main.Editor.Components.Buttons;
 
-import main.Main;
-import main.World.Editor.Components.TextButton;
-import main.World.Editor.File.Loader;
-import main.World.Editor.UIComponent;
-import processing.core.PConstants;
+import main.Editor.Components.TextButton;
+import main.Editor.File.Loader;
 
 public class SaveButton extends TextButton {
     public SaveButton(float _x, float _y, float _w, float _h) {

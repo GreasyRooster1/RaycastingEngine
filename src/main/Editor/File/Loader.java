@@ -1,6 +1,5 @@
-package main.World.Editor.File;
+package main.Editor.File;
 
-import main.Main;
 import main.Texture.TextureRegistry;
 import main.World.Wall;
 import main.World.World;

@@ -1,11 +1,8 @@
-package main.World.Editor.Components.Panels;
+package main.Editor.Components.Panels;
 
-import main.World.Editor.Components.Buttons.TextureButton;
-import main.World.Editor.Components.TextButton;
-import main.World.Editor.UIComponent;
-import main.World.Editor.UIPanel;
-
-import java.awt.*;
+import main.Editor.Components.Buttons.TextureButton;
+import main.Editor.Components.TextButton;
+import main.Editor.UIPanel;
 
 public class TexturePanel extends UIPanel {
     public TexturePanel() {

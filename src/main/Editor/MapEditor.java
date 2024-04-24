@@ -1,15 +1,14 @@
-package main.World.Editor;
+package main.Editor;
 
 import main.Main;
 import main.Texture.TextureRegistry;
 import main.Util.Point;
-import main.World.Editor.Components.Buttons.BlockButton;
-import main.World.Editor.Components.Buttons.PathButton;
-import main.World.Editor.Components.Buttons.SaveButton;
-import main.World.Editor.Components.Buttons.SpawnPointButton;
-import main.World.Editor.Components.Buttons.TextureButton;
-import main.World.Editor.Components.Buttons.WallButton;
-import main.World.Editor.Components.Panels.TexturePanel;
+import main.Editor.Components.Buttons.BlockButton;
+import main.Editor.Components.Buttons.PathButton;
+import main.Editor.Components.Buttons.SaveButton;
+import main.Editor.Components.Buttons.SpawnPointButton;
+import main.Editor.Components.Buttons.WallButton;
+import main.Editor.Components.Panels.TexturePanel;
 import main.World.Wall;
 import processing.core.PApplet;
 
@@ -45,6 +44,13 @@ public class MapEditor {
         //todo add pages
         app = Main.app;
         uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel().sterilize());
+
+        uiComponents = (UIComponent[])append(uiComponents,new WallButton(100,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new PathButton(190,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
+        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(370,410,80,80));
+
+        uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
     }
 

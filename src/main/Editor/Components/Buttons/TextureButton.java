@@ -1,10 +1,10 @@
-package main.World.Editor.Components.Buttons;
+package main.Editor.Components.Buttons;
 
 import main.Main;
 import main.Texture.TextureRegistry;
-import main.World.Editor.UIComponent;
+import main.Editor.UIComponent;
 
-import static main.World.Editor.MapEditor.textureId;
+import static main.Editor.MapEditor.textureId;
 
 public class TextureButton extends UIComponent {
     public TextureButton(float _x, float _y, float _w, float _h) {
