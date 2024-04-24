@@ -1,6 +1,8 @@
-package main.Editor;
+package main.Editor.Components.Buttons;
 
 import main.Editor.Components.TextButton;
+import main.Editor.MapEditor;
+import main.Editor.UIPanel;
 
 public class PanelAccessButton extends TextButton {
     public UIPanel panel=null;

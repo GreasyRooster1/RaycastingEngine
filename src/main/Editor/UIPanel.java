@@ -1,5 +1,6 @@
 package main.Editor;
 
+import main.Editor.Components.Buttons.PanelAccessButton;
 import main.Main;
 import main.Editor.Components.TextButton;
 

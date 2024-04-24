@@ -8,6 +8,7 @@ import processing.core.PConstants;
 
 import static main.Util.Util.rectRect;
 import static main.Util.WallColorHelper.getWallColor;
+import static processing.core.PApplet.append;
 
 public class Wall {
     public float x1,y1;
@@ -72,5 +73,20 @@ public class Wall {
 
     public void changeTexture(int id){
         texture=TextureRegistry.get(id);
+    }
+
+    public void delete() {
+        x1=0;
+        y1=0;
+        x2=0;
+        y2=0;
+        height = 0;
+        Wall[] tmp = {};
+        for(Wall wall:World.walls){
+            if(wall.id!=id){
+                tmp = (Wall[]) append(tmp,wall);
+            }
+        }
+        World.walls = tmp;
     }
 }

@@ -12,12 +12,14 @@ import main.Editor.Components.Buttons.WallButton;
 import main.Editor.Components.Panels.TexturePanel;
 import main.World.Wall;
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 import java.util.ArrayList;
 
 import static main.Util.Util.lineRect;
 import static main.World.World.*;
 import static processing.core.PApplet.append;
+import static processing.core.PApplet.println;
 import static processing.core.PConstants.*;
 
 public class MapEditor {
@@ -225,6 +227,9 @@ public class MapEditor {
                     textureId = wall.texture.id;
                 }
             }
+        }
+        if(Main.app.keyPressed&&(Main.app.key==BACKSPACE||Main.app.key==DELETE)){
+            editingWall.delete();
         }
         if(editingWall!=null){
             editingWall.texture = TextureRegistry.get(textureId);
