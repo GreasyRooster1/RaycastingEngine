@@ -15,5 +15,6 @@ public class SpawnPointButton extends TextButton {
         MapEditor.closePanels();
         MapEditor.resetAction();
         MapEditor.moveSpawnpoint = true;
+        MapEditor.ignoreActions = true;
     }
 }

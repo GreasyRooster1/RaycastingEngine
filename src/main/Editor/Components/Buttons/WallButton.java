@@ -16,5 +16,6 @@ public class WallButton extends TextButton {
         MapEditor.closePanels();
         MapEditor.resetAction();
         MapEditor.placingWall = true;
+        MapEditor.ignoreActions = true;
     }
 }

@@ -33,6 +33,7 @@ public class MapEditor {
     public static float zoom = 1;
     public static float camX = 0;
     public static float camY = 0;
+    public static boolean ignoreActions = false;
 
     public static boolean placingWall = false;
     public static boolean placingPath = false;
@@ -78,9 +79,15 @@ public class MapEditor {
 
     public static void preformChecksAndRenders(){
         if(checkForOpenPanel()) return;
+        if(ignoreActions){
+            ignoreActions = false;
+            return;
+        }
+
         Main.app.pushMatrix();
         Main.app.scale(zoom);
         Main.app.translate(-camX, -camY);
+
 
         checkWallPlace();
         checkWallEdit();
@@ -157,7 +164,7 @@ public class MapEditor {
         if(Main.app.mouseY>barHeight){ return; }
         spawnPoint.position.x=Main.mouseXScaled;
         spawnPoint.position.y=Main.mouseYScaled;
-        if(Main.app.mousePressed){
+        if(Main.mouseClicked){
             moveSpawnpoint = false;
         }
     }
@@ -207,7 +214,7 @@ public class MapEditor {
         Main.app.stroke(1,0,0,.5f);
         Main.app.line(Main.mouseXScaled,Main.mouseYScaled,Main.mouseXScaled,Main.mouseYScaled+100);
 
-        if(Main.app.mousePressed){
+        if(Main.mouseClicked){
             newWall(Main.mouseXScaled,Main.mouseYScaled,Main.mouseXScaled,Main.mouseYScaled+100);
             placingWall=false;
         }
