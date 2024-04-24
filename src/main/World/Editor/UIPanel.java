@@ -4,6 +4,8 @@ import main.Main;
 
 import javax.swing.*;
 
+import static processing.core.PApplet.append;
+
 public class UIPanel extends UIComponent {
     public boolean active = false;
     public UIComponent[] components;
@@ -40,6 +42,13 @@ public class UIPanel extends UIComponent {
         }
     }
 
+    public void addComponent(UIComponent component){
+        components = (UIComponent[]) append(component,components);
+    }
+
+    public void createComponents(){
+
+    }
     public void onOpen(){
 
     }
