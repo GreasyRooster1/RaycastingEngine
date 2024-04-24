@@ -14,7 +14,7 @@ public class PanelAccessButton extends TextButton {
 
     @Override
     public void onPress() {
-        MapEditor.resetAction();
-        MapEditor.placingBlock = true;
+        MapEditor.closePanels();
+        panel.open();
     }
 }

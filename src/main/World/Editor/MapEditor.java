@@ -9,6 +9,7 @@ import main.World.Editor.Components.Buttons.SaveButton;
 import main.World.Editor.Components.Buttons.SpawnPointButton;
 import main.World.Editor.Components.Buttons.TextureButton;
 import main.World.Editor.Components.Buttons.WallButton;
+import main.World.Editor.Components.Panels.TexturePanel;
 import main.World.Wall;
 import processing.core.PApplet;
 
@@ -22,6 +23,7 @@ import static processing.core.PConstants.*;
 public class MapEditor {
     private static PApplet app;
     public static UIComponent[] uiComponents={};
+    public static UIPanel[] uiPanels={};
     public static int barHeight = 400;
 
     public static int textureId;
@@ -42,13 +44,14 @@ public class MapEditor {
     public static void setup(){
         //todo add pages
         app = Main.app;
-        uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new TextureButton(190,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
-        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(370,410,80,80));
-
-        uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
+        uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel());
+//        uiComponents = (UIComponent[])append(uiComponents,new WallButton(10,410,80,80));
+//        uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
+//        uiComponents = (UIComponent[])append(uiComponents,new TextureButton(190,410,80,80));
+//        uiComponents = (UIComponent[])append(uiComponents,new SpawnPointButton(280,410,80,80));
+//        uiComponents = (UIComponent[])append(uiComponents,new BlockButton(370,410,80,80));
+//
+//        uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
     }
 
@@ -106,6 +109,14 @@ public class MapEditor {
         if(Main.app.mousePressed&&Main.app.mouseButton==CENTER){
             camX-=Main.app.mouseX-Main.app.pmouseX;
             camY-=Main.app.mouseY-Main.app.pmouseY;
+        }
+    }
+
+    public static void closePanels() {
+        for(UIPanel panel : uiPanels){
+            if(panel.active) {
+                panel.close();
+            }
         }
     }
 
@@ -215,6 +226,4 @@ public class MapEditor {
             editingWall.edit();
         }
     }
-
-
 }
