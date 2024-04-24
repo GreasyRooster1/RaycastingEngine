@@ -70,5 +70,4 @@ public class UIPanel extends UIComponent {
 
     }
 
-
 }

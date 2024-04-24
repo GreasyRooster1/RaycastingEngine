@@ -13,7 +13,7 @@ public class TexturePanel extends UIPanel {
 
     @Override
     public TextButton createAccessorButton() {
-        TextButton button = new TextButton(10,10,80,80);
+        TextButton button = new TextButton(10,410,80,80);
         button.text = "Textures";
         return button;
     }
