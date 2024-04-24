@@ -23,7 +23,10 @@ public class PanelAccessButton extends TextButton {
 
     @Override
     public void onPress() {
+        boolean wasActive = panel.active;
         MapEditor.closePanels();
-        panel.open();
+        if(!wasActive) {
+            panel.open();
+        }
     }
 }
