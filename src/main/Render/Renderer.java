@@ -76,11 +76,11 @@ public class Renderer {
             float uv_y = i/segCount;
 
             int color = wall.texture.getColor(wall,uv_x,uv_y);
-            if(ray.mag>=fogDistance){
-                color = Main.app.lerpColor(color,fogColor, 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
-            }
             if(wall.texture.isTransparent&&color==0){
                 continue;
+            }
+            if(ray.mag>=fogDistance){
+                color = Main.app.lerpColor(color,fogColor, 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
             }
             renderSegment(color,x,i,height,segRatio);
         }
