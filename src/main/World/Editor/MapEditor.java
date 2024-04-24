@@ -24,7 +24,7 @@ public class MapEditor {
     public static UIComponent[] uiComponents={};
     public static int barHeight = 400;
 
-    public static TextureButton textureButton;
+    public static int textureId;
 
     public static float zoom = 1;
     public static float camX = 0;
@@ -50,7 +50,6 @@ public class MapEditor {
 
         uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
-        textureButton = (TextureButton) uiComponents[2];
     }
 
     public static void update(){
@@ -126,7 +125,7 @@ public class MapEditor {
             blockWalls.add(newWall(Main.mouseXScaled+blockSize/2,Main.mouseYScaled+blockSize/2,Main.mouseXScaled-blockSize/2,Main.mouseYScaled+blockSize/2));
             blockWalls.add(newWall(Main.mouseXScaled-blockSize/2,Main.mouseYScaled+blockSize/2,Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2));
             for(Wall wall : blockWalls){
-                wall.changeTexture(textureButton.textureId);
+                wall.changeTexture(textureId);
             }
             placingBlock=false;
         }
@@ -156,7 +155,7 @@ public class MapEditor {
                     Point p1 = pathPoints[i - 1];
                     Point p2 = pathPoints[i];
                     Wall wall = newWall(p1.x,p1.y,p2.x,p2.y);
-                    wall.changeTexture(textureButton.textureId);
+                    wall.changeTexture(textureId);
                 }
                 placingPath = false;
                 pathPoints = new Point[0];
@@ -207,12 +206,12 @@ public class MapEditor {
                         editingWall.deselect();
                     }
                     editingWall = wall;
-                    textureButton.textureId = wall.texture.id;
+                    textureId = wall.texture.id;
                 }
             }
         }
         if(editingWall!=null){
-            editingWall.texture = TextureRegistry.get(textureButton.textureId);
+            editingWall.texture = TextureRegistry.get(textureId);
             editingWall.edit();
         }
     }

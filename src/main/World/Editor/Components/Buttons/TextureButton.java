@@ -4,8 +4,9 @@ import main.Main;
 import main.Texture.TextureRegistry;
 import main.World.Editor.UIComponent;
 
+import static main.World.Editor.MapEditor.textureId;
+
 public class TextureButton extends UIComponent {
-    public int textureId = 0;
     public TextureButton(float _x, float _y, float _w, float _h) {
         super(_x, _y, _w, _h);
     }
