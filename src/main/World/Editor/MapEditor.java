@@ -61,6 +61,9 @@ public class MapEditor {
         for(UIComponent uiComponent : uiComponents){
             uiComponent.update();
         }
+        for(UIComponent panel : uiPanels){
+            panel.update();
+        }
     }
     public static void drawBar(){
         app.noStroke();
@@ -100,8 +103,8 @@ public class MapEditor {
             }
         }
         if(Main.app.mousePressed&&Main.app.mouseButton==CENTER){
-            camX-=Main.app.mouseX-Main.app.pmouseX;
-            camY-=Main.app.mouseY-Main.app.pmouseY;
+            camX-=(Main.app.mouseX-Main.app.pmouseX)/zoom;
+            camY-=(Main.app.mouseY-Main.app.pmouseY)/zoom;
         }
     }
 
