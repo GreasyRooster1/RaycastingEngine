@@ -9,15 +9,15 @@ import main.World.Wall;
 
 public class ExtrasPanel extends UIPanel {
     public TextButton createAccessorButton() {
-        TextButton button = new TextButton(400,410,80,80);
+        TextButton button = new TextButton(410,410,80,80);
         button.text = "More...";
         return button;
     }
 
     @Override
     public void createComponents() {
-        addComponent(new SaveButton(410,310,90,90));
-        addComponent(new WallButton(10,10,90,90));
-        addComponent(new SpawnPointButton(100,10,90,90));
+        addComponent(new SaveButton(410,310,80,80));
+        addComponent(new WallButton(10,10,80,80));
+        addComponent(new SpawnPointButton(100,10,80,80));
     }
 }

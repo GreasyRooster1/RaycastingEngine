@@ -1,5 +1,6 @@
 package main.Editor;
 
+import main.Editor.Components.Panels.ExtrasPanel;
 import main.Main;
 import main.Texture.TextureRegistry;
 import main.Util.Point;
@@ -44,11 +45,10 @@ public class MapEditor {
         //todo add pages
         app = Main.app;
         uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel().sterilize());
+        uiPanels = (UIPanel[]) append(uiPanels,new ExtrasPanel().sterilize());
 
         uiComponents = (UIComponent[])append(uiComponents,new PathButton(100,410,80,80));
         uiComponents = (UIComponent[])append(uiComponents,new BlockButton(190,410,80,80));
-
-        uiComponents = (UIComponent[])append(uiComponents,new SaveButton(410,410,80,80));
 
     }
 
