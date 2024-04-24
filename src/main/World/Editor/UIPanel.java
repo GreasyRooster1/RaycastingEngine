@@ -1,6 +1,7 @@
 package main.World.Editor;
 
 import main.Main;
+import main.World.Editor.Components.TextButton;
 
 import static processing.core.PApplet.append;
 
@@ -44,7 +45,7 @@ public class UIPanel extends UIComponent {
         components = (UIComponent[]) append(component,components);
     }
 
-    public UIComponent createAccessorButton(){
+    public TextButton createAccessorButton(){
         return null;
     }
     public void createComponents(){
