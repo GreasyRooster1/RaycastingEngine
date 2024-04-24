@@ -42,7 +42,6 @@ public class MapEditor {
     public static float blockSize = 25;
 
     public static void setup(){
-        //todo add pages
         app = Main.app;
         uiPanels = (UIPanel[]) append(uiPanels,new TexturePanel().sterilize());
         uiPanels = (UIPanel[]) append(uiPanels,new ExtrasPanel().sterilize());

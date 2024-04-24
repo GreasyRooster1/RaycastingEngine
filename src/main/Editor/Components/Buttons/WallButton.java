@@ -13,6 +13,7 @@ public class WallButton extends TextButton {
 
     @Override
     public void onPress() {
+        MapEditor.closePanels();
         MapEditor.resetAction();
         MapEditor.placingWall = true;
     }
