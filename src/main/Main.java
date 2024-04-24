@@ -14,6 +14,7 @@ import processing.event.MouseEvent;
 
 import static main.AssetLoader.AssetLoader.registerImages;
 import static main.Util.Util.moveCursor;
+import static main.World.Editor.MapEditor.*;
 import static main.World.World.spawnPoint;
 import static main.World.World.walls;
 
@@ -71,7 +72,9 @@ public class Main extends PApplet {
 
     public void renderEditMode(){
         pushMatrix();
-        scale(MapEditor.zoom);
+        scale(zoom);
+        Main.app.scale(zoom);
+        Main.app.translate(-camX, -camY);
         player.draw();
 
         for(Wall wall:walls){
@@ -85,8 +88,8 @@ public class Main extends PApplet {
 
     public void updateMouseEvents(){
         mouseClicked = !previousMouseDown && mousePressed;
-        mouseXScaled = mouseX/MapEditor.zoom;
-        mouseYScaled = mouseY/MapEditor.zoom;
+        mouseXScaled = mouseX/ zoom + camX;
+        mouseYScaled = mouseY/ zoom + camY;
     }
 
     public void resetMouseEvents() {

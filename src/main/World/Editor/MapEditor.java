@@ -5,18 +5,15 @@ import main.Texture.TextureRegistry;
 import main.Util.Point;
 import main.World.Editor.Buttons.*;
 import main.World.Wall;
-import main.World.World;
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static java.lang.Math.pow;
 import static main.Util.Util.lineRect;
 import static main.World.World.*;
 import static processing.core.PApplet.append;
-import static processing.core.PConstants.LEFT;
-import static processing.core.PConstants.RIGHT;
+import static processing.core.PConstants.*;
 
 public class MapEditor {
     private static PApplet app;
@@ -25,6 +22,8 @@ public class MapEditor {
     public static TextureButton textureButton;
 
     public static float zoom = 1;
+    public static float camX = 0;
+    public static float camY = 0;
 
     public static boolean placingWall = false;
     public static boolean placingPath = false;
@@ -54,7 +53,7 @@ public class MapEditor {
         drawBar();
         renderUIComponents();
 
-        doZoom();
+        doZoomPan();
 
         preformChecksAndRenders();
     }
@@ -72,6 +71,7 @@ public class MapEditor {
     public static void preformChecksAndRenders(){
         Main.app.pushMatrix();
         Main.app.scale(zoom);
+        Main.app.translate(-camX, -camY);
 
         checkWallPlace();
         checkWallEdit();
@@ -90,7 +90,7 @@ public class MapEditor {
         placingBlock = false;
     }
 
-    public static void doZoom(){
+    public static void doZoomPan(){
         if(Main.app.keyPressed){
             if(Main.app.key=='='){
                 zoom+=0.01f;
@@ -98,6 +98,10 @@ public class MapEditor {
             if(Main.app.key=='-'){
                 zoom-=0.01f;
             }
+        }
+        if(Main.app.mousePressed&&Main.app.mouseButton==CENTER){
+            camX-=Main.app.mouseX-Main.app.pmouseX;
+            camY-=Main.app.mouseY-Main.app.pmouseY;
         }
     }
 
@@ -186,12 +190,15 @@ public class MapEditor {
         }
     }
 
-    public static void checkWallEdit(){
-        if(placingWall||placingPath){ editingWall=null;return; }
-        for(Wall wall:walls){
-            if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,Main.mouseXScaled,Main.mouseYScaled,4,4)){
-                if(Main.app.mousePressed) {
-                    if(editingWall!=null) {
+    public static void checkWallEdit() {
+        if (placingWall || placingPath) {
+            editingWall = null;
+            return;
+        }
+        if (Main.app.mousePressed&&Main.app.mouseButton==LEFT) {
+            for (Wall wall : walls) {
+                if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, Main.mouseXScaled, Main.mouseYScaled, 4, 4)) {
+                    if (editingWall != null) {
                         editingWall.deselect();
                     }
                     editingWall = wall;
