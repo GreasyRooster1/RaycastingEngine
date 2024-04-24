@@ -29,7 +29,7 @@ public class TexturePanel extends UIPanel {
         for(int i=0;i<TextureRegistry.textures.length;i++) {
             float buttonsPerRow = floor(500/(buttonSize+buttonMargin));
             float x = buttonMargin+((i%buttonsPerRow)*(buttonSize+buttonMargin));
-            float y = floor(i/buttonsPerRow)*(buttonSize+buttonMargin);
+            float y = buttonMargin+floor(i/buttonsPerRow)*(buttonSize+buttonMargin);
             addComponent(new SingleTextureButton(x, y, buttonSize, buttonSize, i));
         }
     }
