@@ -18,6 +18,7 @@ import static processing.core.PConstants.*;
 public class MapEditor {
     private static PApplet app;
     public static UIComponent[] uiComponents={};
+    public static int barHeight = 400;
 
     public static TextureButton textureButton;
 
@@ -107,7 +108,7 @@ public class MapEditor {
 
     public static void checkBlockPlace(){
         if(!placingBlock){ return; }
-        if(Main.app.mouseY>400){ return; }
+        if(Main.app.mouseY>barHeight){ return; }
 
         Main.app.stroke(1,0,0,.5f);
         Main.app.rect(Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2,blockSize,blockSize);
@@ -129,7 +130,7 @@ public class MapEditor {
 
     public static void checkSpawnMove(){
         if(!moveSpawnpoint){return;}
-        if(Main.app.mouseY>400){ return; }
+        if(Main.app.mouseY>barHeight){ return; }
         spawnPoint.position.x=Main.mouseXScaled;
         spawnPoint.position.y=Main.mouseYScaled;
         if(Main.app.mousePressed){
@@ -140,7 +141,7 @@ public class MapEditor {
     public static void checkPathPlace(){
         if(!placingPath){ return; }
         renderPath();
-        if(Main.app.mouseY>400){ return; }
+        if(Main.app.mouseY>barHeight){ return; }
 
         if(Main.mouseClicked){
             if(Main.app.mouseButton==LEFT) {
@@ -179,7 +180,7 @@ public class MapEditor {
     public static void checkWallPlace(){
         if(!placingWall){ return; }
         if(placingPath){ placingWall = false; return;}
-        if(Main.app.mouseY>400){ return; }
+        if(Main.app.mouseY>barHeight){ return; }
 
         Main.app.stroke(1,0,0,.5f);
         Main.app.line(Main.mouseXScaled,Main.mouseYScaled,Main.mouseXScaled,Main.mouseYScaled+100);
