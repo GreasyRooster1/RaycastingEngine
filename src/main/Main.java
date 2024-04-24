@@ -73,7 +73,6 @@ public class Main extends PApplet {
     public void renderEditMode(){
         pushMatrix();
         scale(zoom);
-        Main.app.scale(zoom);
         Main.app.translate(-camX, -camY);
         player.draw();
 

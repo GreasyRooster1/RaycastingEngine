@@ -137,7 +137,6 @@ public class MapEditor {
             placingBlock=false;
         }
     }
-
     public static void checkSpawnMove(){
         if(!moveSpawnpoint){return;}
         if(Main.app.mouseY>barHeight){ return; }
@@ -147,7 +146,6 @@ public class MapEditor {
             moveSpawnpoint = false;
         }
     }
-
     public static void checkPathPlace(){
         if(!placingPath){ return; }
         renderPath();
@@ -186,7 +184,6 @@ public class MapEditor {
             Main.app.ellipse(p2.x,p2.y,10,10);
         }
     }
-
     public static void checkWallPlace(){
         if(!placingWall){ return; }
         if(placingPath){ placingWall = false; return;}
@@ -200,7 +197,6 @@ public class MapEditor {
             placingWall=false;
         }
     }
-
     public static void checkWallEdit() {
         if (placingWall || placingPath) {
             editingWall = null;
