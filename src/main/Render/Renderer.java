@@ -3,6 +3,9 @@ package main.Render;
 import main.Main;
 import main.Util.Point;
 import main.Util.Ray;
+import main.Util.ThreeDimensional.Point3;
+import main.Util.ThreeDimensional.Ray3;
+import main.Util.ThreeDimensional.Vec3;
 import main.World.Player;
 import main.World.Wall;
 
@@ -36,7 +39,9 @@ public class Renderer {
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
         for (int i = 0; i < (Main.app.height-height)/2; i++) {
-
+            Point3 origin = new Point3(p.x,p.y,0);
+            //Vec3 dir = new Vec3(p.x-);
+            //Ray3 floorRay = new Ray3(origin,dir);
         }
     }
 
