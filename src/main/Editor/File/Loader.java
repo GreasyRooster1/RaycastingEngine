@@ -2,6 +2,7 @@ package main.Editor.File;
 
 import main.Texture.TextureRegistry;
 import main.World.Wall;
+import main.World.WallTypes.Door;
 import main.World.World;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
@@ -23,7 +24,7 @@ public class Loader {
         JSONArray world = json.getJSONArray("world");
         for (int i=0;i<world.size();i++){
             JSONObject jsonWall =  world.getJSONObject(i);
-            Wall wall = new Wall(jsonWall.getFloat("x1"),jsonWall.getFloat("y1"),jsonWall.getFloat("x2"),jsonWall.getFloat("y2"));
+            Door wall = new Door(jsonWall.getFloat("x1"),jsonWall.getFloat("y1"),jsonWall.getFloat("x2"),jsonWall.getFloat("y2"));
             wall.texture = TextureRegistry.get(jsonWall.getInt("textureId"));
             wall.height = jsonWall.getFloat("height");
             walls = (Wall[]) append(walls,wall);
