@@ -144,15 +144,16 @@ public class MapEditor {
         if(!placingDoor){ return; }
 
         if (Main.mouseClicked) {
-            if (Main.app.mouseButton == RIGHT) {
+            if (Main.app.mouseButton == RIGHT&&doorPoints.length>2) {
                 Point p1 = doorPoints[0];
                 Point p2 = doorPoints[1];
                 Point p3 = doorPoints[2];
                 Door door = new Door(p1.x, p1.y, p2.x, p2.y);
-                door.closeAngle = atan2(p2.y - p1.y, p2.x - p1.x);
-                door.openAngle = atan2(p3.y - p1.y, p3.x - p1.x);
+                door.closeAngle = atan2(p2.y - p1.y, p2.x - p1.x)+2*PI;
+                door.openAngle = atan2(p3.y - p1.y, p3.x - p1.x)+2*PI;
                 World.addWall(door);
                 placingDoor = false;
+                doorPoints = new Point[0];
             }
             if(Main.app.mouseButton == LEFT&&doorPoints.length<3){
                 doorPoints = (Point[]) append(doorPoints,new Point(Main.mouseXScaled,Main.mouseYScaled));
@@ -177,7 +178,6 @@ public class MapEditor {
         if(doorPoints.length<=2) return;
         Main.app.fill(1,1,0,.5f);
         Main.app.ellipse(doorPoints[2].x,doorPoints[2].y,10,10);
-
 
     }
     public static void checkBlockPlace(){
