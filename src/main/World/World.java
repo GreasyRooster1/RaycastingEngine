@@ -3,6 +3,7 @@ package main.World;
 import main.Main;
 import main.Texture.TextureRegistry;
 import main.Texture.TextureTypes.PortalTexture;
+import main.World.WallTypes.Door;
 import processing.core.PApplet;
 
 import static processing.core.PApplet.append;
@@ -34,5 +35,9 @@ public class World {
         Wall wall = new Wall(x1,y1,x2,y2);
         walls = (Wall[]) PApplet.append(walls,wall);
         return wall;
+    }
+
+    public static void addWall(Wall wall) {
+        walls = (Wall[]) PApplet.append(walls,wall);
     }
 }

@@ -8,14 +8,15 @@ import main.Editor.Components.Buttons.ToolButtons.BlockButton;
 import main.Editor.Components.Buttons.ToolButtons.PathButton;
 import main.Editor.Components.Panels.TexturePanel;
 import main.World.Wall;
+import main.World.WallTypes.Door;
+import main.World.World;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
 import static main.Util.Util.lineRect;
 import static main.World.World.*;
-import static processing.core.PApplet.append;
-import static processing.core.PApplet.println;
+import static processing.core.PApplet.*;
 import static processing.core.PConstants.*;
 
 public class MapEditor {
@@ -35,9 +36,11 @@ public class MapEditor {
     public static boolean placingPath = false;
     public static boolean moveSpawnpoint = false;
     public static boolean placingBlock = false;
+    public static boolean placingDoor = false;
 
     public static Wall editingWall;
     public static Point[] pathPoints = {};
+    public static Point[] doorPoints = {};
     public static float blockSize = 25;
 
     public static void setup(){
@@ -90,6 +93,8 @@ public class MapEditor {
         checkPathPlace();
         checkSpawnMove();
         checkBlockPlace();
+        checkDoorPlace();
+
 
         Main.app.popMatrix();
     }
@@ -109,6 +114,7 @@ public class MapEditor {
         placingWall = false;
         placingPath = false;
         placingBlock = false;
+        placingDoor = false;
     }
 
     public static void doZoomPan(){
@@ -134,6 +140,46 @@ public class MapEditor {
         }
     }
 
+    public static void checkDoorPlace(){
+        if(!placingDoor){ return; }
+
+        if (Main.mouseClicked) {
+            if (Main.app.mouseButton == RIGHT) {
+                Point p1 = doorPoints[0];
+                Point p2 = doorPoints[1];
+                Point p3 = doorPoints[2];
+                Door door = new Door(p1.x, p1.y, p2.x, p2.y);
+                door.closeAngle = atan2(p2.y - p1.y, p2.x - p1.x);
+                door.openAngle = atan2(p3.y - p1.y, p3.x - p1.x);
+                World.addWall(door);
+            }
+            if(Main.app.mouseButton == LEFT&&doorPoints.length<3){
+                doorPoints = (Point[]) append(doorPoints,new Point(Main.mouseXScaled,Main.mouseYScaled));
+            }
+        }
+
+        if(doorPoints.length == 0) return;
+
+        Main.app.noStroke();
+        Main.app.fill(1,0,1,.5f);
+        Main.app.ellipse(doorPoints[0].x,doorPoints[0].y,10,10);
+        Main.app.stroke(1,0,0,0.5f);
+
+        if(doorPoints.length<=1) return;
+        Point p = doorPoints[0];
+        Point p1 = doorPoints[1];
+        Main.app.line(p.x,p.y,p1.x,p1.y);
+
+        Main.app.noStroke();
+        Main.app.fill(1,0,1,.5f);
+        Main.app.ellipse(p1.x,p1.y,10,10);
+        if(doorPoints.length>2){
+            Main.app.fill(1,1,0,.5f);
+            Main.app.ellipse(doorPoints[2].x,doorPoints[2].y,10,10);
+        }
+
+
+    }
     public static void checkBlockPlace(){
         if(!placingBlock){ return; }
         if(Main.app.mouseY>barHeight){ return; }
