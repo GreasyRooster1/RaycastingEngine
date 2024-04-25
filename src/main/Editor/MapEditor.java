@@ -152,6 +152,7 @@ public class MapEditor {
                 door.closeAngle = atan2(p2.y - p1.y, p2.x - p1.x);
                 door.openAngle = atan2(p3.y - p1.y, p3.x - p1.x);
                 World.addWall(door);
+                placingDoor = false;
             }
             if(Main.app.mouseButton == LEFT&&doorPoints.length<3){
                 doorPoints = (Point[]) append(doorPoints,new Point(Main.mouseXScaled,Main.mouseYScaled));
@@ -159,7 +160,6 @@ public class MapEditor {
         }
 
         if(doorPoints.length == 0) return;
-
         Main.app.noStroke();
         Main.app.fill(1,0,1,.5f);
         Main.app.ellipse(doorPoints[0].x,doorPoints[0].y,10,10);
@@ -173,10 +173,10 @@ public class MapEditor {
         Main.app.noStroke();
         Main.app.fill(1,0,1,.5f);
         Main.app.ellipse(p1.x,p1.y,10,10);
-        if(doorPoints.length>2){
-            Main.app.fill(1,1,0,.5f);
-            Main.app.ellipse(doorPoints[2].x,doorPoints[2].y,10,10);
-        }
+
+        if(doorPoints.length<=2) return;
+        Main.app.fill(1,1,0,.5f);
+        Main.app.ellipse(doorPoints[2].x,doorPoints[2].y,10,10);
 
 
     }
