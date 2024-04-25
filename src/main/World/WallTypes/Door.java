@@ -3,6 +3,7 @@ package main.World.WallTypes;
 import main.Main;
 import main.World.Wall;
 
+import static main.Util.WallColorHelper.getWallColor;
 import static processing.core.PApplet.*;
 
 public class Door extends Wall {
@@ -43,4 +44,16 @@ public class Door extends Wall {
         }
     }
 
+    @Override
+    public void draw() {
+        Main.app.stroke(getWallColor(texture.id));
+        Main.app.strokeWeight(2);
+        Main.app.line(x1,y1,x2,y2);
+        Main.app.stroke(0,1,1,.25f);
+        Main.app.noFill();
+        Main.app.arc(x1,y1,length*2,length*2,openAngle,closeAngle);
+        Main.app.stroke(0,0,1,.25f);
+        Main.app.line(x1,y1,x1+cos(openAngle)*length,y1+sin(openAngle)*length);
+        Main.app.line(x1,y1,x1+cos(closeAngle)*length,y1+sin(closeAngle)*length);
+    }
 }
