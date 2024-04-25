@@ -1,9 +1,8 @@
-package main.Util;
+package main.Util.Colliders;
 
 import main.Main;
 import main.World.Wall;
 
-import static main.Util.Util.lineLine;
 import static main.Util.Util.lineRect;
 
 public class BoxCollider {
