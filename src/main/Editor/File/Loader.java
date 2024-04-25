@@ -24,7 +24,12 @@ public class Loader {
         JSONArray world = json.getJSONArray("world");
         for (int i=0;i<world.size();i++){
             JSONObject jsonWall =  world.getJSONObject(i);
-            Door wall = new Door(jsonWall.getFloat("x1"),jsonWall.getFloat("y1"),jsonWall.getFloat("x2"),jsonWall.getFloat("y2"));
+            Wall wall;
+            if(jsonWall.getBoolean("isDoor")) {
+                wall = new Door(jsonWall.getFloat("x1"), jsonWall.getFloat("y1"), jsonWall.getFloat("x2"), jsonWall.getFloat("y2"));
+            }else{
+                wall = new Wall(jsonWall.getFloat("x1"), jsonWall.getFloat("y1"), jsonWall.getFloat("x2"), jsonWall.getFloat("y2"));
+            }
             wall.texture = TextureRegistry.get(jsonWall.getInt("textureId"));
             wall.height = jsonWall.getFloat("height");
             walls = (Wall[]) append(walls,wall);
@@ -41,6 +46,7 @@ public class Loader {
             jsonWall.put("y2",wall.y2);
             jsonWall.put("height",wall.height);
             jsonWall.put("textureId",wall.texture.id);
+            jsonWall.put("isDoor",wall instanceof Door);
             jsonWalls.append(jsonWall);
         }
         json.put("world",jsonWalls);
