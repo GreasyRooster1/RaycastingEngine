@@ -1,15 +1,14 @@
 package main.World;
 
 import main.Main;
-import main.Util.BoxCollider;
+import main.Util.Colliders.BoxCollider;
+import main.Util.Colliders.LineCollider;
 import main.Util.Ray;
 import processing.core.PApplet;
-import processing.event.MouseEvent;
 
-import static java.lang.Math.*;
+import javax.sound.sampled.Line;
+
 import static main.Render.RenderOptions.*;
-import static main.Util.Util.lineLine;
-import static main.Util.Util.lineRect;
 import static main.World.World.walls;
 import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
@@ -20,7 +19,7 @@ public class Player {
     public float speed,turnSpeed;
     public Ray[] rays={};
     public BoxCollider physicalCollider;
-    public BoxCollider interactionCollider;
+    public LineCollider interactionCollider;
 
     public boolean useMouse = false;
 
@@ -32,7 +31,7 @@ public class Player {
         turnSpeed=radians(1);
 
         physicalCollider=new BoxCollider(x-5,y-5,10,10);
-        interactionCollider=new BoxCollider(x-40,y-40,80,80);
+        interactionCollider=new LineCollider(x-40,y-40,80,80);
 
         setupRays();
     }
@@ -46,12 +45,9 @@ public class Player {
         drawRays();
         drawSelf();
         physicalCollider.render(1,0,0);
-        interactionCollider.render(1,1,0);
+        interactionCollider.render(0,1,0);
     }
     public void drawSelf(){
-        Main.app.stroke(0,0,255);
-        Main.app.strokeWeight(1);
-        Main.app.line(x,y,(x+cos(dir)*40),(y+sin(dir)*40));
         Main.app.fill(0,255,255);
         Main.app.noStroke();
         Main.app.ellipse(x,y,20,20);
@@ -138,7 +134,9 @@ public class Player {
         physicalCollider.x = x- physicalCollider.width/2;
         physicalCollider.y = y- physicalCollider.height/2;
 
-        interactionCollider.x = x- interactionCollider.width/2;
-        interactionCollider.y = y- interactionCollider.height/2;
+        interactionCollider.x1 = x;
+        interactionCollider.y1 = y;
+        interactionCollider.x2 = x+cos(dir)*80;
+        interactionCollider.y2 = y+sin(dir)*80;
     }
 }

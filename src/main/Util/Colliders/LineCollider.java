@@ -1,5 +1,6 @@
 package main.Util.Colliders;
 
+import main.Main;
 import main.World.Wall;
 
 import static main.Util.Util.lineLine;
@@ -17,5 +18,10 @@ public class LineCollider {
     }
     public boolean checkLineCollision(float lx1, float ly1, float lx2, float ly2) {
         return lineLine(x1,y1,x2,y2,lx1, ly1, lx2, ly2).collided;
+    }
+    public void render(float r,float g,float b) {
+        Main.app.stroke(r,g,b);
+        Main.app.noFill();
+        Main.app.line(x1,y1,x2,y2);
     }
 }
