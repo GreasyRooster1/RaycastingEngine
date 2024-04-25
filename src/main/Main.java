@@ -66,6 +66,9 @@ public class Main extends PApplet {
     }
 
     public void gameRender(){
+        for(Wall wall:walls){
+            wall.update();
+        }
         Renderer.renderPlayerView(player);
     }
 

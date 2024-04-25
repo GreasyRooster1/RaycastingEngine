@@ -29,6 +29,10 @@ public class Wall {
         texture = TextureRegistry.get(1);
     }
 
+    public void update() {
+        everyFrame();
+    }
+
     public void draw(){
         Main.app.stroke(getWallColor(texture.id));
         Main.app.strokeWeight(2);
@@ -88,5 +92,9 @@ public class Wall {
             }
         }
         World.walls = tmp;
+    }
+
+    public void everyFrame(){
+
     }
 }
