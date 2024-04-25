@@ -1,6 +1,7 @@
 package main.World;
 
 import main.Main;
+import main.Util.BoxCollider;
 import main.Util.Ray;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -14,10 +15,12 @@ import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
 
 public class Player {
-    public float x,y,w,h;
+    public float x,y;
     public float dir;
     public float speed,turnSpeed;
     public Ray[] rays={};
+    public BoxCollider physicalCollider;
+    public BoxCollider interactionCollider;
 
     public boolean useMouse = false;
 
@@ -26,9 +29,11 @@ public class Player {
         y=_y;
         dir= 0;
         speed = 3;
-        w=10;
-        h=10;
         turnSpeed=radians(1);
+
+        physicalCollider=new BoxCollider(x-5,y-5,10,10);
+        interactionCollider=new BoxCollider(x-40,y-40,80,80);
+
         setupRays();
     }
     public void setupRays(){
@@ -40,12 +45,8 @@ public class Player {
     public void draw(){
         drawRays();
         drawSelf();
-        drawHitbox();
-    }
-    public void drawHitbox(){
-        Main.app.noFill();
-        Main.app.stroke(0,0,1);
-        Main.app.rect(x-w/2,y-h/2,w,h);
+        physicalCollider.render(1,0,0);
+        interactionCollider.render(1,1,0);
     }
     public void drawSelf(){
         Main.app.stroke(0,0,255);
@@ -101,6 +102,7 @@ public class Player {
                 turn(turnSpeed);
             }
         }
+        updateColliders();
     }
 
     public void turn(float deg){
@@ -110,16 +112,14 @@ public class Player {
         }
     }
 
-
-
     public void attemptMove(float dx, float dy) {
         boolean hitX = false;
         boolean hitY = false;
         for (Wall wall : walls) {
-            if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, x-w/2 +dx*2, y-h/2,w,h)) {
+            if (physicalCollider.checkShiftedWallCollision(wall,dx,0)) {
                 hitX = true;
             }
-            if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, x-w/2 , y-h/2 +dy*2,w,h)) {
+            if (physicalCollider.checkShiftedWallCollision(wall,0,dy)) {
                 hitY = true;
             }
             if (hitX && hitY) {
@@ -132,5 +132,13 @@ public class Player {
         if (!hitY) {
             y += dy;
         }
+    }
+
+    public void updateColliders(){
+        physicalCollider.x = x- physicalCollider.width/2;
+        physicalCollider.y = y- physicalCollider.height/2;
+
+        interactionCollider.x = x- interactionCollider.width/2;
+        interactionCollider.y = y- interactionCollider.height/2;
     }
 }
