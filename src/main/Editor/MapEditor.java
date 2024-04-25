@@ -4,15 +4,11 @@ import main.Editor.Components.Panels.ExtrasPanel;
 import main.Main;
 import main.Texture.TextureRegistry;
 import main.Util.Point;
-import main.Editor.Components.Buttons.BlockButton;
-import main.Editor.Components.Buttons.PathButton;
-import main.Editor.Components.Buttons.SaveButton;
-import main.Editor.Components.Buttons.SpawnPointButton;
-import main.Editor.Components.Buttons.WallButton;
+import main.Editor.Components.Buttons.ToolButtons.BlockButton;
+import main.Editor.Components.Buttons.ToolButtons.PathButton;
 import main.Editor.Components.Panels.TexturePanel;
 import main.World.Wall;
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package main.Editor.Components.Buttons;
+package main.Editor.Components.Buttons.ToolButtons;
 
 import main.Editor.Components.TextButton;
 import main.Editor.MapEditor;

@@ -2,10 +2,9 @@ package main.Editor.Components.Panels;
 
 import main.Editor.Components.Buttons.SaveButton;
 import main.Editor.Components.Buttons.SpawnPointButton;
-import main.Editor.Components.Buttons.WallButton;
+import main.Editor.Components.Buttons.ToolButtons.WallButton;
 import main.Editor.Components.TextButton;
 import main.Editor.UIPanel;
-import main.World.Wall;
 
 public class ExtrasPanel extends UIPanel {
     public TextButton createAccessorButton() {
