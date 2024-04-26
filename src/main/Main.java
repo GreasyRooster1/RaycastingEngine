@@ -1,5 +1,6 @@
 package main;
 
+import main.AssetLoader.AssetLoader;
 import main.Render.HUD.HUDRender;
 import main.Render.RenderOptions;
 import main.Render.Renderer;
@@ -48,9 +49,15 @@ public class Main extends PApplet {
         HUDRender.setup();
         MapEditor.setup();
 
+        setupWindow();
         Loader.load("world.json");
 
         player = new Player(spawnPoint.position.x, spawnPoint.position.y);
+    }
+
+    public void setupWindow(){
+        surface.setTitle("Raycasting Engine");
+        surface.setIcon(AssetLoader.getImage("icon.icon"));
     }
 
     public void draw(){

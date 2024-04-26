@@ -26,6 +26,7 @@ public class AssetLoader {
         register("assets\\Walls\\bars.png","walls.bars");
         register("assets\\HUD\\Crosshair\\default.png","HUD.crosshair.default");
         register("assets\\HUD\\Crosshair\\selected.png","HUD.crosshair.selected");
+        register("assets\\icon\\icon.png","icon.icon");
     }
 
     public static void register(String path,String name){
