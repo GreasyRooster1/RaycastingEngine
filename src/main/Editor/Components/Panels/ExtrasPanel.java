@@ -1,7 +1,7 @@
 package main.Editor.Components.Panels;
 
-import main.Editor.Components.Buttons.SaveButton;
-import main.Editor.Components.Buttons.SpawnPointButton;
+import main.Editor.Components.Buttons.ActionButtons.SaveButton;
+import main.Editor.Components.Buttons.ToolButtons.SpawnPointButton;
 import main.Editor.Components.Buttons.ToolButtons.DoorButton;
 import main.Editor.Components.Buttons.ToolButtons.WallButton;
 import main.Editor.Components.TextButton;
