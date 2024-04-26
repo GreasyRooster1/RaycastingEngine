@@ -70,6 +70,7 @@ public class MapEditor {
         }
         Main.app.pushMatrix();
         Main.app.scale(zoom);
+        Main.app.noStroke();
         float scaledSpacing = dotSpacing*zoom;
         for(int i=0; i<Main.app.width/scaledSpacing; i++){
             for(int j=0; j<Main.app.height/scaledSpacing; j++){
@@ -208,6 +209,7 @@ public class MapEditor {
         if(Main.app.mouseY>barHeight){ return; }
 
         Main.app.stroke(1,0,0,.5f);
+        Main.app.noFill();
         Main.app.rect(Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2,blockSize,blockSize);
 
         blockSize-=Main.mouseScroll*2;
@@ -301,7 +303,7 @@ public class MapEditor {
             editingWall.delete();
             editingWall= null;
         }
-        if(Main.mouseClicked&&Main.app.mouseButton==RIGHT){
+        if(Main.mouseClicked&&Main.app.mouseButton==RIGHT&&editingWall!=null){
             editingWall.deselect();
             editingWall = null;
         }
