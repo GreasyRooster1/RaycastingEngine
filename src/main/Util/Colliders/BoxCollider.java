@@ -4,6 +4,7 @@ import main.Main;
 import main.World.Wall;
 
 import static main.Util.Util.lineRect;
+import static main.Util.Util.rectRect;
 
 public class BoxCollider {
     public float x,y,width,height;
@@ -28,5 +29,14 @@ public class BoxCollider {
     }
     public boolean checkShiftedWallCollision(Wall wall,float dx,float dy){
         return lineRect(wall.x1, wall.y1,wall.x2,wall.y2,x+dx,y+dy,width,height);
+    }
+    public boolean isWallWithin(Wall wall){
+        if(rectRect(wall.x1,wall.y1,1,1,x,y,width,height)){
+            return true;
+        }
+        if(rectRect(wall.x2,wall.y2,1,1,x,y,width,height)){
+            return true;
+        }
+        return false;
     }
 }
