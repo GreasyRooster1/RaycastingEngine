@@ -13,7 +13,7 @@ public class TextureRegistry {
         register(new UVTestTexture());
         register(new ImageTexture("walls.brick"));
         register(new ImageTexture("walls.cobble"));
-        register(new ImageTexture("walls.doom.plate"));
+        register(new TiledImageTexture("walls.doom.plate"));
         register(new ImageTexture("walls.doom.rock"));
         register(new ImageTexture("walls.doom.satan"));
         register(new ImageTexture("walls.doom.skull"));
