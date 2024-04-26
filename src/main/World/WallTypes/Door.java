@@ -22,7 +22,7 @@ public class Door extends Wall {
         checkForOpen();
     }
     public void updateEndpoints(){
-        float angle = lerp(openAngle,closeAngle,animationProgress);
+        float angle = lerp(closeAngle,openAngle,animationProgress);
         x2 = x1+cos(angle)*length;
         y2 = y1+sin(angle)*length;
     }
@@ -52,8 +52,9 @@ public class Door extends Wall {
         Main.app.line(x1,y1,x2,y2);
         Main.app.noFill();
         //Main.app.arc(x1,y1,length*2,length*2,openAngle,closeAngle);
-        Main.app.stroke(0,0,1,.25f);
+        Main.app.stroke(0,0,1);
         Main.app.line(x1,y1,x1+cos(openAngle)*length,y1+sin(openAngle)*length);
+        Main.app.stroke(0,1,1);
         Main.app.line(x1,y1,x1+cos(closeAngle)*length,y1+sin(closeAngle)*length);
     }
 
