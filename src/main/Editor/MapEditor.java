@@ -289,12 +289,9 @@ public class MapEditor {
             editingWall = null;
             return;
         }
-        if (Main.app.mousePressed&&Main.app.mouseButton==LEFT) {
+        if (Main.app.mousePressed&&Main.app.mouseButton==LEFT&&editingWall==null) {
             for (Wall wall : walls) {
-                if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, Main.mouseXScaled, Main.mouseYScaled, 4, 4)) {
-                    if (editingWall != null) {
-                        editingWall.deselect();
-                    }
+                if (lineRect(wall.x1, wall.y1, wall.x2, wall.y2, Main.mouseXScaled-4, Main.mouseYScaled-4, 8, 8)) {
                     editingWall = wall;
                     textureId = wall.texture.id;
                 }
@@ -302,6 +299,10 @@ public class MapEditor {
         }
         if(Main.app.keyPressed&&(Main.app.key==BACKSPACE||Main.app.key==DELETE)){
             editingWall.delete();
+        }
+        if(Main.mouseClicked&&Main.app.mouseButton==RIGHT){
+            editingWall.deselect();
+            editingWall = null;
         }
         if(editingWall!=null){
             editingWall.texture = TextureRegistry.get(textureId);
