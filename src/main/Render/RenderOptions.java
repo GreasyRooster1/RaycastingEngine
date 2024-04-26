@@ -5,7 +5,7 @@ import main.Main;
 import static processing.core.PApplet.radians;
 
 public class RenderOptions {
-    public static int fogColor = 0;
+    public static int fogColor;
     public static float fogDistance = 800;
 
     public static float maxViewDistance = 900;

@@ -20,6 +20,7 @@ public class Renderer {
     public static float projectionPlaneWidth = calculateProjectionWidth();
 
     public static void renderPlayerView(Player p){
+        Main.app.background(fogColor);
         for(int i = 0; i< rayCount; i+=1){
             Ray ray = p.rays[i];
             updateRayPosition(ray,p);
