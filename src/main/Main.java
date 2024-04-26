@@ -38,8 +38,8 @@ public class Main extends PApplet {
 
     public void setup(){
         app = this;
-        RenderOptions.setup();
         colorMode(RGB,1);
+        RenderOptions.setup();
 
         registerImages();
         TextureRegistry.registerTextures();
@@ -72,6 +72,7 @@ public class Main extends PApplet {
     }
 
     public void renderEditMode(){
+        MapEditor.renderBackground();
         pushMatrix();
         scale(zoom);
         Main.app.translate(-camX, -camY);

@@ -42,6 +42,7 @@ public class MapEditor {
     public static Point[] pathPoints = {};
     public static Point[] doorPoints = {};
     public static float blockSize = 25;
+    public static float dotSpacing = 30;
 
     public static void setup(){
         app = Main.app;
@@ -61,6 +62,22 @@ public class MapEditor {
         doZoomPan();
 
         preformChecksAndRenders();
+    }
+    public static void renderBackground(){
+        Main.app.background(0);
+        if(zoom<=.25f) {
+            return;
+        }
+        Main.app.pushMatrix();
+        Main.app.scale(zoom);
+        float scaledSpacing = dotSpacing*zoom;
+        for(int i=0; i<Main.app.width/scaledSpacing; i++){
+            for(int j=0; j<Main.app.height/scaledSpacing; j++){
+                Main.app.fill(0.3f);
+                Main.app.ellipse(i*dotSpacing-(camX%dotSpacing),j*dotSpacing-(camY%dotSpacing),3,3);
+            }
+        }
+        Main.app.popMatrix();
     }
     public static void renderUIComponents(){
         for(UIComponent uiComponent : uiComponents){
@@ -138,6 +155,12 @@ public class MapEditor {
                 panel.close();
             }
         }
+    }
+
+    public static Point getClosestGridSpace(float x,float y){
+        float ox = round(x/dotSpacing)*dotSpacing +camX;
+        float oy = round(y/dotSpacing)*dotSpacing +camY;
+        return new Point(ox,oy);
     }
 
     public static void checkDoorPlace(){

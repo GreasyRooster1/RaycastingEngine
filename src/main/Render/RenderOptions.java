@@ -14,6 +14,6 @@ public class RenderOptions {
 
     public static float fov = radians(45);
     public static void setup(){
-        fogColor = Main.app.color(64);
+        fogColor = Main.app.color(0.2f);
     }
 }
