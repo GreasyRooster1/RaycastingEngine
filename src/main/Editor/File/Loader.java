@@ -15,6 +15,16 @@ import static processing.core.PApplet.*;
 
 public class Loader {
     public static void load(String filename){
+        try {
+            loadJson(filename);
+        }catch (Exception e){
+            e.printStackTrace();
+            println("failed to load " + filename);
+            World.walls = new Wall[0];
+            World.createWorld();
+        }
+    }
+    public static void loadJson(String filename) {
         JSONObject json = loadJSONObject(new File(filename));
 
         JSONObject spawnPoint = json.getJSONObject("spawnPoint");
@@ -27,6 +37,9 @@ public class Loader {
             Wall wall;
             if(jsonWall.getBoolean("isDoor")) {
                 wall = new Door(jsonWall.getFloat("x1"), jsonWall.getFloat("y1"), jsonWall.getFloat("x2"), jsonWall.getFloat("y2"));
+                ((Door)wall).closeAngle = jsonWall.getFloat("closeAngle");
+                ((Door)wall).openAngle = jsonWall.getFloat("openAngle");
+
             }else{
                 wall = new Wall(jsonWall.getFloat("x1"), jsonWall.getFloat("y1"), jsonWall.getFloat("x2"), jsonWall.getFloat("y2"));
             }
@@ -47,6 +60,10 @@ public class Loader {
             jsonWall.put("height",wall.height);
             jsonWall.put("textureId",wall.texture.id);
             jsonWall.put("isDoor",wall instanceof Door);
+            if(wall instanceof Door){
+                jsonWall.put("openAngle",((Door)wall).openAngle);
+                jsonWall.put("closeAngle",((Door)wall).closeAngle);
+            }
             jsonWalls.append(jsonWall);
         }
         json.put("world",jsonWalls);

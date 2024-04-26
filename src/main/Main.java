@@ -46,7 +46,6 @@ public class Main extends PApplet {
 
         MapEditor.setup();
 
-        //World.createWorld();
         Loader.load("world.json");
 
         player = new Player(spawnPoint.position.x, spawnPoint.position.y);
