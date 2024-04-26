@@ -1,6 +1,6 @@
 package main;
 
-import main.Render.HUDRender;
+import main.Render.HUD.HUDRender;
 import main.Render.RenderOptions;
 import main.Render.Renderer;
 import main.Texture.TextureRegistry;
@@ -40,11 +40,12 @@ public class Main extends PApplet {
     public void setup(){
         app = this;
         colorMode(RGB,1);
-        RenderOptions.setup();
 
+        RenderOptions.setup();
         registerImages();
         TextureRegistry.registerTextures();
 
+        HUDRender.setup();
         MapEditor.setup();
 
         Loader.load("world.json");
@@ -60,8 +61,8 @@ public class Main extends PApplet {
             renderEditMode();
         }else{
             gameRender();
+            HUDRender.render();
         }
-        HUDRender.render();
         resetMouseEvents();
     }
 
