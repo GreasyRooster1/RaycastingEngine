@@ -37,6 +37,9 @@ public class BoxCollider {
         if(rectRect(wall.x2,wall.y2,1,1,x,y,width,height)){
             return true;
         }
+        if(lineRect(wall.x1,wall.y1,wall.x2,wall.y2,x,y,width,height)){
+            return true;
+        }
         return false;
     }
 }
