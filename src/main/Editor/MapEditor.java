@@ -2,6 +2,7 @@ package main.Editor;
 
 import main.Editor.Components.Panels.ExtrasPanel;
 import main.Main;
+import main.Render.Optimizer;
 import main.Texture.TextureRegistry;
 import main.Util.Point;
 import main.Editor.Components.Buttons.ToolButtons.BlockButton;
@@ -105,7 +106,6 @@ public class MapEditor {
         Main.app.scale(zoom);
         Main.app.translate(-camX, -camY);
 
-
         checkWallPlace();
         checkWallEdit();
         checkPathPlace();
@@ -113,6 +113,7 @@ public class MapEditor {
         checkBlockPlace();
         checkDoorPlace();
 
+        Optimizer.cullCollider.render(0,1,1);
 
         Main.app.popMatrix();
     }

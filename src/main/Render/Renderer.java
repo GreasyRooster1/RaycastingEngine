@@ -18,6 +18,7 @@ public class Renderer {
     public static float widthRayRatio = Main.app.width / rayCount;
     public static float projectionPlaneDistance = 20;
     public static float projectionPlaneWidth = calculateProjectionWidth();
+    public static Wall[] culledWalls = {};
 
     public static void renderPlayerView(Player p){
         Main.app.background(fogColor);

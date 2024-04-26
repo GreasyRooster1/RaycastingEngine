@@ -2,6 +2,7 @@ package main;
 
 import main.AssetLoader.AssetLoader;
 import main.Render.HUD.HUDRender;
+import main.Render.Optimizer;
 import main.Render.RenderOptions;
 import main.Render.Renderer;
 import main.Texture.TextureRegistry;
@@ -64,6 +65,7 @@ public class Main extends PApplet {
         background(0.25f);
         updateMouseEvents();
         player.move();
+        Renderer.culledWalls = Optimizer.cullWalls();
         if(editRender){
             renderEditMode();
         }else{
