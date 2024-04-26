@@ -40,4 +40,8 @@ public class World {
     public static void addWall(Wall wall) {
         walls = (Wall[]) PApplet.append(walls,wall);
     }
+
+    public static void clearWorld() {
+        walls = new Wall[0];
+    }
 }
