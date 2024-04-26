@@ -37,8 +37,8 @@ public class Door extends Wall {
     }
 
     public void checkForOpen(){
-        if(dist(x1,y1,Main.app.player.x,Main.app.player.y)<length){
-            if(Main.mouseClicked) {
+        if(Main.mouseClicked) {
+            if(Main.app.player.interactionCollider.checkWallCollision(this)) {
                 closed = !closed;
             }
         }
