@@ -212,7 +212,7 @@ public class MapEditor {
 
         blockSize-=Main.mouseScroll*2;
 
-        if(Main.app.mousePressed){
+        if(Main.app.mousePressed&&Main.app.mouseButton==LEFT){
             ArrayList<Wall> blockWalls = new ArrayList<>();
             blockWalls.add(newWall(Main.mouseXScaled-blockSize/2,Main.mouseYScaled-blockSize/2,Main.mouseXScaled+blockSize/2,Main.mouseYScaled-blockSize/2));
             blockWalls.add(newWall(Main.mouseXScaled+blockSize/2,Main.mouseYScaled-blockSize/2,Main.mouseXScaled+blockSize/2,Main.mouseYScaled+blockSize/2));
@@ -297,8 +297,9 @@ public class MapEditor {
                 }
             }
         }
-        if(Main.app.keyPressed&&(Main.app.key==BACKSPACE||Main.app.key==DELETE)){
+        if(Main.app.keyPressed&&(Main.app.key==BACKSPACE||Main.app.key==DELETE)&&editingWall!=null){
             editingWall.delete();
+            editingWall= null;
         }
         if(Main.mouseClicked&&Main.app.mouseButton==RIGHT){
             editingWall.deselect();
