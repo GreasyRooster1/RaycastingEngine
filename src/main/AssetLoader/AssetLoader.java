@@ -24,6 +24,8 @@ public class AssetLoader {
         register("assets\\Walls\\doom\\vault_door.png","walls.doom.vaultDoor");
         register("assets\\Walls\\doom\\bars.png","walls.doom.bars");
         register("assets\\Walls\\bars.png","walls.bars");
+        register("assets\\HUD\\Crosshair\\default.png","HUD.crosshair.default");
+        register("assets\\HUD\\Crosshair\\selected.png","HUD.crosshair.selected");
     }
 
     public static void register(String path,String name){
