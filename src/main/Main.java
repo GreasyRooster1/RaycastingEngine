@@ -6,6 +6,7 @@ import main.Render.Renderer;
 import main.Texture.TextureRegistry;
 import main.Editor.File.Loader;
 import main.Editor.MapEditor;
+import main.Util.Point;
 import main.World.Player;
 import main.World.Wall;
 import processing.core.PApplet;
@@ -89,8 +90,13 @@ public class Main extends PApplet {
 
     public void updateMouseEvents(){
         mouseClicked = !previousMouseDown && mousePressed;
-        mouseXScaled = mouseX/ zoom + camX;
-        mouseYScaled = mouseY/ zoom + camY;
+        mouseXScaled = mouseX/ zoom+camX;
+        mouseYScaled = mouseY/ zoom+camY;
+        if(keyPressed&&keyCode==SHIFT){
+            Point adjustedPoint = getClosestGridSpace(mouseXScaled, mouseYScaled);
+            mouseXScaled = adjustedPoint.x;
+            mouseYScaled = adjustedPoint.y;
+        }
     }
 
     public void resetMouseEvents() {

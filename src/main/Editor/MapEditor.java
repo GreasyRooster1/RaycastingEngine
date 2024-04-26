@@ -158,8 +158,8 @@ public class MapEditor {
     }
 
     public static Point getClosestGridSpace(float x,float y){
-        float ox = round(x/dotSpacing)*dotSpacing +camX;
-        float oy = round(y/dotSpacing)*dotSpacing +camY;
+        float ox = round(x/dotSpacing)*dotSpacing;
+        float oy = round(y/dotSpacing)*dotSpacing;
         return new Point(ox,oy);
     }
 
