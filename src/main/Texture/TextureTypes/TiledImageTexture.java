@@ -24,4 +24,9 @@ public class TiledImageTexture extends Texture {
         float x = ((uv_x*length)%tileWidth)/tileWidth;
         return image.get((int) (x*image.width), (int) (uv_y*image.height));
     }
+
+    @Override
+    public int getColorThumb(float uv_x, float uv_y) {
+        return image.get((int) ((uv_x*image.width)), (int) (uv_y*image.height));
+    }
 }
