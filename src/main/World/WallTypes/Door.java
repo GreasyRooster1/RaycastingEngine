@@ -1,6 +1,8 @@
 package main.World.WallTypes;
 
 import main.Main;
+import main.Render.HUD.Components.CrosshairComponent;
+import main.Render.HUD.HUDRender;
 import main.World.Wall;
 
 import static main.Util.Util.rectRect;
@@ -38,8 +40,9 @@ public class Door extends Wall {
     }
 
     public void checkForOpen(){
-        if(Main.mouseClicked) {
-            if(Main.app.player.interactionCollider.checkWallCollision(this)) {
+        if(Main.app.player.interactionCollider.checkWallCollision(this)) {
+            ((CrosshairComponent)HUDRender.crosshair).type = 1;
+            if(Main.mouseClicked) {
                 closed = !closed;
             }
         }
