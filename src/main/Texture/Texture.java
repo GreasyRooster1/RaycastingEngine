@@ -20,10 +20,14 @@ public abstract class Texture {
         return 0;
     }
 
+    public int getColorThumb(float uv_x, float uv_y){
+        return getColorFromUV(uv_x,uv_y);
+    }
+
     public void renderTexture(float x,float y,float w,float h,int res){
         for (int i = 0; i < w; i+=res) {
             for (int j = 0; j < h; j+=res) {
-                Main.app.fill(getColorFromUV(i/w,j/h));
+                Main.app.fill(getColorThumb(i/w,j/h));
                 Main.app.rect(x+i,y+j,res,res);
             }
         }
