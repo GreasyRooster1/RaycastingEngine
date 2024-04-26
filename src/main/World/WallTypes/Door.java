@@ -3,6 +3,7 @@ package main.World.WallTypes;
 import main.Main;
 import main.World.Wall;
 
+import static main.Util.Util.rectRect;
 import static main.Util.WallColorHelper.getWallColor;
 import static processing.core.PApplet.*;
 
@@ -54,5 +55,49 @@ public class Door extends Wall {
         Main.app.stroke(0,0,1,.25f);
         Main.app.line(x1,y1,x1+cos(openAngle)*length,y1+sin(openAngle)*length);
         Main.app.line(x1,y1,x1+cos(closeAngle)*length,y1+sin(closeAngle)*length);
+    }
+
+    public void drawEditMode(){
+        Main.app.noStroke();
+        Main.app.fill(1,1,0);
+        Main.app.ellipse(x1,y1,10,10);
+        Main.app.ellipse(x2,y2,10,10);
+        Main.app.fill(0,1,1);
+        Main.app.ellipse(x1+cos(openAngle)*(length+20),y1+sin(openAngle)*(length+20),10,10);
+        Main.app.ellipse(x1+cos(closeAngle)*(length+20),y1+sin(closeAngle)*(length+20),10,10);
+    }
+
+    public void checkHandleMove(){
+        if(Main.app.mousePressed&&rectRect(Main.mouseXScaled,Main.mouseYScaled,1,1,x1-5,y1-5,10,10)){
+            selectedHandle = 1;
+        }
+        if(Main.app.mousePressed&&rectRect(Main.mouseXScaled,Main.mouseYScaled,1,1,x2-5,y2-5,10,10)){
+            selectedHandle = 2;
+        }
+        if(Main.app.mousePressed&&rectRect(Main.mouseXScaled,Main.mouseYScaled,1,1,(x1+cos(openAngle)*(length+20))-5,(y1+sin(openAngle)*(length+20))-5,10,10)){
+            selectedHandle = 3;
+        }
+        if(Main.app.mousePressed&&rectRect(Main.mouseXScaled,Main.mouseYScaled,1,1,(x1+cos(closeAngle)*(length+20))-5,(y1+sin(closeAngle)*(length+20))-5,10,10)){
+            selectedHandle = 4;
+        }
+        if(!Main.app.mousePressed){
+            selectedHandle=0;
+        }
+        if(selectedHandle==1){
+            x1=Main.mouseXScaled;
+            y1=Main.mouseYScaled;
+        }
+        if(selectedHandle==2){
+            x2=Main.mouseXScaled;
+            y2=Main.mouseYScaled;
+        }
+        if(selectedHandle==3){
+            length = dist(x1,y1,Main.mouseXScaled,Main.mouseYScaled)-20;
+            openAngle = atan2(Main.mouseYScaled-y1,Main.mouseXScaled-x1) +PI*2;
+        }
+        if(selectedHandle==4){
+            length = dist(x1,y1,Main.mouseXScaled,Main.mouseYScaled)-20;
+            closeAngle = atan2(Main.mouseYScaled-y1,Main.mouseXScaled-x1) +PI*2;
+        }
     }
 }
