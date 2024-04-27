@@ -1,6 +1,7 @@
 package main.Render;
 
 import main.Main;
+import main.Texture.TextureRegistry;
 import main.Util.Point;
 import main.Util.Ray;
 import main.Util.ThreeDimensional.Point3;
@@ -9,16 +10,15 @@ import main.Util.ThreeDimensional.Vec3;
 import main.World.Player;
 import main.World.Wall;
 
-import static java.lang.Math.*;
 import static main.Render.RenderOptions.*;
-import static processing.core.PApplet.append;
-import static processing.core.PApplet.dist;
+import static processing.core.PApplet.*;
 
 public class Renderer {
     public static float widthRayRatio = Main.app.width / rayCount;
     public static float projectionPlaneDistance = 20;
     public static float projectionPlaneWidth = calculateProjectionWidth();
     public static Wall[] culledWalls = {};
+    public static float floorHeight = -50;
 
     public static void renderPlayerView(Player p){
         Main.app.background(fogColor);
@@ -40,11 +40,29 @@ public class Renderer {
     }
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
-//        for (int i = (int) (height/2); i < (Main.app.height-height)/2; i++) {
-//            Point3 origin = new Point3(p.x,p.y,0);
-//            Vec3 dir = new Vec3(p.x-);
-//            Ray3 floorRay = new Ray3(origin,dir);
-//        }
+        for (int i = (int) (Main.app.height/2+(height/2)); i < Main.app.height; i++) {
+            Point3 origin = new Point3(p.x,p.y,Main.app.height/2f);
+            Vec3 dir = new Vec3(p.x+cos(ray.dir)*projectionPlaneDistance+cos(ray.dir+PI/2)*projectionPlaneWidth,p.y+sin(ray.dir)*projectionPlaneDistance+sin(ray.dir-PI/2)*projectionPlaneWidth,i);
+            Ray3 floorRay = new Ray3(origin,dir);
+
+            //check ray collision with floor
+            Vec3 floorNormal = new Vec3(0,0,1);
+            float denom = floorNormal.dot(floorRay.direction);
+            Point3 center = new Point3(p.x,p.y,floorHeight);
+            if (abs(denom) > 0.0001f){
+                float t = (center.sub(floorRay.origin)).dot(floorNormal) / denom;
+                if (t >= 0){
+                    //there is a collision!
+                    Vec3 normalizedDirection = floorRay.direction.normal();
+                    Vec3 multVec = normalizedDirection.mult(t);
+                    Point3 collisionPoint = new Point3(floorRay.origin.x+multVec.x,floorRay.origin.y+multVec.y,floorRay.origin.z+multVec.z);
+                    float segRatio = (250-height/2)/segCount;
+                    //TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x%50/50,collisionPoint.y%50/50)
+                    Main.app.fill(0);
+                    Main.app.rect(x*(Main.app.width/rayCount),i,Main.app.width/rayCount,segRatio);
+                }
+            }
+        }
     }
 
     public static float renderWall(Ray ray, Player p, int x, int[] ignoredIds, int depth){
@@ -82,7 +100,7 @@ public class Renderer {
                 continue;
             }
             if(ray.mag>=fogDistance){
-                color = Main.app.lerpColor(color,fogColor, 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
+                color = Main.app.lerpColor(color,Main.app.color(1,0,1), 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
             }
             renderSegment(color,x,i,height,segRatio);
         }

@@ -7,4 +7,8 @@ public class Point3 {
         this.y = y;
         this.z = z;
     }
+
+    public Vec3 sub(Point3 origin) {
+        return new Vec3(origin.x - x, origin.y - y, origin.z - z);
+    }
 }
