@@ -57,8 +57,9 @@ public class Renderer {
                     Vec3 multVec = normalizedDirection.mult(t);
                     Point3 collisionPoint = new Point3(floorRay.origin.x+multVec.x,floorRay.origin.y+multVec.y,floorRay.origin.z+multVec.z);
                     float segRatio = (250-height/2)/segCount;
-                    //TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x%50/50,collisionPoint.y%50/50)
-                    Main.app.fill(0);
+                    //int col = TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x/50,collisionPoint.y/50);
+                    int col = Main.app.randomColor();
+                    Main.app.fill(col);
                     Main.app.rect(x*(Main.app.width/rayCount),i,Main.app.width/rayCount,segRatio);
                 }
             }
