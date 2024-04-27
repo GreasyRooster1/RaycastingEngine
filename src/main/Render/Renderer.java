@@ -54,11 +54,11 @@ public class Renderer {
                 if (t >= 0){
                     //there is a collision!
                     Vec3 normalizedDirection = floorRay.direction.normal();
-                    Vec3 multVec = normalizedDirection.mult(t);
+                    Vec3 multVec = normalizedDirection.mult(t*1000);
                     Point3 collisionPoint = new Point3(floorRay.origin.x+multVec.x,floorRay.origin.y+multVec.y,floorRay.origin.z+multVec.z);
+                    //println(collisionPoint.x,collisionPoint.y,collisionPoint.z);
                     float segRatio = (250-height/2)/segCount;
-                    //int col = TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x/50,collisionPoint.y/50);
-                    int col = Main.app.randomColor();
+                    int col = TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x/250,collisionPoint.y/250);
                     Main.app.fill(col);
                     Main.app.rect(x*(Main.app.width/rayCount),i,Main.app.width/rayCount,segRatio);
                 }
