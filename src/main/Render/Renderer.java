@@ -38,7 +38,7 @@ public class Renderer {
         }
 
         float height = renderWall(ray,p,x,ignoredIds,depth);
-        renderFloor(ray,p,x,height);
+        //renderFloor(ray,p,x,height);
     }
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
