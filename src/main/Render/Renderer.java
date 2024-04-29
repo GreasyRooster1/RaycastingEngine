@@ -11,7 +11,9 @@ import main.World.Player;
 import main.World.Wall;
 
 import static main.Render.RenderOptions.*;
+import static main.Util.ThreeDimensional.Vec3.dot;
 import static processing.core.PApplet.*;
+
 
 public class Renderer {
     public static float widthRayRatio = Main.app.width / rayCount;
@@ -42,21 +44,24 @@ public class Renderer {
     public static void renderFloor(Ray ray,Player p,int x,float height){
         for (int i = (int) (Main.app.height/2+(height/2)); i < Main.app.height; i++) {
             Point3 origin = new Point3(p.x,p.y,Main.app.height/2f);
-            Vec3 dir = new Vec3(p.x+cos(ray.dir)*projectionPlaneDistance+cos(ray.dir+PI/2)*projectionPlaneWidth,p.y+sin(ray.dir)*projectionPlaneDistance+sin(ray.dir-PI/2)*projectionPlaneWidth,i);
+            Vec3 dir = new Vec3(p.x+cos(p.dir)*projectionPlaneDistance+cos(p.dir+PI/2)*((float) x /Main.app.width*projectionPlaneWidth),p.y+sin(p.dir)*projectionPlaneDistance+sin(p.dir-PI/2)*((float) x /Main.app.width*projectionPlaneWidth),i);
             Ray3 floorRay = new Ray3(origin,dir);
 
             //check ray collision with floor
             Vec3 floorNormal = new Vec3(0,0,1);
+            Point3 center = new Point3(0,0,floorHeight);
+
             float denom = floorNormal.dot(floorRay.direction);
-            Point3 center = new Point3(p.x,p.y,floorHeight);
+
             if (abs(denom) > 0.0001f){
-                float t = (center.sub(floorRay.origin)).dot(floorNormal) / denom;
-                if (t >= 0){
+                Vec3 dif = center.sub(floorRay.origin);
+                float t = dot(dif,floorNormal) / denom;
+                if (t > 0.0001f){
                     //there is a collision!
                     Vec3 normalizedDirection = floorRay.direction.normal();
-                    Vec3 multVec = normalizedDirection.mult(t*1000);
+                    Vec3 multVec = normalizedDirection.mult(t);
                     Point3 collisionPoint = new Point3(floorRay.origin.x+multVec.x,floorRay.origin.y+multVec.y,floorRay.origin.z+multVec.z);
-                    //println(collisionPoint.x,collisionPoint.y,collisionPoint.z);
+                    println(collisionPoint.x,collisionPoint.y,collisionPoint.z);
                     float segRatio = (250-height/2)/segCount;
                     int col = TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x/250,collisionPoint.y/250);
                     Main.app.fill(col);

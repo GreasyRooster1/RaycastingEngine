@@ -12,6 +12,12 @@ public class Vec3 {
     public float dot(Vec3 v){
         return x*v.x+y*v.y+z*v.z;
     }
+    public static float dot(float a,Vec3 v){
+        return a*v.x+a*v.y+a*v.z;
+    }
+    public static float dot(Vec3 v,Vec3 v2){
+        return v.x*v2.x+v.y*v2.y+v.z*v2.z;
+    }
 
     public Vec3 normal() {
         float mag = mag();

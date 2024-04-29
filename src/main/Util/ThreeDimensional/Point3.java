@@ -9,6 +9,6 @@ public class Point3 {
     }
 
     public Vec3 sub(Point3 origin) {
-        return new Vec3(origin.x - x, origin.y - y, origin.z - z);
+        return new Vec3(x - origin.x, y - origin.y,z - origin.z);
     }
 }
