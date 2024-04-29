@@ -21,6 +21,7 @@ public class TextureRegistry {
         register(new ImageTexture("walls.doom.vaultDoor"));
         register(new TransparentImageTexture("walls.doom.bars"));
         register(new TransparentImageTexture("walls.bars"));
+        register(new GlitchTexture());
     }
     public static void register(Texture texture){
         texture.id = textures.length;
