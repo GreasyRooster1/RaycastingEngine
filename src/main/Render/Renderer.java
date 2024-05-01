@@ -91,15 +91,20 @@ public class Renderer {
         float wallLength = dist(wall.x1,wall.y1,wall.x2,wall.y2);
         float uv_x = dist(wall.x1,wall.y1,ray.collisionX,ray.collisionY)/wallLength;
         float segRatio = height/segCount;
+        float limitedSegCount = segCount;
+        if(segRatio<2){
+            segRatio = 2;
+            limitedSegCount = height/2;
+        }
 
         Main.app.noStroke();
-        for(int i=0;i<segCount;i++){
+        for(int i=0;i<limitedSegCount;i++){
             float y = 250-height/2 +(segRatio*(i-(wall.height-50)/2));
             if(y<=-segRatio||y>=Main.app.height){
                 continue;
             }
 
-            float uv_y = i/segCount;
+            float uv_y = i/limitedSegCount;
 
             int color = wall.texture.getColor(wall,uv_x,uv_y);
             if(wall.texture.isTransparent&&color==0){
@@ -108,13 +113,13 @@ public class Renderer {
             if(ray.mag>=fogDistance){
                 color = Main.app.lerpColor(color,Main.app.color(1,0,1), 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
             }
-            renderSegment(color,x,i-(wall.height-50)/2,height,segRatio);
+            renderSegment(color,x,i-(wall.height-50)/2,height,segRatio,limitedSegCount);
         }
     }
 
-    public static void renderSegment(int color, float line_x,float line_y,float height,float segRatio){
+    public static void renderSegment(int color, float line_x,float line_y,float height,float segRatio,float segC){
         Main.app.fill(color);
-        Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ rayCount,height/segCount+1);
+        Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ rayCount,height/segC+1);
     }
 
     public static float calculateLineHeight(Ray ray,Player p){
