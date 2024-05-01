@@ -53,6 +53,8 @@ public class Main extends PApplet {
         setupWindow();
         Loader.load("world.json");
 
+        frameRate(9999);
+
         player = new Player(spawnPoint.position.x, spawnPoint.position.y);
     }
 

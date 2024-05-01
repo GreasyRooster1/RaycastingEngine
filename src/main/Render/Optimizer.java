@@ -37,4 +37,8 @@ public class Optimizer {
     public static float max3(float a, float b, float c){
         return max(max(a,b),c);
     }
+
+    public static float cosOpt(float a){
+        return cos(a);
+    }
 }
