@@ -15,7 +15,7 @@ public class StressTestButton extends TextButton {
     public StressTestButton(float _x, float _y, float _w, float _h) {
         super(_x, _y, _w, _h);
 
-        text = "Reload All";
+        text = "Stress";
     }
 
     @Override
