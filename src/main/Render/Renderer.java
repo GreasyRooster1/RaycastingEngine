@@ -38,7 +38,7 @@ public class Renderer {
         }
 
         float height = renderWall(ray,p,x,ignoredIds,depth);
-        renderFloor(ray,p,x,height);
+        //renderFloor(ray,p,x,height);
     }
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
@@ -94,7 +94,7 @@ public class Renderer {
 
         Main.app.noStroke();
         for(int i=0;i<segCount;i++){
-            float y = 250-height/2 +(segRatio*i);
+            float y = 250-height/2 +(segRatio*(i-(wall.height-50)/2));
             if(y<=-segRatio||y>=Main.app.height){
                 continue;
             }
@@ -108,7 +108,7 @@ public class Renderer {
             if(ray.mag>=fogDistance){
                 color = Main.app.lerpColor(color,Main.app.color(1,0,1), 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
             }
-            renderSegment(color,x,i,height,segRatio);
+            renderSegment(color,x,i-(wall.height-50)/2,height,segRatio);
         }
     }
 
