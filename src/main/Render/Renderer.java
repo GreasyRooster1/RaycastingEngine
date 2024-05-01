@@ -20,7 +20,7 @@ public class Renderer {
     public static float projectionPlaneDistance = 20;
     public static float projectionPlaneWidth = calculateProjectionWidth();
     public static Wall[] culledWalls = {};
-    public static float floorHeight = -50;
+    public static float floorHeight = -.1f;
 
     public static void renderPlayerView(Player p){
         Main.app.background(fogColor);
@@ -38,7 +38,7 @@ public class Renderer {
         }
 
         float height = renderWall(ray,p,x,ignoredIds,depth);
-        //renderFloor(ray,p,x,height);
+        renderFloor(ray,p,x,height);
     }
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
@@ -64,7 +64,7 @@ public class Renderer {
                     println(collisionPoint.x,collisionPoint.y,collisionPoint.z);
                     float segRatio = (250-height/2)/segCount;
                     int col = TextureRegistry.get(1).getColor(ray.collisionWall,collisionPoint.x/250,collisionPoint.y/250);
-                    Main.app.fill(col);
+                    Main.app.fill(0);
                     Main.app.rect(x*(Main.app.width/rayCount),i,Main.app.width/rayCount,segRatio);
                 }
             }
