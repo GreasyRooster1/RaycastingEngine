@@ -33,9 +33,7 @@ public class Renderer {
     }
 
     public static void renderSingleRay(Ray ray,Player p,int x,int[] ignoredIds,int depth){
-        if(ray.mag>= maxViewDistance||depth<=0){
-            return;
-        }
+//
 
         renderWall(ray,p,x,ignoredIds,9999,depth);
 
@@ -75,6 +73,12 @@ public class Renderer {
     }
 
     public static float renderWall(Ray ray, Player p, int x, int[] ignoredIds, float lastHeight, int depth){
+        ray.checkCollisionHighestBelowThresh(lastHeight,ray.mag);
+
+        if(ray.mag>= maxViewDistance||depth<=0){
+            return 0;
+        }
+
         if(ray.collisionWall.texture.isTransparent){
             Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,maxViewDistance);
 
@@ -83,13 +87,11 @@ public class Renderer {
             renderSingleRay(rayThroughWall,p,x,ignoredIds,depth-1);
         }
 
-        ray.checkCollisionHighestBelowThresh(lastHeight,ray.mag);
 
-        if(ray.collisionWall!=null) {
-            float lineHeight = calculateLineHeight(ray, p);
-            drawLine(lineHeight, x, ray);
-            renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
-        }
+        float lineHeight = calculateLineHeight(ray, p);
+        drawLine(lineHeight, x, ray);
+        renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
+
         return 0;
     }
 
