@@ -99,8 +99,9 @@ public class Renderer {
 
         Main.app.noStroke();
         for(int i=0;i<limitedSegCount;i++){
-            float y = 250-height/2 +(segRatio*(i-(wall.height-50)/2));
-            if(y<=-segRatio||y>=Main.app.height){
+            float segY = i-(wall.height-50)/2 +wall.yShift;
+            float renderY =250-height/2 +(segRatio*segY);
+            if(renderY<=-segRatio||renderY>=Main.app.height){
                 continue;
             }
 
@@ -113,7 +114,7 @@ public class Renderer {
             if(ray.mag>=fogDistance){
                 color = Main.app.lerpColor(color,Main.app.color(1,0,1), 1-((maxViewDistance-ray.mag)/(maxViewDistance-fogDistance)));
             }
-            renderSegment(color,x,i-(wall.height-50)/2,height,segRatio,limitedSegCount);
+            renderSegment(color,x,segY,height,segRatio,limitedSegCount);
         }
     }
 
