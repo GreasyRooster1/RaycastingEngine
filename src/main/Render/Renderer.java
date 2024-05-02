@@ -37,9 +37,12 @@ public class Renderer {
             return;
         }
 
-        float height = renderWall(ray,p,x,ignoredIds,depth);
+        renderWall(ray,p,x,ignoredIds,9999,depth);
+
+        //float height = renderWall(ray,p,x,ignoredIds,9999,depth);
         //renderFloor(ray,p,x,height);
     }
+
 
     public static void renderFloor(Ray ray,Player p,int x,float height){
         for (int i = (int) (Main.app.height/2+(height/2)); i < Main.app.height; i++) {
@@ -71,7 +74,7 @@ public class Renderer {
         }
     }
 
-    public static float renderWall(Ray ray, Player p, int x, int[] ignoredIds, int depth){
+    public static float renderWall(Ray ray, Player p, int x, int[] ignoredIds, float lastHeight, int depth){
         if(ray.collisionWall.texture.isTransparent){
             Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,maxViewDistance);
 
@@ -80,9 +83,14 @@ public class Renderer {
             renderSingleRay(rayThroughWall,p,x,ignoredIds,depth-1);
         }
 
-        float lineHeight = calculateLineHeight(ray,p);
-        drawLine(lineHeight,x,ray);
-        return lineHeight;
+        ray.checkCollisionHighestBelowThresh(lastHeight,ray.mag);
+
+        if(ray.collisionWall!=null) {
+            float lineHeight = calculateLineHeight(ray, p);
+            drawLine(lineHeight, x, ray);
+            renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
+        }
+        return 0;
     }
 
     public static void drawLine(float height, float x, Ray ray){
@@ -135,7 +143,6 @@ public class Renderer {
     public static void updateRayPosition(Ray ray,Player p){
         ray.x1 = p.x;
         ray.y1 = p.y;
-        ray.checkCollision();
     }
 
     public static float calculateProjectionWidth(){

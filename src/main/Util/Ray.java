@@ -34,15 +34,17 @@ public class Ray {
         Main.app.strokeWeight(1);
         Main.app.line(x1,y1, (float) (x1+cos(dir)*mag), (float) (y1+sin(dir)*mag));
     }
-    public void checkCollisionHighestBelowThresh(float threshold){
+    public void checkCollisionHighestBelowThresh(float threshold,float distance){
         float closestCollisionDistance=maxViewDistance;
         float highestHeight = 0;
         Wall hitWall = null;
         for(Wall wall: culledWalls) {
-            CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * maxViewDistance), (float) (y1 + sin(dir) * maxViewDistance), wall.x1,wall.y1,wall.x2,wall.y2);
+            CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * distance), (float) (y1 + sin(dir) * distance), wall.x1,wall.y1,wall.x2,wall.y2);
             if(result.collided){
                 if(wall.height>highestHeight&&wall.height<threshold){
                     highestHeight=wall.height;
+                }else{
+                    continue;
                 }
                 mag = dist(x1,y1,result.intersectionX,result.intersectionY);
                 closestCollisionDistance=mag;
