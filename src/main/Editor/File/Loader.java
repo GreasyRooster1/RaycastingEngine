@@ -23,7 +23,6 @@ public class Loader {
             World.walls = new Wall[0];
             World.createWorld();
         }
-        walls[0].yShift =-20;
     }
     public static void loadJson(String filename) {
         JSONObject json = loadJSONObject(new File(filename));

@@ -34,6 +34,26 @@ public class Ray {
         Main.app.strokeWeight(1);
         Main.app.line(x1,y1, (float) (x1+cos(dir)*mag), (float) (y1+sin(dir)*mag));
     }
+    public void checkCollisionHighestBelowThresh(float threshold){
+        float closestCollisionDistance=maxViewDistance;
+        float highestHeight = 0;
+        Wall hitWall = null;
+        for(Wall wall: culledWalls) {
+            CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * maxViewDistance), (float) (y1 + sin(dir) * maxViewDistance), wall.x1,wall.y1,wall.x2,wall.y2);
+            if(result.collided){
+                if(wall.height>highestHeight&&wall.height<threshold){
+                    highestHeight=wall.height;
+                }
+                mag = dist(x1,y1,result.intersectionX,result.intersectionY);
+                closestCollisionDistance=mag;
+                hitWall = wall;
+                collisionX = result.intersectionX;
+                collisionY = result.intersectionY;
+            }
+        }
+        collisionWall= hitWall;
+        mag = closestCollisionDistance;
+    }
     public void checkCollisionIgnoringWalls(int[] ids) {
         float closestCollisionDistance=maxViewDistance;
         Wall hitWall = null;
@@ -61,19 +81,6 @@ public class Ray {
         mag = closestCollisionDistance;
     }
     public void checkCollision(){
-        float closestCollisionDistance=maxViewDistance;
-        Wall hitWall = null;
-        for(Wall wall: culledWalls) {
-            CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * closestCollisionDistance), (float) (y1 + sin(dir) * closestCollisionDistance), wall.x1,wall.y1,wall.x2,wall.y2);
-            if(result.collided){
-                mag = dist(x1,y1,result.intersectionX,result.intersectionY);
-                closestCollisionDistance=mag;
-                hitWall = wall;
-                collisionX = result.intersectionX;
-                collisionY = result.intersectionY;
-            }
-        }
-        collisionWall= hitWall;
-        mag = closestCollisionDistance;
+        checkCollisionIgnoringWalls(new int[0]);
     }
 }
