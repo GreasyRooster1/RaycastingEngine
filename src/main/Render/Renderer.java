@@ -88,11 +88,14 @@ public class Renderer {
 
 
         float lineHeight = calculateLineHeight(ray, p);
-        drawLine(lineHeight, x, ray);
+        float distanceToWall = dist(p.x,p.y,ray.collisionX,ray.collisionY);
+        float wallTop = 250-(ray.collisionWall.height-50)/2;
+        float stopY = atan2(wallTop,distanceToWall);
+        drawLine(lineHeight, x, ray,stopY);
         renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
     }
 
-    public static void drawLine(float height, float x, Ray ray){
+    public static void drawLine(float height, float x, Ray ray, float stopY){
         Wall wall = ray.collisionWall;
 
         float wallLength = dist(wall.x1,wall.y1,wall.x2,wall.y2);
@@ -109,6 +112,9 @@ public class Renderer {
             float segY = i-(wall.height-50)/2 +wall.yShift;
             float renderY =250-height/2 +(segRatio*segY);
             if(renderY<=-segRatio||renderY>=Main.app.height){
+                continue;
+            }
+            if(renderY>stopY){
                 continue;
             }
 
