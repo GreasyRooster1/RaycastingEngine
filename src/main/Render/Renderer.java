@@ -28,7 +28,7 @@ public class Renderer {
             Ray ray = p.rays[i];
             updateRayPosition(ray,p);
             
-            renderSingleRay(ray,p,i,new int[0],3);
+            renderSingleRay(ray,p,i,new int[0],10);
         }
     }
 
@@ -78,19 +78,19 @@ public class Renderer {
             return;
         }
 
-        if(ray.collisionWall.texture.isTransparent){
-            Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,maxViewDistance);
+        Ray rayThroughWall = new Ray(p.x,p.y,ray.dir,maxViewDistance);
 
-            ignoredIds = append(ignoredIds,ray.collisionWall.id);
-            rayThroughWall.checkCollisionIgnoringWalls(ignoredIds);
-            renderSingleRay(rayThroughWall,p,x,ignoredIds,depth-1);
-        }
+        ignoredIds = append(ignoredIds,ray.collisionWall.id);
+        rayThroughWall.checkCollisionIgnoringWalls(ignoredIds);
+        renderSingleRay(rayThroughWall,p,x,ignoredIds,depth-1);
 
 
         float lineHeight = calculateLineHeight(ray, p);
         float distanceToWall = dist(p.x,p.y,ray.collisionX,ray.collisionY);
         float wallTop = 250-(ray.collisionWall.height-50)/2;
-        float stopY = 5000;//sin(atan2(wallTop,distanceToWall))*ray.collisionWall.height;
+        float viewAngle = sin(atan2(wallTop,distanceToWall))*ray.collisionWall.height;
+        float stopY = 0;
+
         drawLine(lineHeight, x, ray,stopY);
         renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
     }
@@ -102,10 +102,10 @@ public class Renderer {
         float uv_x = dist(wall.x1,wall.y1,ray.collisionX,ray.collisionY)/wallLength;
         float segRatio = height/segCount;
         float limitedSegCount = segCount;
-        if(segRatio<2){
-            segRatio = 2;
-            limitedSegCount = height/2;
-        }
+//        if(segRatio<2){
+//            segRatio = 2;
+//            limitedSegCount = height/2;
+//        }
 
         Main.app.noStroke();
         for(int i=0;i<limitedSegCount;i++){
