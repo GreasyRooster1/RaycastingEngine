@@ -90,7 +90,7 @@ public class Renderer {
         float lineHeight = calculateLineHeight(ray, p);
         float distanceToWall = dist(p.x,p.y,ray.collisionX,ray.collisionY);
         float wallTop = 250-(ray.collisionWall.height-50)/2;
-        float stopY = sin(atan2(wallTop,distanceToWall))*ray.collisionWall.height;
+        float stopY = 5000;//sin(atan2(wallTop,distanceToWall))*ray.collisionWall.height;
         drawLine(lineHeight, x, ray,stopY);
         renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
     }
@@ -133,7 +133,7 @@ public class Renderer {
 
     public static void renderSegment(int color, float line_x,float line_y,float height,float segRatio,float segC){
         Main.app.fill(color);
-        Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ rayCount,height/segC+1);
+        Main.app.rect(widthRayRatio*line_x,250-height/2 +(segRatio*line_y), Main.app.width/ rayCount,1);//height/segC+1);
     }
 
     public static float calculateLineHeight(Ray ray,Player p){

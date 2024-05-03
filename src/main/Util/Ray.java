@@ -41,10 +41,16 @@ public class Ray {
         for(Wall wall: culledWalls) {
             CollisionResult result = Util.lineLine(x1, y1, (float) (x1 + cos(dir) * distance), (float) (y1 + sin(dir) * distance), wall.x1,wall.y1,wall.x2,wall.y2);
             if(result.collided){
-                if(wall.height>highestHeight&&wall.height<threshold){
-                    highestHeight=wall.height;
-                }else{
-                    continue;
+                if(wall.height==highestHeight){
+                    if(dist(result.intersectionX,result.intersectionY,x1,y1)>mag){
+                        continue;
+                    }
+                }else {
+                    if (wall.height > highestHeight && wall.height < threshold) {
+                        highestHeight = wall.height;
+                    } else {
+                        continue;
+                    }
                 }
                 mag = dist(x1,y1,result.intersectionX,result.intersectionY);
                 closestCollisionDistance=mag;
