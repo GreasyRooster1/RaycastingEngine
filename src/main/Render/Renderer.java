@@ -90,7 +90,7 @@ public class Renderer {
         float lineHeight = calculateLineHeight(ray, p);
         float distanceToWall = dist(p.x,p.y,ray.collisionX,ray.collisionY);
         float wallTop = 250-(ray.collisionWall.height-50)/2;
-        float stopY = atan2(wallTop,distanceToWall);
+        float stopY = sin(atan2(wallTop,distanceToWall))*ray.collisionWall.height;
         drawLine(lineHeight, x, ray,stopY);
         renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
     }
