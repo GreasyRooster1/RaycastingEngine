@@ -28,7 +28,7 @@ public class Renderer {
             Ray ray = p.rays[i];
             updateRayPosition(ray,p);
             
-            renderSingleRay(ray,p,i,new int[0],10);
+            renderSingleRay(ray,p,i,new int[0],3);
         }
     }
 
@@ -82,14 +82,13 @@ public class Renderer {
 
         ignoredIds = append(ignoredIds,ray.collisionWall.id);
         rayThroughWall.checkCollisionIgnoringWalls(ignoredIds);
-        renderSingleRay(rayThroughWall,p,x,ignoredIds,depth-1);
 
 
         float lineHeight = calculateLineHeight(ray, p);
         float distanceToWall = dist(p.x,p.y,ray.collisionX,ray.collisionY);
         float wallTop = 250-(ray.collisionWall.height-50)/2;
         float viewAngle = sin(atan2(wallTop,distanceToWall))*ray.collisionWall.height;
-        float stopY = 0;
+        float stopY = 500;
 
         drawLine(lineHeight, x, ray,stopY);
         renderWall(ray, p, x, ignoredIds, ray.collisionWall.height, depth - 1);
